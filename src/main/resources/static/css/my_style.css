@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+
+.cursor-default {
+    cursor: default;
+}
+
+.writer {
+    position: inherit;
+    float: right;
+    right: 15px;
+    top: 15px;
+}
+
+/* FONT */
+.font-white {
+    color: white;
+}
+
+.font-white-shadow {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.font-black-shadow {
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+/* TEXT */
+.non-effect {
+    color: white;
+    text-decoration-line: none;
+}
+.non-effect:hover {
+    color: #00115c;
+    /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+
+
+/* 구단 엠블럼 */
+.logo {
+    max-height: 112px;
+    max-width: 112px;
+}
+
+.title-emblem {
+    position: fixed;
+    max-height: 70px;
+    max-width: 70px;
+    top: 10px;
+    left: 125px;
+    margin: auto;
+}
+.title-team {
+    font-family: 'Do Hyeon', sans-serif;
+    position: fixed;
+    top: 15px;
+    left: 200px;
+    margin: auto;
+}
+
+.stadium-title {
+    min-width: 655px !important;
+    min-height: 70px;
+    width: 70%;
+    /*height: 10%;*/
+    margin: auto;
+}
+
+.stadium-content {
+    min-width: 655px !important;
+    width: 70%;
+    height: 85%;
+    border-radius: 5px ;
+    border: 1px solid black;
+
+    margin: auto;
+}

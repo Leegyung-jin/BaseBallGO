@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!-- Header-->
+<th:block th:replace="fragments/header::header">
+</th:block>
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <h1 class="mb-1 font-white-shadow cursor-default">BASEBALL GO</h1>
+            <h3 class="mb-5 font-black-shadow cursor-default"><em>Let's find a good seat at the baseball stadium</em></h3>
+            <a class="btn btn-xl" style="background-color: #131340; color: white" href="#about">BaseBall Go 알아보기</a>
+        </div>
+    </header>
+
+    <!-- About-->
+    <section class="content-section bg-light" id="about">
+        <div class="container px-4 px-lg-5 text-center">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-10 cursor-default ">
+                    <h2>BASEBALL GO를 이용하여 최고의 좌석을 알아보세요!</h2>
+                    <p class="lead mb-5 cursor-default"><br>
+                        1. KBO에 소속된 10개 구단 엠블럼을 확인한다.<br>
+                        2. 원하는 구단의 엠블럼을 클릭한다.<br>
+                        3. 클릭한 구단의 홈구장 좌석 페이지로 이동한다.<br><br><br>
+
+                        KBO에 소속된 구단 엠블럼을 클릭하면 해당 구단의 홈구장 좌석 페이지로 이동합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 구단 선택 -->
+    <section class="content-section text-white text-center" style="background-color: #050a24f2" id="choose">
+        <div class="container px-4 px-lg-5">
+            <div class="content-section-heading">
+                <h3 class="text-secondary mb-0 cursor-default">KOREA BASEBALL</h3>
+                <h2 class="mb-5 cursor-default">CHOOSE A TEAM</h2>
+            </div>
+            <div class="row gx-4 gx-lg-5 pt-4 pb-5">
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{landers}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/ssg_baseballclub_landers_emblem.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{landers}">SSG LANDERS</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[인천] SSG 랜더스 필드</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{heroes}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/kiwoom.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{heroes}">KIWOOM HEROES</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[서울] 고척 스카이돔</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{twins}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/lgtwins.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{twins}">LG트윈스</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[서울] 잠실 야구장</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{wiz}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/ktwiz.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{wiz}">kt wiz</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[수원] 수원KT위즈파크</p>
+                </div>
+            </div>
+
+            <div class="row gx-6 gx-lg-5 pb-5">
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{tigers}"><img class="img-fluid logo pt-2 pb-3" src="../assets/img/emblem/kia.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{tigers}">KIA타이거즈</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[광주] 기아 챔피언스 필드</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{bears}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/doosan.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{bears}">두산베어스</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[서울] 잠실 야구장</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{giants}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/lotte.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{giants}">롯데자이언츠</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[부산] 사직 야구장</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{dinos}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/nc.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{dinos}">NC DINOS</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[창원] 창원NC파크</p>
+                </div>
+            </div>
+
+            <div class="row gx-6 gx-lg-5 pb-5">
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{lions}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/samsung.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{lions}">삼성 라이온즈</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[대구] 삼성 라이온즈 파크</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a th:href="@{eagles}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/hanhwa.png"></a>
+                    </span>
+                    <h4><strong><a class="non-effect" th:href="@{eagles}">한화이글스</a></strong></h4>
+                    <p class="text-faded mb-0 cursor-default">[대전] 한화생명 이글스 파크</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Callout-->
+    <section class="callout">
+        <div class="container px-4 px-lg-5 text-center">
+            <h2 class="mx-auto mb-5">
+                회원가입하고</br>
+                <em>다양한</em></br>
+                서비스 즐겨보기!
+            </h2>
+            <a class="btn btn-light btn-xl" href="#">Sign up</a>
+        </div>
+    </section>
+    <!-- Portfolio-->
+    <section class="content-section" id="services">
+        <div class="container px-4 px-lg-5">
+            <div class="content-section-heading text-center">
+                <h3 class="text-secondary mb-0">Service</h3>
+                <h2 class="mb-5">새로운 서비스 이용하기</h2>
+            </div>
+            <div class="row gx-0">
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="https://sports.news.naver.com/kbaseball/schedule/index" target="_blank">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <div class="h2">경기 일정 알아보기</div>
+                                <p class="mb-0">NAVER Sport에서 경기 일정 확인하기</p>
+                                <!--<p class="mb-0"><a href="https://www.koreabaseball.com/Schedule/GameCenter/Main.aspx" target="_blank">KBO 페이지에서 경기 일정 확인하기</a></p>
+                                <p class="mb-0"><a href="https://sports.news.naver.com/kbaseball/schedule/index" target="_blank">네이버 스포츠에서 경기 일정 확인하기</a></p>-->
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="../assets/img/portfolio-1.jpg" alt="..." />
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="fragments/team.html" th:href="@{team}">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <div class="h2">구단 정보 알아보기</div>
+                                <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="../assets/img/portfolio-2.jpg" alt="..." />
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#!" onclick="alert('서비스 준비 중입니다:)')">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <div class="h2">맛집 찾아보기</div>
+                                <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="../assets/img/portfolio-3.jpg" alt="..." />
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#!">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <div class="h2">Q & A 문의하기</div>
+                                <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="../assets/img/portfolio-4.jpg" alt="..." />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call to Action-->
+    <section class="content-section bg-primary text-white">
+        <div class="container px-4 px-lg-5 text-center">
+            <h2 class="mb-4">The buttons below are impossible to resist...</h2>
+            <a class="btn btn-xl btn-light me-4" href="#!">Click Me!</a>
+            <a class="btn btn-xl btn-dark" href="#!">Look at Me!</a>
+        </div>
+    </section>
+    <!-- Map-->
+    <div class="map" id="contact">
+        <iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+        <br />
+        <small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a></small>
+    </div>
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container px-4 px-lg-5">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-facebook"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-twitter"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="#!"><i class="icon-social-github"></i></a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Copyright &copy; Your Website 2022</p>
+        </div>
+    </footer>
+</html>
+<script>
+
+</script>
+
