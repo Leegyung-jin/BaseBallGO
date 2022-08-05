@@ -1,8 +1,18 @@
 @charset "UTF-8";
 
+body {
+    min-width: 1125px;
+}
 
-.cursor-default {
+.cursor-default, .cursor-default:hover {
     cursor: default;
+    text-decoration: none;
+    /*color: black;*/
+}
+
+.cursor-pointer {
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .writer {
@@ -17,6 +27,13 @@
     color: white;
 }
 
+.font-black {
+    color: black;
+}
+
+.font-dohyeon {
+    font-family: 'Do Hyeon', sans-serif;
+}
 .font-white-shadow {
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -38,7 +55,53 @@
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
+/* 공통 모듈 */
+.search-group {
+    width: 100%;
+}
+.search-btn {
+    height: 30px;
+    padding: 0px 15px;
+    margin-left: 5px;
+}
 
+.register-div {
+
+}
+.register-btn {
+    height: 30px;
+    padding: 0px 15px;
+    margin-left: 5px;
+    display: inline-block;
+    font-size: small;
+}
+
+.textarea-content {
+    width: 100%;
+    height: 200px;
+    resize: none;
+}
+
+.section-drop {
+    min-width: 170px;
+    width: 20%;
+    height: 38px;
+    float: left;
+    appearance: auto;
+    margin-right: 3px;
+}
+.section-text {
+    width: 45px;
+    float: left;
+    margin-right: 3px;
+}
+.section-text-2 {
+
+}
+
+.image-title {
+    font-weight: bold;
+}
 
 /* 구단 엠블럼 */
 .logo {
@@ -50,32 +113,88 @@
     position: fixed;
     max-height: 70px;
     max-width: 70px;
-    top: 10px;
-    left: 125px;
+    top: 20px;
+    left: 30px;
     margin: auto;
 }
 .title-team {
-    font-family: 'Do Hyeon', sans-serif;
     position: fixed;
-    top: 15px;
-    left: 200px;
+    /*max-height: 50px;*/
+    /*max-width: 350px;*/
+    font-family: 'Do Hyeon', sans-serif;
+    top: 28px;
+    left: 110px;
     margin: auto;
+    font-size: 3rem;
+    text-overflow: clip;
 }
 
 .stadium-title {
-    min-width: 655px !important;
+    min-width: 400px !important;
     min-height: 70px;
-    width: 70%;
-    /*height: 10%;*/
+    overflow: auto;
+    height: 10%;
     margin: auto;
 }
 
 .stadium-content {
-    min-width: 655px !important;
+    min-width: 400px !important;
+    /*overflow: auto;*/
     width: 70%;
     height: 85%;
     border-radius: 5px ;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 
     margin: auto;
+}
+
+div > .div-div {
+    float: left;
+}
+
+/* TEAM TITLE */
+.landers-title {
+    background-color: #CE0E2D;
+    color: white;
+}
+.landers-title-sub {
+    color: #CE0E2D;
+}
+
+.heroes-title {
+    background-color: #820024;
+    color: white;
+}
+.heroes-title-sub {
+    color: #820024;
+}
+
+/* Upload */
+.uploadResult {
+    width: 100%;
+    margin-top: 10px;
+}
+.uploadResult ul {
+    display: flex;
+    flex-float: row;
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
+    overflow: auto;
+    /*background-color: #ffffff;*/
+}
+.uploadResult ul li {
+    list-style: none;
+    padding: 10px;
+    margin-left: 2em;
+}
+.uploadResult ul li img {
+    width: 100px;
+}
+.uploadResult ul li button {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    /*display: none;*/
 }

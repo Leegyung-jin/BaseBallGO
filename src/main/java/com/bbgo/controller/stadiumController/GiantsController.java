@@ -15,6 +15,6 @@ public class GiantsController {
 
     @GetMapping(value = {"", "/"})
     public String main(Model model) {
-        return "stadium/giants";
+        return "team/giants";
     }
 }

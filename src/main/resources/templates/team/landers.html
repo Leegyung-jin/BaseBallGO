@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/header::header">
+</th:block>
+<body id="page-top">
+    <div class="stadium-title mb-3 landers-title">
+        <img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/ssg_baseballclub_landers_emblem.png">
+        <div class="title-team m-auto">
+            <h1 class="cursor-default">SSG LANDERS</h1>
+        </div>
+    </div>
+    <div class="container stadium-content p-3">
+        <h2 class="landers-title-sub font-dohyeon">SSG랜더스필드 좌석 안내</h2>
+        <div class="mb-3 float-end search-group">
+            <button class="btn btn-outline-dark search-btn float-end" type="button" id="button-addon2">검색</button>
+            <input type="text" class="float-end" placeholder="검색어를 입력해주세요.">
+        </div>
+        <div>
+            <a class="float-start font-black cursor-default">전체 23,431개</a>
+            <a class="writer float-end font-black cursor-pointer" th:href="@{landers/register}"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</a>
+        </div>
+        <table class="table mt-5 mb-5">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>1/3루</th>
+                <th>구역</th>
+                <th>좌석</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>3루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>1루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>3루</td>
+                <td>노브랜드 테이블</td>
+                <td>C열 12, 13</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">이전</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">다음</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

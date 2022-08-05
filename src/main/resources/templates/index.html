@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- Header-->
-<th:block th:replace="fragments/header::header">
+<th:block th:replace="common/header::header">
 </th:block>
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center">
@@ -41,7 +41,7 @@
                     <span class="service-icon rounded-circle mx-auto mb-3">
                         <a th:href="@{landers}"><img class="img-fluid logo pb-3" src="../assets/img/emblem/ssg_baseballclub_landers_emblem.png"></a>
                     </span>
-                    <h4><strong><a class="non-effect" th:href="@{landers}">SSG LANDERS</a></strong></h4>
+                    <h4><strong><a class="non-effect" th:href="@{/landers}">SSG LANDERS</a></strong></h4>
                     <p class="text-faded mb-0 cursor-default">[인천] SSG 랜더스 필드</p>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
@@ -149,7 +149,7 @@
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <a class="portfolio-item" href="fragments/team.html" th:href="@{team}">
+                    <a class="portfolio-item" href="common/team.html" th:href="@{team}">
                         <div class="caption">
                             <div class="caption-content">
                                 <div class="h2">구단 정보 알아보기</div>

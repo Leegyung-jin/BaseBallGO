@@ -15,6 +15,6 @@ public class WizController {
 
     @GetMapping(value = {"", "/"})
     public String main(Model model) {
-        return "stadium/wiz";
+        return "team/wiz";
     }
 }

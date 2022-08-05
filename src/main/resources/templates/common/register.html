@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/common/header::header">
+</th:block>
+<head>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <!--
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+  -->
+  <script th:src="@{/js/summernote-lite.js}"></script>
+  <script th:src="@{/js/summernote-ko-KR.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/summernote-lite.css}">
+</head>
+<body id="page-top">
+<div class="stadium-title mb-3 landers-title">
+  <a th:href="@{/landers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/ssg_baseballclub_landers_emblem.png"></a>
+  <div class="title-team m-auto">
+    <a style="color: white; text-decoration-line: none" th:href="@{/landers}"><h1>Register</h1></a>
+  </div>
+</div>
+  <div class="container stadium-content p-3">
+    <h2 class="landers-title-sub font-dohyeon mb-5">좌석 정보 등록하기</h2>
+    <form th:action="@{/randers/register}" th:method="post">
+      <input type="text" class="form-label" placeholder="제목을 입력해주세요." style="width: 100%">
+      <textarea id="summernote"></textarea>
+      <div class="mt-4" style="text-align: center">
+        <button type="submit" class="btn btn-dark register-btn">등록</button>
+        <a th:href="@{/landers}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+      </div>
+    </form>
+  </div>
+  <script>
+    // 메인화면 페이지 로드 함수
+    $(document).ready(function () {
+      $('#summernote').summernote({
+        height: 400,
+        maxHeight: 400,
+        focus: true,
+        lang: "ko-KR",
+        placeholder: '내용을 작성하세요',
+      });
+    });
+  </script>
+</body>
+</html>
