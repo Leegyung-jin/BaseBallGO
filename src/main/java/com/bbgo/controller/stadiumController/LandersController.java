@@ -1,7 +1,7 @@
 package com.bbgo.controller.stadiumController;
 
 import com.bbgo.dto.common.PageRequestDTO;
-import com.bbgo.dto.team.LandersDTO;
+import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.service.stadiumService.LandersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -33,8 +33,14 @@ public class LandersController {
     }
 
     @PostMapping("/register")
-    public String register(LandersDTO landersDTO, RedirectAttributes redirectAttributes) {
-        return "/landers";
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes) {
+
+        log.info("C>stadiumDTO: " + stadiumDTO);
+        Long sno = landersService.register(stadiumDTO);
+        log.info("SNO: " + sno);
+        redirectAttributes.addFlashAttribute("msg", sno);
+
+        return "redirect:/landers";
     }
 
 

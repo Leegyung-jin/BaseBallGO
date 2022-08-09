@@ -22,5 +22,4 @@ public class StadiumImage{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Stadium stadium;
-
 }
