@@ -17,6 +17,9 @@ public class PageResultDTO<DTO, EN>{
     // 총 페이지 번호
     private int totalPage;
 
+    // 총 데이터 개수
+    private long totalElements;
+
     // 현재 페이지 번호
     private int page;
 
@@ -35,6 +38,7 @@ public class PageResultDTO<DTO, EN>{
     public PageResultDTO(Page<EN>result, Function<EN, DTO> fn) {
         dtoList = result.stream().map(fn).collect(Collectors.toList());
         totalPage = result.getTotalPages();
+        totalElements = result.getTotalElements();
         makePageList(result.getPageable());
     }
 

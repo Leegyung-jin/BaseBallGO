@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.7.2'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
@@ -34,6 +40,14 @@ dependencies {
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     // Thumbnailator 사이트 이용
     implementation 'net.coobird:thumbnailator:0.4.17'
+
+    // Paging
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
 }
 
 tasks.named('test') {
