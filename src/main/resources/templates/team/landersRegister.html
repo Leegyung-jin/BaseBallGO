@@ -14,23 +14,28 @@
   <div class="container stadium-content p-3">
     <h2 class="landers-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
     <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-    <form th:action="@{/landers/register}" th:method="post">
+    <form th:action="@{/landers/register}" th:method="post" name="fm">
       <div class="form-group">
-        <select class="form-control section-drop small">
+        <select name="section" class="form-control section-drop small">
           <option value="#">구역 선택</option>
-          <option>라이브존</option>
-          <option>피코크 테이블석</option>
-          <option>노브랜드 테이블석</option>
-          <option>응원지정석</option>
-          <option>일반석</option>
+          <option value="라이브존">라이브존</option>
+          <option value="피코크 테이블석">피코크 테이블석</option>
+          <option value="노브랜드 테이블석">노브랜드 테이블석</option>
+          <option value="응원지정석">응원지정석</option>
+          <option value="일반석">일반석</option>
         </select>
         <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
-        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="A"><a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
-        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="0"><a style="float: left; padding: 0.375rem 0rem;">번</a>
+        <select name="base" class="form-control base-drop small">
+          <option value="#">선택</option>
+          <option value="1">1루</option>
+          <option value="3">3루</option>
+          <option value="2">중앙</option>
+        </select>
+        <input type="text" class="form-control mb-2 section-text" name="row" placeholder="A"><a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
+        <input type="text" class="form-control mb-2 section-text" name="num" placeholder="0"><a style="float: left; padding: 0.375rem 0rem;">번</a>
+        <textarea class="form-control textarea-content" name="content" placeholder="내용을 입력해주세요."></textarea>
       </div>
-      <div class="form-group">
-        <textarea class="form-control textarea-content" placeholder="내용을 입력해주세요."></textarea>
-      </div>
+
       <div class="form-group fileForm"></br>
         <label class="small image-title">이미지 첨부하기</label>
         <div class="custom-file small">
@@ -71,6 +76,7 @@
       }
 
       $(".custom-file-input").on("change", function () {
+        alert("change")
 
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-input").addClass("selected").html(fileName);
@@ -84,7 +90,7 @@
           if (!checkExtension(files[i].name, files[i].size)) {
             return false;
           }
-          // console.log("files[i]", files[i]);
+          console.log("files[i]", files[i]);
           formData.append("uploadFiles", files[i]);
           appended = true;
         }
@@ -108,7 +114,7 @@
           type: 'POST',
           dataType: 'json',
           success: function (result) {
-            console.log("success", result);
+            console.log("result", result);
             showResult(result);
           },
           error: function (jqXHR, textStatus, errorThrown){
@@ -123,14 +129,15 @@
 
         $(uploadResultArr).each(function (i, obj) {
           str += "<li data-name='" + obj.fileName + "' data-path='" + obj.folderPath + "' data-uuid='" + obj.uuid + "'>";
-          str +  "<div>"
+          str +=  "<div>";
           str += "<button type='button' data-file=\'" + obj.imageURL + "\'"
           str += "class='btn-warning btn-sm'>X</button><br>";
           str += "<img src='/display?fileName=" + obj.thumbnailURL + "'>";
-          str += "</div>"
-          str +  "</li>"
+          str += "</div>";
+          str +=  "</li>";
         });
         uploadUL.append(str);
+        console.log("str", str)
       }
 
       $(".uploadResult ").on("click", "li button", function (e) {
@@ -166,7 +173,7 @@
         $(".box").html(str);
         $("form").submit();
       })
-    }); // document ready
+    });
   </script>
 </body>
   </th:block>
