@@ -10,6 +10,7 @@
             <a class="btn btn-xl" style="background-color: #131340; color: white" href="#about">BaseBall Go 알아보기</a>
         </div>
     </header>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5135ce8ba9a6812c2711cd3fa19d1ab"></script>
 
     <!-- About-->
     <section class="content-section bg-light" id="about">
@@ -141,8 +142,6 @@
                             <div class="caption-content">
                                 <div class="h2">경기 일정 알아보기</div>
                                 <p class="mb-0">NAVER Sport에서 경기 일정 확인하기</p>
-                                <!--<p class="mb-0"><a href="https://www.koreabaseball.com/Schedule/GameCenter/Main.aspx" target="_blank">KBO 페이지에서 경기 일정 확인하기</a></p>
-                                <p class="mb-0"><a href="https://sports.news.naver.com/kbaseball/schedule/index" target="_blank">네이버 스포츠에서 경기 일정 확인하기</a></p>-->
                             </div>
                         </div>
                         <img class="img-fluid" src="../assets/img/portfolio-1.jpg" alt="..." />
@@ -193,11 +192,39 @@
         </div>
     </section>
     <!-- Map-->
-    <div class="map" id="contact">
-        <iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a></small>
-    </div>
+    <div id="map" style="width:100%;height:480px;"></div>
+    <script>
+    /* 지도 표출 */
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+    center: new kakao.maps.LatLng(37.4882, 127.0328), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    /* 마커 및 인포윈도우 */
+    var markerPosition  = new kakao.maps.LatLng(37.48833, 127.0328);
+
+    var marker = new kakao.maps.Marker({
+    position: markerPosition
+    });
+
+    marker.setMap(map);
+
+    var iwContent = '<div style="padding:5px;"><p class="fw-bold mb-0">KBO </p>' +
+        '<a class="small" href="https://map.kakao.com/link/map/Hello World!,37.4882, 127.0328" style="color:#1D809F" target="_blank">큰지도보기</a>' + ' | ' +
+        '<a class="small" href="https://map.kakao.com/link/to/Hello World!,37.4882, 127.0328" style="color:#1D809F" target="_blank">길찾기</a>' +
+        '</div>',
+    iwPosition = new kakao.maps.LatLng(37.4882, 127.0328);
+
+    var infowindow = new kakao.maps.InfoWindow({
+    position : iwPosition,
+    content : iwContent
+    });
+
+    infowindow.open(map, marker);
+    </script>
     <!-- Footer-->
     <footer class="footer text-center">
         <div class="container px-4 px-lg-5">
