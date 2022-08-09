@@ -95,8 +95,13 @@ body {
     float: left;
     margin-right: 3px;
 }
-.section-text-2 {
-
+.base-drop {
+    min-width: 70px;
+    width: 20%;
+    height: 38px;
+    float: left;
+    appearance: auto;
+    margin-right: 3px;
 }
 
 .image-title {

@@ -30,6 +30,7 @@
                 <th>1/3루</th>
                 <th>구역</th>
                 <th>좌석</th>
+                <th>등록일</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@
                 <td>[[${dto.base}]]루</td>
                 <td>[[${dto.section}]]</td>
                 <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
+                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             </tr>
             </tbody>
         </table>
