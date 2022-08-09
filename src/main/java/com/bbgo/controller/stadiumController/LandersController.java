@@ -1,6 +1,8 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.team.LandersDTO;
+import com.bbgo.service.stadiumService.LandersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/landers")
 public class LandersController {
 
-    @GetMapping(value = {"","/"})
-    public String main(Model model) {
+    private final LandersService landersService;
+
+    @GetMapping(value = {"", "/"})
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
+        log.info("list......................" + pageRequestDTO);
+        model.addAttribute("result", landersService.getList(pageRequestDTO));
         return "team/landers";
     }
 
@@ -28,12 +34,8 @@ public class LandersController {
 
     @PostMapping("/register")
     public String register(LandersDTO landersDTO, RedirectAttributes redirectAttributes) {
-        System.out.println("2222222222222222222222222");
-
-        log.info("landersDTO: " + landersDTO);
-//        Long tno = landersService.register(landersDTO);
-//        redirectAttributes.addFlashAttribute("msg", tno);
-
         return "/landers";
     }
+
+
 }

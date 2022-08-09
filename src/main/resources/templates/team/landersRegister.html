@@ -2,28 +2,49 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/common/header::header">
 </th:block>
-<head>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <!--
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-  -->
-  <script th:src="@{/js/summernote-lite.js}"></script>
-  <script th:src="@{/js/summernote-ko-KR.js}"></script>
-  <link rel="stylesheet" th:href="@{/css/summernote-lite.css}">
-</head>
+<th:block>
+  <th:block>
 <body id="page-top">
 <div class="stadium-title mb-3 landers-title">
-  <a th:href="@{/landers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/ssg_baseballclub_landers_emblem.png"></a>
+  <a th:href="@{/landers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/landers.png"></a>
   <div class="title-team m-auto">
     <a style="color: white; text-decoration-line: none" th:href="@{/landers}"><h1>SSG LANDERS</h1></a>
   </div>
 </div>
   <div class="container stadium-content p-3">
-    <h2 class="landers-title-sub font-dohyeon mb-5">좌석 정보 등록하기</h2>
-    <form th:action="@{/randers/register}" th:method="post">
-      <input type="text" class="form-label" placeholder="제목을 입력해주세요." style="width: 100%">
-      <textarea id="summernote"></textarea>
+    <h2 class="landers-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+    <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
+    <form th:action="@{/landers/register}" th:method="post">
+      <div class="form-group">
+        <select class="form-control section-drop small">
+          <option value="#">구역 선택</option>
+          <option>라이브존</option>
+          <option>피코크 테이블석</option>
+          <option>노브랜드 테이블석</option>
+          <option>응원지정석</option>
+          <option>일반석</option>
+        </select>
+        <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
+        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="A"><a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
+        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="0"><a style="float: left; padding: 0.375rem 0rem;">번</a>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control textarea-content" placeholder="내용을 입력해주세요."></textarea>
+      </div>
+      <div class="form-group fileForm"></br>
+        <label class="small image-title">이미지 첨부하기</label>
+        <div class="custom-file small">
+          <input type="file" class="custom-file-input files" id="fileInput" multiple>
+          <label class="custom-file-label" data-browse="Browse"></label>
+        </div>
+      </div>
+      <div class="box">
+      </div>
+      <div class="uploadResult">
+        <ul>
+        </ul>
+      </div>
+
       <div class="mt-4" style="text-align: center">
         <button type="submit" class="btn btn-dark register-btn">등록</button>
         <a th:href="@{/landers}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
@@ -31,16 +52,123 @@
     </form>
   </div>
   <script>
-    // 메인화면 페이지 로드 함수
-    $(document).ready(function () {
-      $('#summernote').summernote({
-        height: 400,
-        maxHeight: 400,
-        focus: true,
-        lang: "ko-KR",
-        placeholder: '내용을 작성하세요',
+    $(document).ready(function (e) {
+
+      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|tiff)$");
+      var maxSize = 10485760;  // 10MB
+
+      function checkExtension(fileName, fileSize) {
+        if (fileSize >= maxSize) {
+          alert("파일 사이즈 초과");
+          return false;
+        }
+
+        if (regex.test(fileName)) {
+          alert("해당 종류의 파일은 업로드할 수 없습니다.");
+          return false
+        }
+        return true;
+      }
+
+      $(".custom-file-input").on("change", function () {
+
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-input").addClass("selected").html(fileName);
+
+        var formData = new FormData();
+        var inputFile = $(this);
+        var files = inputFile[0].files;
+        var appended = false;
+
+        for (var i=0; i<files.length; i++){
+          if (!checkExtension(files[i].name, files[i].size)) {
+            return false;
+          }
+          // console.log("files[i]", files[i]);
+          formData.append("uploadFiles", files[i]);
+          appended = true;
+        }
+
+        // upload를 하지 않는다.
+        if (!appended) {
+          return;
+        }
+
+        for (var value of formData.values()) {
+          console.log(value)
+        }
+
+        // 실제 업로드 부분
+        // upload ajax
+        $.ajax({
+          url: '/uploadAjax',
+          processData: false,
+          contentType: false,
+          data: formData,
+          type: 'POST',
+          dataType: 'json',
+          success: function (result) {
+            console.log("success", result);
+            showResult(result);
+          },
+          error: function (jqXHR, textStatus, errorThrown){
+            console.log("error", textStatus);
+          }
+        }); // $.ajax
+      })    // end change event
+
+      function showResult(uploadResultArr) {
+        var uploadUL = $(".uploadResult ul");
+        var str = "";
+
+        $(uploadResultArr).each(function (i, obj) {
+          str += "<li data-name='" + obj.fileName + "' data-path='" + obj.folderPath + "' data-uuid='" + obj.uuid + "'>";
+          str +  "<div>"
+          str += "<button type='button' data-file=\'" + obj.imageURL + "\'"
+          str += "class='btn-warning btn-sm'>X</button><br>";
+          str += "<img src='/display?fileName=" + obj.thumbnailURL + "'>";
+          str += "</div>"
+          str +  "</li>"
+        });
+        uploadUL.append(str);
+      }
+
+      $(".uploadResult ").on("click", "li button", function (e) {
+        var targetFile = $(this).data("file");
+        var targetLi = $(this).closest("li");
+
+        $.ajax({
+          url: '/removeFile',
+          data: {fileName: targetFile},
+          dataType: 'text',
+          type: 'POST',
+          success: function (result) {
+            alert(result)
+            targetLi.remove();
+          }
+        }); // $.ajax
       });
-    });
+
+      $(".btn-primary").on("click", function (e) {
+        e.preventDefault();
+
+        var str = "";
+
+        $(".uploadResult li").each(function (i, obj) {
+          var target = $(obj);
+
+          str += "<input type='hidden' name='imageDTOList["+i+"].imgName' value='" + target.data('name') + "'>";
+          str += "<input type='hidden' name='imageDTOList["+i+"].path' value='" + target.data('path') + "'>";
+          str += "<input type='hidden' name='imageDTOList["+i+"].uuid' value='" + target.data('uuid') + "'>";
+        });
+
+        // 태그들이 추가된 것을 확인한 후에 comment를 제거한다.
+        $(".box").html(str);
+        $("form").submit();
+      })
+    }); // document ready
   </script>
 </body>
+  </th:block>
+</th:block>
 </html>
