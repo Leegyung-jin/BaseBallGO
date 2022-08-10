@@ -1,4 +1,4 @@
-package com.bbgo.entity;
+package com.bbgo.entity.stadium;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,24 +11,24 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QStadium is a Querydsl query type for Stadium
+ * QStadiumHeros is a Querydsl query type for StadiumHeros
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QStadium extends EntityPathBase<Stadium> {
+public class QStadiumHeros extends EntityPathBase<StadiumHeros> {
 
-    private static final long serialVersionUID = -306017685L;
+    private static final long serialVersionUID = -1154826145L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QStadium stadium = new QStadium("stadium");
+    public static final QStadiumHeros stadiumHeros = new QStadiumHeros("stadiumHeros");
 
-    public final QBaseEntity _super = new QBaseEntity(this);
+    public final QSBaseEntity _super = new QSBaseEntity(this);
 
-    public final StringPath base = createString("base");
+    public final NumberPath<Integer> base = createNumber("base", Integer.class);
 
     public final StringPath content = createString("content");
 
-    public final QMember member;
+    public final com.bbgo.entity.QMember member;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modDate = _super.modDate;
@@ -44,25 +44,25 @@ public class QStadium extends EntityPathBase<Stadium> {
 
     public final NumberPath<Long> sno = createNumber("sno", Long.class);
 
-    public QStadium(String variable) {
-        this(Stadium.class, forVariable(variable), INITS);
+    public QStadiumHeros(String variable) {
+        this(StadiumHeros.class, forVariable(variable), INITS);
     }
 
-    public QStadium(Path<? extends Stadium> path) {
+    public QStadiumHeros(Path<? extends StadiumHeros> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QStadium(PathMetadata metadata) {
+    public QStadiumHeros(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QStadium(PathMetadata metadata, PathInits inits) {
-        this(Stadium.class, metadata, inits);
+    public QStadiumHeros(PathMetadata metadata, PathInits inits) {
+        this(StadiumHeros.class, metadata, inits);
     }
 
-    public QStadium(Class<? extends Stadium> type, PathMetadata metadata, PathInits inits) {
+    public QStadiumHeros(Class<? extends StadiumHeros> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new com.bbgo.entity.QMember(forProperty("member")) : null;
     }
 
 }
