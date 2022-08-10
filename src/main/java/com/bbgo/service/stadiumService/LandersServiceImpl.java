@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,7 +34,7 @@ public class LandersServiceImpl implements LandersService{
     public PageResultDTO<StadiumDTO, Stadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
         Page<Stadium> result = stadiumRepository.findAll(pageable);
-        Function<Stadium, StadiumDTO> fn = (entity -> entityToDto(entity));
+        Function<Stadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
 
         return new PageResultDTO<>(result, fn);
     }
@@ -54,5 +56,25 @@ public class LandersServiceImpl implements LandersService{
         });
 
         return stadium.getSno();
+    }
+
+    @Override
+    public StadiumDTO getStadium(Long sno) {
+        List<Object[]> result = stadiumRepository.getStadiumWithAll(sno);
+        Stadium stadium = (Stadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<StadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            StadiumImage stadiumImage = (StadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+    @Override
+    public StadiumDTO entitiesToDTO(Stadium stadium, List<StadiumImage> stadiumImages) {
+        System.out.println("================== entitiesToDTO= " + stadium);
+        return LandersService.super.entitiesToDTO(stadium, stadiumImages);
     }
 }

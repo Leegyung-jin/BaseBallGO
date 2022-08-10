@@ -49,15 +49,24 @@ body {
 }
 
 /* TEXT */
-.non-effect {
+.non-effect-white {
     color: white;
     text-decoration-line: none;
 }
-.non-effect:hover {
+.non-effect-white:hover {
     color: #00115c;
     /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
+.non-effect-black {
+    color: black;
+    text-decoration-line: none;
+}
+/*.non-effect-white:hover {*/
+/*    color: #00115c;*/
+/*    !*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*!*/
+/*    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
+/*}*/
 
 /* 공통 모듈 */
 .search-group {
@@ -88,11 +97,20 @@ body {
 
 .section-drop {
     min-width: 170px;
-    width: 20%;
+    width: 170px;
     height: 38px;
     float: left;
     appearance: auto;
     margin-right: 3px;
+}
+.section-drop-read {
+    min-width: 170px;
+    width: 170px;
+    height: 38px;
+    float: left;
+    appearance: none;
+    margin-right: 3px;
+    text-align: center;
 }
 .section-text {
     width: 45px;
@@ -101,11 +119,20 @@ body {
 }
 .base-drop {
     min-width: 70px;
-    width: 20%;
+    width: 30px;
     height: 38px;
     float: left;
     appearance: auto;
     margin-right: 3px;
+}
+.base-drop-read {
+    min-width: 70px;
+    width: 30px;
+    height: 38px;
+    float: left;
+    appearance: none;
+    margin-right: 3px;
+    text-align: center;
 }
 
 .image-title {
@@ -168,6 +195,7 @@ div > .div-div {
 }
 .landers-title-sub {
     color: #CE0E2D;
+    display: inline-block;
 }
 
 .heroes-title {
@@ -176,6 +204,7 @@ div > .div-div {
 }
 .heroes-title-sub {
     color: #820024;
+    display: inline-block;
 }
 
 /* Upload */
@@ -207,3 +236,27 @@ div > .div-div {
     border: 1px solid black;
     /*display: none;*/
 }
+
+.readImg {
+    width: 100%;
+    margin-top: 10px;
+}
+.readImg ul {
+    display: flex;
+    flex-float: row;
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
+    overflow: auto;
+    padding-left: 0px;
+    /*background-color: #ffffff;*/
+}
+.readImg ul li {
+    list-style: none;
+    padding: 10px;
+    /*margin-left: 2em;*/
+}
+.readImg ul li img {
+    width: 100%;
+}
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/common/header::header">
+</th:block>
+<th:block>
+  <th:block>
+<body id="page-top">
+<div class="stadium-title mb-3 heroes-title">
+  <a th:href="@{/heroes}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/kiwoom.png"></a>
+  <div class="title-team m-auto">
+    <a style="color: white; text-decoration-line: none" th:href="@{/heroes}"><h1>키움 히어로즈</h1></a>
+  </div>
+</div>
+  <div class="container stadium-content p-3">
+    <h2 class="heroes-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+    <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
+      <div class="form-group">
+        <select class="form-control section-drop small">
+          <option value="#">구역 검색</option>
+          <option>스카이박스</option>
+          <option>R.d-club</option>
+          <option>1층 테이블석</option>
+          <option>2층 테이블석</option>
+          <option>내야커플석</option>
+          <option>외야커플석</option>
+          <option>다크버건디석</option>
+          <option>버건디석</option>
+          <option>3층 지정석</option>
+          <option>4층 지정석</option>
+          <option>휠체어석</option>
+          <option>외야일반석</option>
+          <option>외야패밀리석</option>
+        </select>
+        <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
+        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="A"><a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
+        <input type="text" class="form-control mb-2 section-text" name="title" placeholder="0"><a style="float: left; padding: 0.375rem 0rem;">번</a>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control textarea-content" placeholder="내용을 입력해주세요."></textarea>
+      </div>
+      <div class="form-group fileForm"></br>
+        <label class="small image-title">이미지 첨부하기</label>
+        <div class="custom-file small">
+          <input type="file" class="custom-file-input files" id="fileInput" multiple>
+          <label class="custom-file-label" data-browse="Browse"></label>
+        </div>
+      </div>
+      <div class="uploadResult">
+        <ul>
+        </ul>
+      </div>
+
+      <div class="mt-4" style="text-align: center">
+        <button type="submit" class="btn btn-dark register-btn">등록</button>
+        <a th:href="@{/heroes}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+      </div>
+  </div>
+  <script>
+
+  </script>
+</body>
+  </th:block>
+</th:block>
+</html>

@@ -19,27 +19,18 @@ public interface LandersService {
     // PageRequestDTO-파라미터, PageResultDTO-리턴 타입으로 사용
     PageResultDTO<StadiumDTO, Stadium> getList(PageRequestDTO requestDTO);
 
+    // Register
+    Long register(StadiumDTO dto);
+
+    StadiumDTO getStadium(Long sno);
+
     // entity객체를 DTO객체로 변환
-//    default Stadium dtoToEntity(StadiumDTO dto) {
-//    Team team = Team.builder().sName(dto.getSName()).build();
-//
-//    Stadium entity = Stadium.builder()
-//            .sno(dto.getSno())
-//            .team(team)
-//            .base(dto.getBase())
-//            .section(dto.getSection())
-//            .row(dto.getRow())
-//            .num(dto.getNum())
-//            .build();
-//        return entity;
-//}
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
-        Team team = Team.builder().sName(stadiumDTO.getSName()).build();
         Stadium stadium = Stadium.builder()
                 .sno(stadiumDTO.getSno())
-                .team(team)
+//                .base(stadiumDTO.getBase())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
                 .row(stadiumDTO.getRow())
@@ -47,10 +38,7 @@ public interface LandersService {
                 .content(stadiumDTO.getContent())
                 .build();
         entityMap.put("stadium", stadium);
-
         List<StadiumImageDTO> imageDTOList = stadiumDTO.getImageDTOList();
-        System.out.println("=============================== StadiumDTO- " + stadiumDTO);
-        System.out.println("=============================== imageDTOList- " + imageDTOList);
 
         // StadiumImageDTO 처리
         if (imageDTOList != null && imageDTOList.size() > 0) {
@@ -64,20 +52,16 @@ public interface LandersService {
                         .build();
                 return stadiumImage;
             }).collect(Collectors.toList());
-
-            System.out.println("========================== stadiumImage= " + stadiumImageList);
             entityMap.put("imgList", stadiumImageList);
         }
-
         return entityMap;
     }
 
-    default StadiumDTO entityToDto(Stadium entity) {
+    // List
+    default StadiumDTO entityToDTO(Stadium entity) {
 
-        StadiumDTO dto = StadiumDTO.builder()
+        StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
-//                .sName(entity.getTeam().getSName())
-                .sName("인천 SSG랜더스필드")
                 .base(entity.getBase())
                 .section(entity.getSection())
                 .row(entity.getRow())
@@ -87,10 +71,35 @@ public interface LandersService {
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
                 .build();
-        return dto;
+
+        return stadiumDTO;
     }
 
-    // Register
-    Long register(StadiumDTO dto);
+    // Read
+    default StadiumDTO entitiesToDTO(Stadium entity, List<StadiumImage> stadiumImages) {
+        StadiumDTO stadiumDTO = StadiumDTO.builder()
+                .sno(entity.getSno())
+                .base(entity.getBase())
+                .section(entity.getSection())
+                .row(entity.getRow())
+                .num(entity.getNum())
+                .content(entity.getContent())
+                .email("member1@aa.com")
+                .nickname("ADMIN")
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
+                .build();
+
+        List<StadiumImageDTO> stadiumImageDTOList = stadiumImages.stream().map(stadiumImage -> {
+            return StadiumImageDTO.builder().imgName(stadiumImage.getImgName())
+                    .path(stadiumImage.getPath())
+                    .uuid(stadiumImage.getUuid())
+                    .build();
+        }).collect(Collectors.toList());
+
+        stadiumDTO.setImageDTOList(stadiumImageDTOList);
+
+        return stadiumDTO;
+    }
 
 }

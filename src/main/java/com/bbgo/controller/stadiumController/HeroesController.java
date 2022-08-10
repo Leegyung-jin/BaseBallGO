@@ -15,12 +15,16 @@ public class HeroesController {
 
     @GetMapping(value = {"", "/"})
     public String main(Model model) {
-        return "team/heroes";
+        return "heroes/list";
     }
 
     @GetMapping("/register")
     public String registerStadium(Model model) {
-        return "team/heroesRegister";
+        return "heroes/register";
     }
 
+    @GetMapping("/read")
+    public String read(Model model){
+        return "heroes/read";
+    }
 }

@@ -48,7 +48,7 @@ public class StadiumRepositoryTests {
             Member member = Member.builder().mno(mno).build();
 
             Stadium stadium = Stadium.builder()
-                    .team(team)
+//                    .team(team)
                     .base(1)
                     .section("노브랜드 테이블석")
                     .row("I")

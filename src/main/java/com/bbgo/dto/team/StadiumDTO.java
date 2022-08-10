@@ -16,8 +16,8 @@ import java.util.List;
 public class StadiumDTO {
 
     private Long sno;           // Stadium number
-    private String sName;       // Stadium Name
-    private Integer base;       // 1루/3루
+//    private Integer base;       // 1루/3루
+    private String base;       // 1루/3루
     private String section;     // Stadium 구역
     private String row;         // Stadium 좌석(열)
     private Integer num;        // Stadium 좌석(번호)
