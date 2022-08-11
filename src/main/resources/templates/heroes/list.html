@@ -10,14 +10,31 @@
         </div>
     </div>
     <div class="container stadium-content p-3">
-        <h2 class="heroes-title-sub font-dohyeon">고척 스카이돔 좌석 안내</h2>
+        <h2 class="heroes-title-sub font-dohyeon mb-5" >고척 스카이돔 좌석 안내</h2>
+        <a href="https://www.heroesbaseball.co.kr/ticket/normal/viewCharge.do" target="_blank" class="mb-5 heroes-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
         <div class="mb-3 float-end search-group">
-            <button class="btn btn-outline-dark search-btn float-end" type="button" id="button-addon2">검색</button>
-            <input type="text" class="float-end" placeholder="검색어를 입력해주세요.">
+<!--            <button class="btn btn-outline-dark search-btn float-end" type="button" id="button-addon2">검색</button>-->
+<!--            <input type="text" class="float-end" placeholder="검색어를 입력해주세요.">-->
+            <select class="form-control section-drop small float-start">
+                <option value="#">구역 검색</option>
+                <option>스카이박스</option>
+                <option>R.d-club</option>
+                <option>1층 테이블석</option>
+                <option>2층 테이블석</option>
+                <option>내야커플석</option>
+                <option>외야커플석</option>
+                <option>다크버건디석</option>
+                <option>버건디석</option>
+                <option>3층 지정석</option>
+                <option>4층 지정석</option>
+                <option>휠체어석</option>
+                <option>외야일반석</option>
+                <option>외야패밀리석</option>
+            </select>
         </div>
         <div>
             <a class="float-start font-black cursor-default">전체 23,431개</a>
-            <a class="writer float-end font-black cursor-pointer" th:href="@{heroes/register}"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</a>
+            <a class="writer float-end font-black cursor-pointer" th:href="@{heroes/register}"><i class="fa-solid fa-pen-to-square font-black"></i>좌석 등록하기</a>
         </div>
         <table class="table mt-5 mb-5">
             <thead>
@@ -30,7 +47,9 @@
             </thead>
             <tbody>
             <tr>
-                <td>1</td>
+                <td>
+                    <a th:href="@{/heroes/read}">1</a>
+                </td>
                 <td>1루</td>
                 <td>노브랜드 테이블</td>
                 <td>C열 12, 13</td>

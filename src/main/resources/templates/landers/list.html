@@ -10,10 +10,30 @@
         </div>
     </div>
     <div class="container stadium-content p-3">
-        <h2 class="landers-title-sub font-dohyeon">SSG랜더스필드 좌석 안내</h2>
+        <h2 class="landers-title-sub font-dohyeon mb-5">SSG랜더스필드 좌석</h2>
+        <a href="http://www.ssglanders.com/game/ticket" target="_blank" class="mb-5 landers-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
         <div class="mb-3 float-end search-group">
-            <button class="btn btn-outline-dark search-btn float-end" type="button" id="button-addon2">검색</button>
-            <input type="text" class="float-end" placeholder="검색어를 입력해주세요.">
+            <select class="form-control section-drop small float-start" name="section">
+                <option value="#">전체</option>
+                <option>일반석</option>
+                <option>몰리스 그린존</option>
+                <option>응원지정석</option>
+                <option>의자지정석</option>
+                <option>랜더스 라이브존</option>
+                <option>이마트 프렌들리존</option>
+                <option>피코크 테이블석</option>
+                <option>노브랜드 테이블석</option>
+                <option>SKY탁자석</option>
+                <option>홈런커플존</option>
+                <option>바베큐존</option>
+                <option>외야파티덱</option>
+                <option>외야패밀리존</option>
+                <option>내야패밀리존</option>
+                <option>초가정자</option>
+                <option>미니스카이박스</option>
+                <option>스카이박스</option>
+                <option>휠체어 장애인석</option>
+            </select>
         </div>
         <div>
             <a class="float-start font-black cursor-default">전체 [[${result.totalElements}]] 개</a>
@@ -23,7 +43,7 @@
 <!--        <form action="/landers" method="get" id="searchForm">-->
 <!--            <input type="hidden" name="page" value="1">-->
 <!--        </form>-->
-        <table class="table mt-5 mb-5">
+        <table class="table mt-5 mb-5 font-notosans">
             <thead>
             <tr>
                 <th>#</th>
@@ -34,8 +54,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="dto : ${result.dtoList}" >
-                <th scope="row">[[${dto.sno}]]</th>
+            <tr class="readTable" th:each="dto : ${result.dtoList}">
+                <th scope="row">
+                    <a th:href="@{/landers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.sno}]]</a>
+<!--                    <a>[[${dto.sno}]]</a>-->
+                </th>
                 <td>[[${dto.base}]]루</td>
                 <td>[[${dto.section}]]</td>
                 <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
@@ -67,4 +90,9 @@
         </nav>
     </div>
 </body>
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
 </html>

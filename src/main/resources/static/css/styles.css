@@ -3057,36 +3057,64 @@ textarea.form-control-lg {
   background-color: #1D809F;
   border-color: #1D809F;
 }
-
-.btn-secondary {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+.btn-secondary{
+  color:#fff;
+  background-color:#6c757d;
+  border-color:#6c757d
 }
 .btn-secondary:hover {
-  color: #000;
-  background-color: #efc32c;
-  border-color: #eebf20;
+  color:#fff;
+  background-color:#5a6268;
+  border-color:#545b62
 }
-.btn-check:focus + .btn-secondary, .btn-secondary:focus {
-  color: #000;
-  background-color: #efc32c;
-  border-color: #eebf20;
-  box-shadow: 0 0 0 0.25rem rgba(201, 156, 6, 0.5);
+.btn-secondary.focus, .btn-secondary:focus {
+  color:#fff;
+  background-color:#5a6268;
+  border-color:#545b62;
+  box-shadow:0 0 0 .2rem rgba(130,138,145,.5)
 }
-.btn-check:checked + .btn-secondary, .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
-  color: #000;
-  background-color: #f0c639;
-  border-color: #eebf20;
+.btn-secondary.disabled, .btn-secondary:disabled {
+  color:#fff;
+  background-color:#6c757d;
+  border-color:#6c757d
 }
-.btn-check:checked + .btn-secondary:focus, .btn-check:active + .btn-secondary:focus, .btn-secondary:active:focus, .btn-secondary.active:focus, .show > .btn-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.25rem rgba(201, 156, 6, 0.5);
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+  color:#fff;background-color:#545b62;border-color:#4e555b
 }
-.btn-secondary:disabled, .btn-secondary.disabled {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow:0 0 0 .2rem rgba(130,138,145,.5)
 }
+
+/* btn-secondary 변경 */
+/*.btn-secondary {*/
+/*  color: #000;*/
+/*  background-color: #ecb807;*/
+/*  border-color: #ecb807;*/
+/*}*/
+/*.btn-secondary:hover {*/
+/*  color: #000;*/
+/*  background-color: #efc32c;*/
+/*  border-color: #eebf20;*/
+/*}*/
+/*.btn-check:focus + .btn-secondary, .btn-secondary:focus {*/
+/*  color: #000;*/
+/*  background-color: #efc32c;*/
+/*  border-color: #eebf20;*/
+/*  box-shadow: 0 0 0 0.25rem rgba(201, 156, 6, 0.5);*/
+/*}*/
+/*.btn-check:checked + .btn-secondary, .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {*/
+/*  color: #000;*/
+/*  background-color: #f0c639;*/
+/*  border-color: #eebf20;*/
+/*}*/
+/*.btn-check:checked + .btn-secondary:focus, .btn-check:active + .btn-secondary:focus, .btn-secondary:active:focus, .btn-secondary.active:focus, .show > .btn-secondary.dropdown-toggle:focus {*/
+/*  box-shadow: 0 0 0 0.25rem rgba(201, 156, 6, 0.5);*/
+/*}*/
+/*.btn-secondary:disabled, .btn-secondary.disabled {*/
+/*  color: #000;*/
+/*  background-color: #ecb807;*/
+/*  border-color: #ecb807;*/
+/*}*/
 
 .btn-success {
   color: #fff;
@@ -3294,6 +3322,40 @@ textarea.form-control-lg {
 }
 
 .btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:focus, .btn-outline-secondary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
+  color: #6c757d;
+  background-color: transparent;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+/*
+btn-outline-secondary 변경 수정
+.btn-outline-secondary {
   color: #ecb807;
   border-color: #ecb807;
 }
@@ -3317,6 +3379,7 @@ textarea.form-control-lg {
   color: #ecb807;
   background-color: transparent;
 }
+*/
 
 .btn-outline-success {
   color: #198754;
