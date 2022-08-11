@@ -3,10 +3,13 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
+import com.bbgo.entity.QStadium;
 import com.bbgo.entity.Stadium;
 import com.bbgo.entity.StadiumImage;
 import com.bbgo.repository.StadiumImageRepository;
 import com.bbgo.repository.StadiumRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -33,11 +36,48 @@ public class LandersServiceImpl implements LandersService{
     @Override
     public PageResultDTO<StadiumDTO, Stadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
-        Page<Stadium> result = stadiumRepository.findAll(pageable);
-        Function<Stadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
 
+        // 검색
+        BooleanBuilder booleanBuilder = getSearch(requestDTO);
+        Page<Stadium> result = stadiumRepository.findAll(booleanBuilder, pageable);  // Querydsl 사용
+
+        Function<Stadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
     }
+
+    private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
+        String type = requestDTO.getType();
+        String keyword = requestDTO.getKeyword();
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QStadium qStadium = QStadium.stadium;
+
+        // sno > 0조건 생성
+        BooleanExpression expression = qStadium.sno.gt(0L);
+        booleanBuilder.and(expression);
+
+
+        if (type == null || type.trim().length() == 0) {
+            return booleanBuilder;
+        }
+
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+        if (type.contains("1")) {
+            conditionBuilder.or(qStadium.base.contains("1")).and(qStadium.section.contains(keyword));
+        }
+        if (type.contains("2")) {
+            conditionBuilder.or(qStadium.base.contains("중앙")).and(qStadium.section.contains(keyword));
+        }
+        if (type.contains("3")) {
+            conditionBuilder.or(qStadium.base.contains("3")).and(qStadium.section.contains(keyword));
+        }
+
+        // 모든 조건 통합
+        booleanBuilder.and(conditionBuilder);
+
+        return booleanBuilder;
+    }
+
 
     // Register
     @Transactional

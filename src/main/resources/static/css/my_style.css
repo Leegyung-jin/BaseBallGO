@@ -7,7 +7,6 @@ body {
 .cursor-default, .cursor-default:hover {
     cursor: default;
     text-decoration: none;
-    /*color: black;*/
 }
 
 .cursor-pointer {
@@ -20,6 +19,14 @@ body {
     float: right;
     right: 15px;
     top: 15px;
+}
+
+.list-text {
+    color: #000;
+    text-decoration: none;
+}
+.list-text:hover {
+    text-decoration: underline;
 }
 
 /* FONT */
@@ -96,6 +103,7 @@ body {
 }
 
 .section-drop {
+    max-width: 200px;
     min-width: 170px;
     width: 170px;
     height: 38px;
@@ -118,8 +126,9 @@ body {
     margin-right: 3px;
 }
 .base-drop {
+    max-width: 100px;
     min-width: 70px;
-    width: 30px;
+    width: 80px;
     height: 38px;
     float: left;
     appearance: auto;
@@ -163,6 +172,15 @@ body {
     margin: auto;
     font-size: 3rem;
     text-overflow: clip;
+}
+.title-team-white {
+    color: white;
+    text-decoration-line: none;
+}
+.title-team-white:hover {
+    color: #ffffff;
+    /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
+    /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
 }
 
 .stadium-title {
@@ -259,4 +277,5 @@ div > .div-div {
 .readImg ul li img {
     width: 100%;
 }
+
 

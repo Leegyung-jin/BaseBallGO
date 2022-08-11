@@ -4,45 +4,53 @@
 </th:block>
 <body id="page-top">
     <div class="stadium-title mb-3 landers-title">
-        <img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/landers.png">
+        <a th:href="@{landers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/landers.png"></a>
         <div class="title-team m-auto">
-            <h1 class="cursor-default">SSG LANDERS</h1>
+            <h1><a class="title-team-white" th:href="@{landers}">SSG LANDERS</a></h1>
         </div>
     </div>
     <div class="container stadium-content p-3">
         <h2 class="landers-title-sub font-dohyeon mb-5">SSG랜더스필드 좌석</h2>
         <a href="http://www.ssglanders.com/game/ticket" target="_blank" class="mb-5 landers-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
-        <div class="mb-3 float-end search-group">
-            <select class="form-control section-drop small float-start" name="section">
-                <option value="#">전체</option>
-                <option>일반석</option>
-                <option>몰리스 그린존</option>
-                <option>응원지정석</option>
-                <option>의자지정석</option>
-                <option>랜더스 라이브존</option>
-                <option>이마트 프렌들리존</option>
-                <option>피코크 테이블석</option>
-                <option>노브랜드 테이블석</option>
-                <option>SKY탁자석</option>
-                <option>홈런커플존</option>
-                <option>바베큐존</option>
-                <option>외야파티덱</option>
-                <option>외야패밀리존</option>
-                <option>내야패밀리존</option>
-                <option>초가정자</option>
-                <option>미니스카이박스</option>
-                <option>스카이박스</option>
-                <option>휠체어 장애인석</option>
-            </select>
-        </div>
-        <div>
-            <a class="float-start font-black cursor-default">전체 [[${result.totalElements}]] 개</a>
-            <a class="writer float-end font-black cursor-pointer" th:href="@{landers/register}"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</a>
-        </div>
 
-<!--        <form action="/landers" method="get" id="searchForm">-->
-<!--            <input type="hidden" name="page" value="1">-->
-<!--        </form>-->
+        <form action="landers" method="get" id="searchForm">
+            <div class="input-group mb-4">
+                <input type="hidden" name="page" value="1">
+                <select class="form-control base-drop small float-start" name="type">
+                    <option value="123" th:selected="${pageRequestDTO.type == '123'}">전체</option>
+                    <option value="1"   th:selected="${pageRequestDTO.type == '1'}">1루</option>
+                    <option value="2"   th:selected="${pageRequestDTO.type == '2'}">중앙</option>
+                    <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
+                </select>
+                <select class="form-control section-drop small" name="keyword">
+                    <option value="" th:selected="${pageRequestDTO.keyword == null}">선택</option>
+                    <option value="일반석"          th:selected="${pageRequestDTO.keyword == '일반석'}">일반석</option>
+                    <option value="몰리스"          th:selected="${pageRequestDTO.keyword == '몰리스'}">몰리스 그린존</option>
+                    <option value="응원지정석"      th:selected="${pageRequestDTO.keyword == '응원지정석'}">응원지정석</option>
+                    <option value="의자지정석"      th:selected="${pageRequestDTO.keyword == '의자지정석'}">의자지정석</option>
+                    <option value="라이브존"        th:selected="${pageRequestDTO.keyword == '라이브존'}">랜더스 라이브존</option>
+                    <option value="프렌들리존"      th:selected="${pageRequestDTO.keyword == '프렌들리존'}">이마트 프렌들리존</option>
+                    <option value="피코크"          th:selected="${pageRequestDTO.keyword == '피코크'}">피코크 테이블석</option>
+                    <option value="노브랜드"        th:selected="${pageRequestDTO.keyword == '노브랜드'}">노브랜드 테이블석</option>
+                    <option value="SKY탁자석"       th:selected="${pageRequestDTO.keyword == 'SKY탁자석'}">SKY탁자석</option>
+                    <option value="홈런커플존"      th:selected="${pageRequestDTO.keyword == '홈런커플존'}">홈런커플존</option>
+                    <option value="바베큐존"        th:selected="${pageRequestDTO.keyword == '바베큐존'}">바베큐존</option>
+                    <option value="외야파티덱"      th:selected="${pageRequestDTO.keyword == '외야파티덱'}">외야파티덱</option>
+                    <option value="외야패밀리존"    th:selected="${pageRequestDTO.keyword == '외야패밀리존'}">외야패밀리존</option>
+                    <option value="내야패밀리존"    th:selected="${pageRequestDTO.keyword == '내야패밀리존'}">내야패밀리존</option>
+                    <option value="초가정자"        th:selected="${pageRequestDTO.keyword == '초가정자'}">초가정자</option>
+                    <option value="미니스카이박스"  th:selected="${pageRequestDTO.keyword == '미니스카이박스'}">미니스카이박스</option>
+                    <option value="스카이박스"      th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
+                    <option value="휠체어"          th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어 장애인석</option>
+                </select>
+                <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
+            </div>
+        </form>
+<!--        <div>-->
+            <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
+            <a class="writer float-end font-black cursor-pointer" th:href="@{landers/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+<!--        </div>-->
+
         <table class="table mt-5 mb-5 font-notosans">
             <thead>
             <tr>
@@ -54,15 +62,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="readTable" th:each="dto : ${result.dtoList}">
+            <tr class="readTable" th:each="dto : ${result.dtoList}" th:if="${result.totalElements}">
                 <th scope="row">
-                    <a th:href="@{/landers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.sno}]]</a>
-<!--                    <a>[[${dto.sno}]]</a>-->
+                    <a>[[${dto.sno}]]</a>
                 </th>
-                <td>[[${dto.base}]]루</td>
-                <td>[[${dto.section}]]</td>
+                <td>[[${dto.base}]]</td>
+                <td>
+                    <a class="list-text" th:href="@{/landers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+                </td>
                 <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            </tr>
+            <tr th:unless="${result.totalElements}" class="text-center">
+                <td colspan="5">검색 결과가 없습니다.</a></td>
             </tr>
             </tbody>
         </table>
@@ -90,9 +102,17 @@
         </nav>
     </div>
 </body>
-<script>
-    $(document).ready(function() {
+<script th:inline="javascript">
+    var msg = [[${msg}]];
+    console.log(msg);
 
-    });
+    if(msg){
+        $(".modal").modal();
+    }
+
+    var searchForm = $("#searchForm");
+    $('.btn-search').click(function (e){
+        searchForm.submit();
+    })
 </script>
 </html>
