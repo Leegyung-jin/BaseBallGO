@@ -1,5 +1,7 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.dto.common.PageRequestDTO;
+import com.bbgo.service.stadiumService.TwinsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bears")
 public class BearsController {
 
+//    private final BearsService bearsService;
+    private final TwinsService twinsService;
+
     @GetMapping(value = {"", "/"})
-    public String main(Model model) {
-        return "team/bears";
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
+        log.info("list......................" + pageRequestDTO);
+        model.addAttribute("result", twinsService.getList(pageRequestDTO));
+        return "bears/list";
     }
 }

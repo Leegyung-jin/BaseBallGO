@@ -179,16 +179,20 @@ body {
 }
 .title-team-white:hover {
     color: #ffffff;
-    /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
-    /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
 }
 .title-team-kia {
     color: #EA0029;
     text-decoration-line: none;
 }
+.title-team-kia:hover {
+    color: #EA0029;
+}
 .title-team-twins {
     color: #C30452;
     text-decoration-line: none;
+}
+.title-team-twins:hover {
+    color: #C30452;
 }
 
 .stadium-title {
@@ -254,6 +258,15 @@ div > .div-div {
 }
 .tigers-title-sub {
     color: #EA0029 ;
+    display: inline-block;
+}
+.bears-title {
+    background-color: black;
+
+    color: #131230;
+}
+.bears-title-sub {
+    color: #131230 ;
     display: inline-block;
 }
 
