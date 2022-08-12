@@ -180,6 +180,13 @@ body {
 .title-team-white:hover {
     color: #ffffff;
 }
+.title-team-black {
+    color: black;
+    text-decoration-line: none;
+}
+.title-team-black:hover {
+    color: black;
+}
 .title-team-kia {
     color: #EA0029;
     text-decoration-line: none;
@@ -305,6 +312,13 @@ div > .div-div {
 }
 .lions-title-sub {
     color: #074CA1 ;
+    display: inline-block;
+}
+.eagles-title {
+    background-color: #FF6600;
+}
+.eagles-title-sub {
+    color: #FF6600 ;
     display: inline-block;
 }
 

@@ -3,17 +3,17 @@
 <th:block th:replace="common/header::header">
 </th:block>
 <body id="page-top" class="font-notosans">
-<div class="stadium-title mb-3 lions-title">
-    <a th:href="@{lions}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/lions.png"></a>
+<div class="stadium-title mb-3 eagles-title">
+    <a th:href="@{eagles}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/eagles.png" style="top: 27px"></a>
     <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-lions" th:href="@{lions}">삼성 라이온즈</a></h1>
+        <h1 class="cursor-default"><a class="title-team-black" th:href="@{eagles}">한화이글스</a></h1>
     </div>
 </div>
 <div class="container stadium-content p-3">
-    <h2 class="lions-title-sub font-dohyeon mb-5" >삼성 라이온즈 파크 좌석 안내</h2>
-    <a href="https://www.samsunglions.com/intro/intro05_4.asp" target="_blank" class="mb-5 lions-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+    <h2 class="eagles-title-sub font-dohyeon mb-5" >한화생명 이글스 파크 좌석 안내</h2>
+    <a href="https://www.hanwhaeagles.co.kr/MN/EP/MNEPPI01.do" target="_blank" class="mb-5 eagles-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
 
-    <form action="lions" method="get" id="searchForm">
+    <form action="eagles" method="get" id="searchForm">
         <div class="input-group mb-4">
             <input type="hidden" name="page" value="1">
             <select class="form-control base-drop small float-start" name="type">
@@ -43,7 +43,7 @@
     </form>
 
     <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-    <a class="writer float-end font-black cursor-pointer" th:href="@{lions/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{eagles/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
 
     <table class="table mt-5 mb-5">
         <thead>
@@ -62,7 +62,7 @@
             </th>
             <td>[[${dto.base}]]</td>
             <td>
-                <a class="list-text" th:href="@{/lions/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+                <a class="list-text" th:href="@{/eagles/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
@@ -76,11 +76,11 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/lions(page = ${result.start- 1})}" tabindex="-1">이전</a>
+                <a class="page-link" th:href="@{/eagles(page = ${result.start- 1})}" tabindex="-1">이전</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/lions(page=    ${page},
+                <a class="page-link" th:href="@{/eagles(page=    ${page},
                                                              type=    ${pageRequestDTO.type},
                                                              keyword= ${pageRequestDTO.keyword})}">
                     [[${page}]]
@@ -88,9 +88,9 @@
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/lions(page=   ${result.end +1},
-                                                       type=   ${pageRequestDTO.type},
-                                                       keyword=#{pageRequestDTO.keyword})}">다음</a>
+                <a class="page-link" th:href="@{/eagles(page=   ${result.end +1},
+                                                             type=   ${pageRequestDTO.type},
+                                                             keyword=#{pageRequestDTO.keyword})}">다음</a>
             </li>
         </ul>
     </nav>
