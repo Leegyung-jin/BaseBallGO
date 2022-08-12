@@ -3,17 +3,17 @@
 <th:block th:replace="common/header::header">
 </th:block>
 <body id="page-top" class="font-notosans">
-<div class="stadium-title mb-3 twins-title">
-    <a th:href="@{twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/lgtwins.png"></a>
+<div class="stadium-title mb-3 wiz-title">
+    <a th:href="@{wiz}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/ktwiz.png" style="top: 10px"></a>
     <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-white" th:href="@{twins}">LG트윈스</a></h1>
+        <h1 class="cursor-default"><a class="title-team-white" th:href="@{wiz}">kt wiz</a></h1>
     </div>
 </div>
 <div class="container stadium-content p-3">
-    <h2 class="twins-title-sub font-dohyeon mb-5" >잠실 야구장 좌석 안내</h2>
-    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/ticket/ticketinfo" target="_blank" class="mb-5 twins-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+    <h2 class="wiz-title-sub font-dohyeon mb-5" >수원KT위즈파크 좌석 안내</h2>
+    <a href="https://www.ktwiz.co.kr/ticket/price" target="_blank" class="mb-5 wiz-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
 
-    <form action="twins" method="get" id="searchForm">
+    <form action="wiz" method="get" id="searchForm">
         <div class="input-group mb-4">
             <input type="hidden" name="page" value="1">
             <select class="form-control base-drop small float-start" name="type">
@@ -23,27 +23,27 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                <option value=""                th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value="포수뒤테이블석"  th:selected="${pageRequestDTO.keyword == '포수 뒤 테이블석'}">포수 뒤 테이블석</option>
+                <option value="중앙테이블석"    th:selected="${pageRequestDTO.keyword == '중앙테이블석'}">중앙테이블석</option>
+                <option value="Y박스존"         th:selected="${pageRequestDTO.keyword == 'Y박스존'}">Y 박스존</option>
+                <option value="3루테이블석"     th:selected="${pageRequestDTO.keyword == '3루 테이블석'}">3루 테이블석</option>
+                <option value="중앙지정석"      th:selected="${pageRequestDTO.keyword == '중앙지정석'}">중앙지정석</option>
+                <option value="하이파이브존"    th:selected="${pageRequestDTO.keyword == '하이파이브존'}">하이파이브존/익사이팅석</option>
+                <option value="스카이존"        th:selected="${pageRequestDTO.keyword == '스카이존'}">스카이존</option>
+                <option value="내야지정석"      th:selected="${pageRequestDTO.keyword == '내야지정석'}">내야지정석</option>
+                <option value="응원지정석"      th:selected="${pageRequestDTO.keyword == '응원지정석'}">응원지정석</option>
+                <option value="외야테이블석"    th:selected="${pageRequestDTO.keyword == '외야테이블석'}">외야테이블석</option>
+                <option value="휠체어석"        th:selected="${pageRequestDTO.keyword == '휠체어석'}">휠체어석</option>
+                <option value="외야잔디자유석"  th:selected="${pageRequestDTO.keyword == '외야잔디자유석'}">외야 잔디 자유석</option>
+                <option value="스카이박스"      th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
             </select>
             <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
         </div>
     </form>
 
     <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-    <a class="writer float-end font-black cursor-pointer" th:href="@{twins/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{wiz/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
 
     <table class="table mt-5 mb-5">
         <thead>
@@ -62,7 +62,7 @@
             </th>
             <td>[[${dto.base}]]</td>
             <td>
-                <a class="list-text" th:href="@{/twins/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+                <a class="list-text" th:href="@{/wiz/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
@@ -76,11 +76,11 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/twins(page = ${result.start- 1})}" tabindex="-1">이전</a>
+                <a class="page-link" th:href="@{/wiz(page = ${result.start- 1})}" tabindex="-1">이전</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/twins(page=    ${page},
+                <a class="page-link" th:href="@{/wiz(page=    ${page},
                                                              type=    ${pageRequestDTO.type},
                                                              keyword= ${pageRequestDTO.keyword})}">
                     [[${page}]]
@@ -88,7 +88,7 @@
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/twins(page=   ${result.end +1},
+                <a class="page-link" th:href="@{/wiz(page=   ${result.end +1},
                                                              type=   ${pageRequestDTO.type},
                                                              keyword=#{pageRequestDTO.keyword})}">다음</a>
             </li>

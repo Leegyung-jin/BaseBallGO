@@ -234,6 +234,15 @@ div > .div-div {
     display: inline-block;
 }
 
+.wiz-title {
+    background-color: #000000;
+    color: white;
+}
+.wiz-title-sub {
+    color: #000000;
+    display: inline-block;
+}
+
 /* Upload */
 .uploadResult {
     width: 100%;

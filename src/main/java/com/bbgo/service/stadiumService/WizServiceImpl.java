@@ -4,11 +4,11 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.HeroesStadium;
-import com.bbgo.entity.stadium.HeroesStadiumImage;
-import com.bbgo.entity.stadium.QHeroesStadium;
+import com.bbgo.entity.stadium.QWizStadium;
+import com.bbgo.entity.stadium.WizStadium;
+import com.bbgo.entity.stadium.WizStadiumImage;
 import com.bbgo.repository.StadiumImageRepository;
-import com.bbgo.repository.stadiumRepository.HeroesStadiumRepository;
+import com.bbgo.repository.stadiumRepository.WizStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +27,21 @@ import java.util.function.Function;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class HeroesServiceImpl implements HeroesService{
+public class WizServiceImpl implements WizService {
 
-    private final HeroesStadiumRepository repository;
+    private final WizStadiumRepository repository;
     private final StadiumImageRepository imageRepository;
 
     // List
     @Override
-    public PageResultDTO<StadiumDTO, HeroesStadium> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<StadiumDTO, WizStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
 
         // 검색
         BooleanBuilder booleanBuilder = getSearch(requestDTO);
-        Page<HeroesStadium> result = repository.findAll(booleanBuilder, pageable);  // Querydsl 사용
+        Page<WizStadium> result = repository.findAll(booleanBuilder, pageable);  // Querydsl 사용
 
-        Function<HeroesStadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
+        Function<WizStadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
     }
 
@@ -50,10 +50,11 @@ public class HeroesServiceImpl implements HeroesService{
         String keyword = requestDTO.getKeyword();
 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        QHeroesStadium qHeroesStadium = QHeroesStadium.heroesStadium;
+        QWizStadium qWizStadium = QWizStadium.wizStadium;
+
 
         // sno > 0조건 생성
-        BooleanExpression expression = qHeroesStadium.sno.gt(0L);
+        BooleanExpression expression = qWizStadium.sno.gt(0L);
         booleanBuilder.and(expression);
 
 
@@ -63,13 +64,13 @@ public class HeroesServiceImpl implements HeroesService{
 
         BooleanBuilder conditionBuilder = new BooleanBuilder();
         if (type.contains("1")) {
-            conditionBuilder.or(qHeroesStadium.base.contains("1")).and(qHeroesStadium.section.contains(keyword));
+            conditionBuilder.or(qWizStadium.base.contains("1")).and(qWizStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qHeroesStadium.base.contains("중앙")).and(qHeroesStadium.section.contains(keyword));
+            conditionBuilder.or(qWizStadium.base.contains("중앙")).and(qWizStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
-            conditionBuilder.or(qHeroesStadium.base.contains("3")).and(qHeroesStadium.section.contains(keyword));
+            conditionBuilder.or(qWizStadium.base.contains("3")).and(qWizStadium.section.contains(keyword));
         }
 
         // 모든 조건 통합
@@ -86,7 +87,7 @@ public class HeroesServiceImpl implements HeroesService{
         log.info("SI>stadiumDTO: " + stadiumDTO);
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-        HeroesStadium stadium = (HeroesStadium) entityMap.get("stadium");
+        WizStadium stadium = (WizStadium) entityMap.get("stadium");
         List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
@@ -101,11 +102,11 @@ public class HeroesServiceImpl implements HeroesService{
     @Override
     public StadiumDTO getStadium(Long sno) {
         List<Object[]> result = repository.getStadiumWithAll(sno);
-        HeroesStadium stadium = (HeroesStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
-        List<HeroesStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+        WizStadium stadium = (WizStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<WizStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
-            HeroesStadiumImage stadiumImage = (HeroesStadiumImage) arr[1];
+            WizStadiumImage stadiumImage = (WizStadiumImage) arr[1];
             stadiumImageList.add(stadiumImage);
         });
 
@@ -113,8 +114,8 @@ public class HeroesServiceImpl implements HeroesService{
     }
 
     @Override
-    public StadiumDTO entitiesToDTO(HeroesStadium stadium, List<HeroesStadiumImage> stadiumImages) {
+    public StadiumDTO entitiesToDTO(WizStadium stadium, List<WizStadiumImage> stadiumImages) {
         System.out.println("================== entitiesToDTO= " + stadium);
-        return HeroesService.super.entitiesToDTO(stadium, stadiumImages);
+        return WizService.super.entitiesToDTO(stadium, stadiumImages);
     }
 }

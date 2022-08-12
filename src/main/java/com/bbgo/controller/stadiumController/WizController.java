@@ -1,5 +1,7 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.dto.common.PageRequestDTO;
+import com.bbgo.service.stadiumService.WizService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/wiz")
 public class WizController {
 
+    private final WizService wizService;
+
     @GetMapping(value = {"", "/"})
-    public String main(Model model) {
-        return "team/wiz";
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
+        log.info("list......................" + pageRequestDTO);
+        model.addAttribute("result", wizService.getList(pageRequestDTO));
+        return "wiz/list";
     }
 }
