@@ -284,6 +284,14 @@ div > .div-div {
     color: #002955 ;
     display: inline-block;
 }
+.dinos-title {
+    background-color: #315288;
+    color: #131230;
+}
+.dinos-title-sub {
+    color: #315288 ;
+    display: inline-block;
+}
 
 /* Upload */
 .uploadResult {
