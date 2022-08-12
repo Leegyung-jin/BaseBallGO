@@ -3,17 +3,17 @@
 <th:block th:replace="common/header::header">
 </th:block>
 <body id="page-top" class="font-notosans">
-<div class="stadium-title mb-3 bears-title">
-    <a th:href="@{bears}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/bears.png"></a>
+<div class="stadium-title mb-3 giants-title">
+    <a th:href="@{giants}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/giants.png"></a>
     <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-white" th:href="@{bears}">두산베어스</a></h1>
+        <h1 class="cursor-default"><a class="title-team-giants" th:href="@{giants}">롯데자이언츠</a></h1>
     </div>
 </div>
 <div class="container stadium-content p-3">
-    <h2 class="bears-title-sub font-dohyeon mb-5" >잠실 야구장 좌석 안내</h2>
-    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/ticket/ticketinfo" target="_blank" class="mb-5 bears-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+    <h2 class="giants-title-sub font-dohyeon mb-5" >사직 야구장 좌석 안내</h2>
+    <a href="https://www.giantsclub.com/html/?pcode=340" target="_blank" class="mb-5 giants-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
 
-    <form action="bears" method="get" id="searchForm">
+    <form action="giants" method="get" id="searchForm">
         <div class="input-group mb-4">
             <input type="hidden" name="page" value="1">
             <select class="form-control base-drop small float-start" name="type">
@@ -43,7 +43,7 @@
     </form>
 
     <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-    <a class="writer float-end font-black cursor-pointer" th:href="@{bears/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{giants/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
 
     <table class="table mt-5 mb-5">
         <thead>
@@ -62,7 +62,7 @@
             </th>
             <td>[[${dto.base}]]</td>
             <td>
-                <a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+                <a class="list-text" th:href="@{/giants/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
@@ -76,11 +76,11 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/bears(page = ${result.start- 1})}" tabindex="-1">이전</a>
+                <a class="page-link" th:href="@{/giants(page = ${result.start- 1})}" tabindex="-1">이전</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/bears(page=    ${page},
+                <a class="page-link" th:href="@{/giants(page=    ${page},
                                                              type=    ${pageRequestDTO.type},
                                                              keyword= ${pageRequestDTO.keyword})}">
                     [[${page}]]
@@ -88,7 +88,7 @@
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/bears(page=   ${result.end +1},
+                <a class="page-link" th:href="@{/giants(page=   ${result.end +1},
                                                              type=   ${pageRequestDTO.type},
                                                              keyword=#{pageRequestDTO.keyword})}">다음</a>
             </li>

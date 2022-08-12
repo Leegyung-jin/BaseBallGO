@@ -194,6 +194,13 @@ body {
 .title-team-twins:hover {
     color: #C30452;
 }
+.title-team-giants {
+    color: #DC0232;
+    text-decoration-line: none;
+}
+.title-team-giants:hover {
+    color: #DC0232;
+}
 
 .stadium-title {
     min-width: 400px !important;
@@ -267,6 +274,14 @@ div > .div-div {
 }
 .bears-title-sub {
     color: #131230 ;
+    display: inline-block;
+}
+.giants-title {
+    background-color: #002955;
+    color: #131230;
+}
+.giants-title-sub {
+    color: #002955 ;
     display: inline-block;
 }
 
