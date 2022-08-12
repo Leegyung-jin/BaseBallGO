@@ -1,6 +1,5 @@
 package com.bbgo.entity.stadium;
 
-import com.bbgo.entity.Stadium;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,8 +9,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "HeroesStadium")
-public class HeroesStadiumImage {
+@ToString(exclude = "TwinsStadium")
+public class TwinsStadiumImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +21,5 @@ public class HeroesStadiumImage {
     private String path;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private HeroesStadium heroesStadium;
+    private TwinsStadium twinsStadium;
 }

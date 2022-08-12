@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/header::header">
+</th:block>
+<body id="page-top" class="font-notosans">
+<div class="stadium-title mb-3 twins-title">
+    <a th:href="@{twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/lgtwins.png"></a>
+    <div class="title-team m-auto">
+        <h1 class="cursor-default"><a class="title-team-white" th:href="@{twins}">LG트윈스</a></h1>
+    </div>
+</div>
+<div class="container stadium-content p-3">
+    <h2 class="twins-title-sub font-dohyeon mb-5" >잠실 야구장 좌석 안내</h2>
+    <a href="https://www.heroesbaseball.co.kr/ticket/normal/viewCharge.do" target="_blank" class="mb-5 twins-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+
+    <form action="twins" method="get" id="searchForm">
+        <div class="input-group mb-4">
+            <input type="hidden" name="page" value="1">
+            <select class="form-control base-drop small float-start" name="type">
+                <option value="123" th:selected="${pageRequestDTO.type == '123'}">전체</option>
+                <option value="1"   th:selected="${pageRequestDTO.type == '1'}">1루</option>
+                <option value="2"   th:selected="${pageRequestDTO.type == '2'}">중앙</option>
+                <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
+            </select>
+            <select class="form-control section-drop small" name="keyword">
+                <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
+                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
+                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
+                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
+                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
+                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
+                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
+                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
+                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
+                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
+                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
+                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
+                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+            </select>
+            <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
+        </div>
+    </form>
+
+    <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{twins/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+
+    <table class="table mt-5 mb-5">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>1/3루</th>
+            <th>구역</th>
+            <th>좌석</th>
+            <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="readTable" th:each="dto : ${result.dtoList}" th:if="${result.totalElements}">
+            <th scope="row">
+                <a>[[${dto.sno}]]</a>
+            </th>
+            <td>[[${dto.base}]]</td>
+            <td>
+                <a class="list-text" th:href="@{/twins/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+            </td>
+            <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
+            <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+        </tr>
+        <tr th:unless="${result.totalElements}" class="text-center">
+            <td colspan="5">검색 결과가 없습니다.</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item " th:if="${result.prev}">
+                <a class="page-link" th:href="@{/twins(page = ${result.start- 1})}" tabindex="-1">이전</a>
+            </li>
+
+            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                <a class="page-link" th:href="@{/twins(page=    ${page},
+                                                             type=    ${pageRequestDTO.type},
+                                                             keyword= ${pageRequestDTO.keyword})}">
+                    [[${page}]]
+                </a>
+            </li>
+
+            <li class="page-item" th:if="${result.next}">
+                <a class="page-link" th:href="@{/twins(page=   ${result.end +1},
+                                                             type=   ${pageRequestDTO.type},
+                                                             keyword=#{pageRequestDTO.keyword})}">다음</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+<script th:inline="javascript">
+    var msg = [[${msg}]];
+    console.log(msg);
+
+    if(msg){
+        $(".modal").modal();
+    }
+
+    var searchForm = $("#searchForm");
+    $('.btn-search').click(function (e){
+        searchForm.submit();
+    })
+</script>
+</html>

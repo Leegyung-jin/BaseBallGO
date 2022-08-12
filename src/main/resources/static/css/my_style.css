@@ -225,6 +225,15 @@ div > .div-div {
     display: inline-block;
 }
 
+.twins-title {
+    background-color: #b3b3b3;
+    color: black;
+}
+.twins-title-sub {
+    color: #505050;
+    display: inline-block;
+}
+
 /* Upload */
 .uploadResult {
     width: 100%;

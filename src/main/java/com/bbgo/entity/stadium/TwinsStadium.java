@@ -10,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = {"team", "member"})
-public class HeroesStadium extends SBaseEntity {
+@ToString(exclude = {"member"})
+public class TwinsStadium extends SBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
