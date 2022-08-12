@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"member"})
-public class WizStadium extends SBaseEntity {
+public class TigersStadium extends SBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

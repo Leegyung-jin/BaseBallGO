@@ -3,17 +3,17 @@
 <th:block th:replace="common/header::header">
 </th:block>
 <body id="page-top" class="font-notosans">
-<div class="stadium-title mb-3 twins-title">
-    <a th:href="@{twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/twins.png"></a>
+<div class="stadium-title mb-3 tigers-title">
+    <a th:href="@{tigers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/kia.png"></a>
     <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-twins" th:href="@{twins}">LG트윈스</a></h1>
+        <h1 class="cursor-default"><a class="title-team-kia" th:href="@{tigers}">KIA타이거즈</a></h1>
     </div>
 </div>
 <div class="container stadium-content p-3">
-    <h2 class="twins-title-sub font-dohyeon mb-5" >잠실 야구장 좌석 안내</h2>
-    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/ticket/ticketinfo" target="_blank" class="mb-5 twins-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+    <h2 class="tigers-title-sub font-dohyeon mb-5" >기아 챔피언스 필드 좌석 안내</h2>
+    <a href="https://tigers.co.kr/tigers/champions-field/stadium-guide" target="_blank" class="mb-5 tigers-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
 
-    <form action="twins" method="get" id="searchForm">
+    <form action="tigers" method="get" id="searchForm">
         <div class="input-group mb-4">
             <input type="hidden" name="page" value="1">
             <select class="form-control base-drop small float-start" name="type">
@@ -43,7 +43,7 @@
     </form>
 
     <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-    <a class="writer float-end font-black cursor-pointer" th:href="@{twins/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{tigers/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
 
     <table class="table mt-5 mb-5">
         <thead>
@@ -62,7 +62,7 @@
             </th>
             <td>[[${dto.base}]]</td>
             <td>
-                <a class="list-text" th:href="@{/twins/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
+                <a class="list-text" th:href="@{/tigers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
@@ -76,11 +76,11 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/twins(page = ${result.start- 1})}" tabindex="-1">이전</a>
+                <a class="page-link" th:href="@{/tigers(page = ${result.start- 1})}" tabindex="-1">이전</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/twins(page=    ${page},
+                <a class="page-link" th:href="@{/tigers(page=    ${page},
                                                              type=    ${pageRequestDTO.type},
                                                              keyword= ${pageRequestDTO.keyword})}">
                     [[${page}]]
@@ -88,7 +88,7 @@
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/twins(page=   ${result.end +1},
+                <a class="page-link" th:href="@{/tigers(page=   ${result.end +1},
                                                              type=   ${pageRequestDTO.type},
                                                              keyword=#{pageRequestDTO.keyword})}">다음</a>
             </li>

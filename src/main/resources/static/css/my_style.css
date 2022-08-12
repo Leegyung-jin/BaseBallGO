@@ -182,6 +182,14 @@ body {
     /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
     /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
 }
+.title-team-kia {
+    color: #EA0029;
+    text-decoration-line: none;
+}
+.title-team-twins {
+    color: #C30452;
+    text-decoration-line: none;
+}
 
 .stadium-title {
     min-width: 400px !important;
@@ -215,7 +223,6 @@ div > .div-div {
     color: #CE0E2D;
     display: inline-block;
 }
-
 .heroes-title {
     background-color: #820024;
     color: white;
@@ -224,22 +231,29 @@ div > .div-div {
     color: #820024;
     display: inline-block;
 }
-
 .twins-title {
-    background-color: #b3b3b3;
-    color: black;
+    background-color: #000000;
+    color: #C30452;
 }
 .twins-title-sub {
-    color: #505050;
+    color: #C30452;
     display: inline-block;
 }
-
 .wiz-title {
     background-color: #000000;
     color: white;
 }
 .wiz-title-sub {
     color: #000000;
+    display: inline-block;
+}
+.tigers-title {
+    background-color: black;
+
+    color: #EA0029;
+}
+.tigers-title-sub {
+    color: #EA0029 ;
     display: inline-block;
 }
 
