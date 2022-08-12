@@ -42,7 +42,6 @@ public class LandersController {
         log.info("SNO: " + sno);
         redirectAttributes.addFlashAttribute("msg", sno);
 
-//        return "redirect:/landers";
         return "redirect:/landers";
     }
 

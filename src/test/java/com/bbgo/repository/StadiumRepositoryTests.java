@@ -49,7 +49,7 @@ public class StadiumRepositoryTests {
 
             Stadium stadium = Stadium.builder()
 //                    .team(team)
-                    .base(1)
+                    .base("1")
                     .section("노브랜드 테이블석")
                     .row("I")
                     .num(10)

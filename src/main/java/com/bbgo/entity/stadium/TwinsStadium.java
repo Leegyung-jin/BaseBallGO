@@ -1,5 +1,6 @@
-package com.bbgo.entity;
+package com.bbgo.entity.stadium;
 
+import com.bbgo.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"team", "member"})
-public class Stadium extends BaseEntity{
+public class HeroesStadium extends SBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

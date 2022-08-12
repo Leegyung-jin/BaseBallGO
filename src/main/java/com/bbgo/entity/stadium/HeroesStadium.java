@@ -11,13 +11,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"team", "member"})
-public class StadiumHeros extends SBaseEntity {
+public class HeroesStadium extends SBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long sno;
 
-    private Integer base;
+    private String base;
     private String section;
     private String row;
     private Integer num;

@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="common/header::header">
 </th:block>
-<body id="page-top">
+<body id="page-top" class="font-notosans">
     <div class="stadium-title mb-3 landers-title">
         <a th:href="@{landers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/landers.png"></a>
         <div class="title-team m-auto">
@@ -46,12 +46,11 @@
                 <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
             </div>
         </form>
-<!--        <div>-->
-            <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-            <a class="writer float-end font-black cursor-pointer" th:href="@{landers/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
-<!--        </div>-->
 
-        <table class="table mt-5 mb-5 font-notosans">
+        <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
+        <a class="writer float-end font-black cursor-pointer" th:href="@{landers/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+
+        <table class="table mt-5 mb-5">
             <thead>
             <tr>
                 <th>#</th>
