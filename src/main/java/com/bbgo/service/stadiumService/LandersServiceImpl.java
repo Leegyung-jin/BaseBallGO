@@ -63,10 +63,11 @@ public class LandersServiceImpl implements LandersService{
 
         BooleanBuilder conditionBuilder = new BooleanBuilder();
         if (type.contains("1")) {
+//            conditionBuilder.or(qStadium.base.contains("1")).and(qStadium.section.contains(keyword));
             conditionBuilder.or(qStadium.base.contains("1")).and(qStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qStadium.base.contains("중앙")).and(qStadium.section.contains(keyword));
+            conditionBuilder.or(qStadium.base.contains("2")).and(qStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qStadium.base.contains("3")).and(qStadium.section.contains(keyword));

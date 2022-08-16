@@ -30,7 +30,6 @@ public interface LandersService {
 
         Stadium stadium = Stadium.builder()
                 .sno(stadiumDTO.getSno())
-//                .base(stadiumDTO.getBase())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
                 .row(stadiumDTO.getRow())

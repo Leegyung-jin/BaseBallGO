@@ -54,7 +54,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>1/3루</th>
+                <th>위치</th>
                 <th>구역</th>
                 <th>좌석</th>
                 <th>등록일</th>
@@ -65,7 +65,9 @@
                 <th scope="row">
                     <a>[[${dto.sno}]]</a>
                 </th>
-                <td>[[${dto.base}]]</td>
+                <td th:if="${dto.base} == '1'" th:text="1루"></td>
+                <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+                <td th:if="${dto.base} == '3'" th:text="3루"></td>
                 <td>
                     <a class="list-text" th:href="@{/landers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
                 </td>

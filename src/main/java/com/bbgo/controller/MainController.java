@@ -18,6 +18,13 @@ public class MainController {
         return "/index";
     }
 
+    
+    @GetMapping("/stadium")
+    public String stadium(Model model) {
+        return "common/stadium";
+    }
+
+    // 구단 정보 알아보기
     @GetMapping("/team")
     public String team(Model model) {
         return "common/team";

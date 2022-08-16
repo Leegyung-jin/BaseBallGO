@@ -21,6 +21,9 @@ body {
     top: 15px;
 }
 
+.menu-title {
+    background-color: #050a24f2;
+}
 .list-text {
     color: #000;
     text-decoration: none;
@@ -69,11 +72,20 @@ body {
     color: black;
     text-decoration-line: none;
 }
-/*.non-effect-white:hover {*/
-/*    color: #00115c;*/
-/*    !*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*!*/
-/*    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
-/*}*/
+.non-effect-black:hover {
+    color: black;
+    /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+.non-effect-navy {
+    color: #050a24f2;
+    text-decoration-line: none;
+}
+.non-effect-navy:hover {
+    color:white;
+    /*text-shadow: -1px 0 #cbcb00, 0 1px #cbcb00, 1px 0 #cbcb00, 0 -1px #cbcb00;*/
+    text-shadow: -1px 0 #050a24f2, 0 1px #050a24f2, 1px 0 #050a24f2, 0 -1px #050a24f2;
+}
 
 /* 공통 모듈 */
 .search-group {
@@ -146,6 +158,20 @@ body {
 
 .image-title {
     font-weight: bold;
+}
+
+/* TEAM CHOOSE Stadium */
+.team-section {
+    padding-top: 2.5rem;
+    padding-bottom: 0;
+    /*padding-bottom: 7.5rem;*/
+}
+.team-select {
+    border: 1px solid #050a24f2;
+    border-radius: 10px;
+}
+.team-title {
+    background-color: #050a24f2;
 }
 
 /* 구단 엠블럼 */

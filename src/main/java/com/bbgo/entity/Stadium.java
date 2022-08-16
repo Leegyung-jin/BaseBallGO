@@ -17,6 +17,7 @@ public class Stadium extends BaseEntity{
     private Long sno;
 
     private String base;
+//    private Integer base;
     private String section;
     private String row;
     private Integer num;

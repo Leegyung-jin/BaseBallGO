@@ -20,7 +20,7 @@
           </select>
           <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
           <select name="base" class="form-control base-drop-read small" style="margin-right: 10px; background-color: white" disabled>
-            <option th:value="${dto.base}">[[${dto.base}]]</option>
+            <option th:value="${dto.base}">[[${dto.base}]]루</option>
           </select>
           <input type="text" class="form-control mb-2 section-text text-sm-center" name="row" placeholder="A" th:value="${dto.row}" style="background-color: white" disabled><a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
           <input type="text" class="form-control mb-2 section-text text-sm-center" name="num" placeholder="0" th:value="${dto.num}" style="background-color: white" disabled><a style="float: left; padding: 0.375rem 0rem;">번</a>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="readImg mt-3">
-          <a>※ 하단의 이미지 섬네일을 클릭하면 원본 크기로 확인할 수 있습니다.</a>
+          <a>※ 하단의 이미지를 클릭하면 원본 크기로 확인할 수 있습니다.</a>
           <ul>
             <li th:each="stadiumImage : ${dto.imageDTOList}" th:data-file="${stadiumImage.getThumbnailURL()}">
               <img th:if="${stadiumImage.path != null}"
