@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class EaglesStadium extends SBaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sno;
 
     private String base;

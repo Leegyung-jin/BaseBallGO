@@ -5,32 +5,27 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 heroes-title">
-      <a th:href="@{/heroes}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/heroes.png"></a>
+    <div class="stadium-title mb-3 twins-title">
+      <a th:href="@{/twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/twins.png"></a>
       <div class="title-team m-auto">
-        <a style="color: white; text-decoration-line: none" th:href="@{/heroes}"><h1>KIWOOM HEROES</h1></a>
+        <a style="color: white; text-decoration-line: none" th:href="@{/twins}"><h1>LG트윈스</h1></a>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="heroes-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+      <h2 class="twins-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/heroes/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/twins/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
           <select name="section" id="section" class="form-control section-drop small" required>
-            <option value="">구역 선택</option>
-            <option value="스카이박스"  >스카이박스</option>
-            <option value="R.d-club"    >R.d-club</option>
-            <option value="1층 테이블석">1층 테이블석</option>
-            <option value="2층 테이블석">2층 테이블석</option>
-            <option value="내야커플석"  >내야커플석</option>
-            <option value="외야커플석"  >외야커플석</option>
-            <option value="다크버건디석">다크버건디석</option>
-            <option value="버건디석"    >버건디석</option>
-            <option value="3층 지정석"  >3층 지정석</option>
-            <option value="4층 지정석"  >4층 지정석</option>
-            <option value="휠체어석"    >휠체어석</option>
-            <option value="외야일반석"  >외야일반석</option>
-            <option value="외야패밀리석">외야패밀리석</option>
+            <option value=""           >구역 선택</option>
+            <option value="프리미엄"   >프리미엄</option>
+            <option value="테이블"     >테이블</option>
+            <option value="익사이팅존" >익사이팅존</option>
+            <option value="블루"       >블루</option>
+            <option value="오렌지"     >오렌지</option>
+            <option value="레드"       >레드</option>
+            <option value="네이비"     >네이비</option>
+            <option value="그린(외야)" >그린(외야)</option>
           </select>
           <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
           <select name="base" id="base" class="form-control base-drop small" required>
@@ -66,7 +61,7 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="submit" class="btn btn-dark register-btn">등록</button>
-          <a th:href="@{/heroes}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a th:href="@{/twins}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
     </div>
@@ -167,7 +162,6 @@
             type: 'POST',
             dataType: 'json',
             success: function (result) {
-              console.log("result", result);
               showResult(result);
             },
             error: function (jqXHR, textStatus, errorThrown){
@@ -190,7 +184,6 @@
             str +=  "</li>";
           });
           uploadUL.append(str);
-          console.log("str", str)
         }
 
         $(".uploadResult ").on("click", "li button", function (e) {

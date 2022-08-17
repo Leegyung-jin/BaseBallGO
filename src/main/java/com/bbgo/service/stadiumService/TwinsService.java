@@ -27,11 +27,12 @@ public interface TwinsService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         TwinsStadium stadium = TwinsStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();
@@ -99,4 +100,5 @@ public interface TwinsService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }
