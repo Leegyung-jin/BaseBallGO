@@ -14,31 +14,26 @@ import java.util.stream.Collectors;
 
 public interface EaglesService {
 
-    // List
-    // PageRequestDTO-파라미터, PageResultDTO-리턴 타입으로 사용
     PageResultDTO<StadiumDTO, EaglesStadium> getList(PageRequestDTO requestDTO);
-
-    // Register
     Long register(StadiumDTO dto);
-
     StadiumDTO getStadium(Long sno);
 
     // entity객체를 DTO객체로 변환
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         EaglesStadium stadium = EaglesStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();
         entityMap.put("stadium", stadium);
         List<StadiumImageDTO> imageDTOList = stadiumDTO.getImageDTOList();
 
-        // StadiumImageDTO 처리
         if (imageDTOList != null && imageDTOList.size() > 0) {
             List<EaglesStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
                 EaglesStadiumImage stadiumImage = EaglesStadiumImage.builder()
@@ -54,9 +49,7 @@ public interface EaglesService {
         return entityMap;
     }
 
-    // List
     default StadiumDTO entityToDTO(EaglesStadium entity) {
-
         StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
                 .base(entity.getBase())
@@ -68,7 +61,6 @@ public interface EaglesService {
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
                 .build();
-
         return stadiumDTO;
     }
 
@@ -99,4 +91,5 @@ public interface EaglesService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }

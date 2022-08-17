@@ -23,7 +23,7 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value=""                    th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
                 <option value="VIP석"               th:selected="${pageRequestDTO.keyword == 'VIP석'}">VIP석</option>
                 <option value="중앙테이블석"        th:selected="${pageRequestDTO.keyword == '중앙테이블석'}">중앙테이블석</option>
                 <option value="테이블석"            th:selected="${pageRequestDTO.keyword == '테이블석'}" >테이블석</option>

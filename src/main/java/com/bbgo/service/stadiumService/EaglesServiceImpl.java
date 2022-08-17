@@ -3,11 +3,8 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.EaglesStadium;
-import com.bbgo.entity.stadium.EaglesStadiumImage;
-import com.bbgo.entity.stadium.QEaglesStadium;
-import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.entity.stadium.*;
+import com.bbgo.repository.stadiumRepository.EaglesStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.EaglesStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,9 +28,8 @@ import java.util.function.Function;
 public class EaglesServiceImpl implements EaglesService {
 
     private final EaglesStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final EaglesStadiumImageRepository imageRepository;
 
-    // List
     @Override
     public PageResultDTO<StadiumDTO, EaglesStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
@@ -52,10 +49,8 @@ public class EaglesServiceImpl implements EaglesService {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QEaglesStadium qEaglesStadium = QEaglesStadium.eaglesStadium;
 
-        // sno > 0조건 생성
         BooleanExpression expression = qEaglesStadium.sno.gt(0L);
         booleanBuilder.and(expression);
-
 
         if (type == null || type.trim().length() == 0) {
             return booleanBuilder;
@@ -72,22 +67,16 @@ public class EaglesServiceImpl implements EaglesService {
             conditionBuilder.or(qEaglesStadium.base.contains("3")).and(qEaglesStadium.section.contains(keyword));
         }
 
-        // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
-
-    // Register
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
-
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         EaglesStadium stadium = (EaglesStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<EaglesStadiumImage> stadiumImageList = (List<EaglesStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -114,7 +103,29 @@ public class EaglesServiceImpl implements EaglesService {
 
     @Override
     public StadiumDTO entitiesToDTO(EaglesStadium stadium, List<EaglesStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return EaglesService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<EaglesStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            EaglesStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<EaglesStadiumImage> stadiumImageList = (List<EaglesStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }
