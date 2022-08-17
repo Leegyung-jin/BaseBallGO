@@ -3,11 +3,8 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.LionsStadium;
-import com.bbgo.entity.stadium.LionsStadiumImage;
-import com.bbgo.entity.stadium.QLionsStadium;
-import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.entity.stadium.*;
+import com.bbgo.repository.stadiumRepository.LionsStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.LionsStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,9 +28,8 @@ import java.util.function.Function;
 public class LionsServiceImpl implements LionsService {
 
     private final LionsStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final LionsStadiumImageRepository imageRepository;
 
-    // List
     @Override
     public PageResultDTO<StadiumDTO, LionsStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
@@ -52,8 +49,6 @@ public class LionsServiceImpl implements LionsService {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QLionsStadium qLionsStadium = QLionsStadium.lionsStadium;
 
-
-        // sno > 0조건 생성
         BooleanExpression expression = qLionsStadium.sno.gt(0L);
         booleanBuilder.and(expression);
 
@@ -75,7 +70,6 @@ public class LionsServiceImpl implements LionsService {
 
         // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
@@ -84,11 +78,9 @@ public class LionsServiceImpl implements LionsService {
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
-
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         LionsStadium stadium = (LionsStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<LionsStadiumImage> stadiumImageList = (List<LionsStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -115,7 +107,29 @@ public class LionsServiceImpl implements LionsService {
 
     @Override
     public StadiumDTO entitiesToDTO(LionsStadium stadium, List<LionsStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return LionsService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<LionsStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            LionsStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<LionsStadiumImage> stadiumImageList = (List<LionsStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

@@ -5,35 +5,38 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 dinos-title">
-      <a th:href="@{/dinos}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/dinos.png"></a>
+    <div class="stadium-title mb-3 lions-title">
+      <a th:href="@{/lions}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/lions.png"></a>
       <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-white" th:href="@{dinos}">NC DINOS</a></h1>
+        <h1 class="cursor-default"><a class="title-team-lions" th:href="@{lions}">삼성 라이온즈</a></h1>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="dinos-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+      <h2 class="lions-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/dinos/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/lions/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
           <select name="section" id="section" class="form-control section-drop small" required>
-            <option value=""                            >구역 선택</option>
-            <option value="내야석"                      >내야석</option>
-            <option value="외야잔디석"                  >외야잔디석</option>
-            <option value="미니테이블석"                >미니테이블석</option>
-            <option value="불펜가족석"                  >불펜가족석</option>
-            <option value="휠체어석"                    >휠체어석</option>
-            <option value="피크닉테이블석"              >피크닉테이블석</option>
-            <option value="테이블석"                    >테이블석</option>
-            <option value="외야석"                      >외야석</option>
-            <option value="가족석"                      >가족석</option>
-            <option value="ABL생명 프리미엄 테이블석"   >ABL생명 프리미엄 테이블석</option>
-            <option value="불펜석"                      >불펜석</option>
-            <option value="라운드 테이블석"             >라운드 테이블석</option>
-            <option value="3/4층 내야석"                >3/4층 내야석</option>
-            <option value="ABL생명 프리미엄석"          >ABL생명 프리미엄석</option>
-            <option value="스카이박스"                  >스카이박스</option>
-            <option value="포크밸리 바베큐석"           >포크밸리 바베큐석</option>
+            <option value=""                    >구역 선택</option>
+            <option value="VIP석"               >VIP석</option>
+            <option value="중앙테이블석"        >중앙테이블석</option>
+            <option value="테이블석"            >테이블석</option>
+            <option value="익사이팅석"          >익사이팅석</option>
+            <option value="블루존"              >블루존</option>
+            <option value="원정응원석"          >원정응원석</option>
+            <option value="내야지정석"          >내야지정석</option>
+            <option value="잔디석"              >잔디석</option>
+            <option value="장애인석"            >장애인석</option>
+            <option value="SKY요기보존"         >SKY요기보존</option>
+            <option value="SKY하단지정석"       >SKY하단지정석</option>
+            <option value="SKY상단지정석"       >SKY상단지정석</option>
+            <option value="스윗박스"            >스윗박스</option>
+            <option value="파티플로어석"        >파티플로어석</option>
+            <option value="외야패밀리석"        >외야패밀리석</option>
+            <option value="외야테이블석"        >외야테이블석</option>
+            <option value="외야지정석"          >외야지정석</option>
+            <option value="외야미니테이블석"    >외야미니테이블석</option>
+            <option value="땅땅치킨 루프탑"     >땅땅치킨 루프탑</option>
           </select>
           <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
           <select name="base" id="base" class="form-control base-drop small" required>
@@ -69,7 +72,7 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="submit" class="btn btn-dark register-btn">등록</button>
-          <a th:href="@{/dinos}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a th:href="@{/lions}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
     </div>

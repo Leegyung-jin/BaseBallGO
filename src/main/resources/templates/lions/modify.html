@@ -5,52 +5,35 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 dinos-title">
-      <a th:href="@{/dinos}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/dinos.png"></a>
+    <div class="stadium-title mb-3 lions-title">
+      <a th:href="@{/lions}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/lions.png"></a>
       <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-white" th:href="@{dinos}">NC DINOS</a></h1>
+        <h1 class="cursor-default"><a class="title-team-lions" th:href="@{lions}">삼성 라이온즈</a></h1>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="dinos-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+      <h2 class="lions-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/dinos/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/lions/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
-          <select name="section" id="section" class="form-control section-drop small" required>
-            <option value=""                            >구역 선택</option>
-            <option value="내야석"                      >내야석</option>
-            <option value="외야잔디석"                  >외야잔디석</option>
-            <option value="미니테이블석"                >미니테이블석</option>
-            <option value="불펜가족석"                  >불펜가족석</option>
-            <option value="휠체어석"                    >휠체어석</option>
-            <option value="피크닉테이블석"              >피크닉테이블석</option>
-            <option value="테이블석"                    >테이블석</option>
-            <option value="외야석"                      >외야석</option>
-            <option value="가족석"                      >가족석</option>
-            <option value="ABL생명 프리미엄 테이블석"   >ABL생명 프리미엄 테이블석</option>
-            <option value="불펜석"                      >불펜석</option>
-            <option value="라운드 테이블석"             >라운드 테이블석</option>
-            <option value="3/4층 내야석"                >3/4층 내야석</option>
-            <option value="ABL생명 프리미엄석"          >ABL생명 프리미엄석</option>
-            <option value="스카이박스"                  >스카이박스</option>
-            <option value="포크밸리 바베큐석"           >포크밸리 바베큐석</option>
+          <input  type="text" class="form-control" name="sno" th:value="${dto.sno}" hidden>
+          <select name="section" class="form-control section-drop-read small" disabled>
+            <option th:value="${dto.section}">[[${dto.section}]]</option>
           </select>
           <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
-          <select name="base" id="base" class="form-control base-drop small" required>
-            <option value="">선택</option>
-            <option value="1">1루</option>
-            <option value="3">3루</option>
-            <option value="2">중앙</option>
+          <select name="base" class="form-control base-drop-read small" style="margin-right: 10px;" disabled>
+            <option th:if="${dto.base} == '1'" th:value="${dto.base}">[[${dto.base}]]루</option>
+            <option th:if="${dto.base} == '2'" th:value="${dto.base}">중앙</option>
+            <option th:if="${dto.base} == '3'" th:value="${dto.base}">[[${dto.base}]]루</option>
           </select>
 
           <input type="text" class="form-control mb-2 section-text" name="row" id="row" placeholder="A"
-                 style="text-transform: uppercase" maxlength="1" oninput="validation_row(this)" required>
-          <a style="float: left; padding: 0.375rem 0rem; margin-right: 10px;">열</a>
-
+                 style="text-transform: uppercase" maxlength="1" oninput="validation_row(this)" th:value="${dto.row}" required>
+          <a style="float: left; padding: 0.375rem 0rem; margin-right: 10px">열</a>
           <input type="text" class="form-control mb-2 section-text" name="num" id="num" placeholder="0" required
-                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2">
+                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2" th:value="${dto.num}">
           <a style="float: left; padding: 0.375rem 0rem;">번</a>
-          <textarea class="form-control textarea-content" name="content" id="content" placeholder="내용을 입력해주세요." required></textarea>
+          <textarea class="form-control textarea-content" name="content" id="content" th:value="${dto.content}" placeholder="내용을 입력해주세요.">[[${dto.content}]]</textarea>
         </div>
 
         <div class="form-group fileForm"></br>
@@ -62,41 +45,38 @@
         </div>
         <div class="box" id="imageBox">
         </div>
+
         <div class="uploadResult">
           <ul>
+            <li th:each="stadiumImage : ${dto.imageDTOList}" th:data-file="${stadiumImage.getThumbnailURL()}"
+                th:data-name="${stadiumImage.imgName}" th:data-path="${stadiumImage.path}" th:data-uuid="${stadiumImage.uuid}" class="imageInfo">
+              <button type="button" class="btn-warning btn-sm removeImage" th:data-file="${stadiumImage.getImageURL()}" th:data-ino="${stadiumImage.ino}">X</button><br>
+              <img th:if="${stadiumImage.path != null}"
+                   th:src="|/display?fileName=${stadiumImage.getThumbnailURL()}|">
+            </li>
           </ul>
         </div>
 
         <div class="mt-4" style="text-align: center">
-          <button type="submit" class="btn btn-dark register-btn">등록</button>
-          <a th:href="@{/dinos}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
+          <a th:href="@{/lions}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
+
     </div>
-    <script>
+    <script th:inline="javascript">
+
       function validation_row(e) {
         e.value = e.value.replace(/[^A-Za-z]/ig, '')
       }
 
       function validation_input () {
         // 필수값 확인
-        var sectionV  = document.getElementById("section").value;
-        var baseV     = document.getElementById("base").value;
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
-        var fileV     = document.getElementById("fileInput").value;
+        var fileV     = document.getElementById("imageBox").value;
 
-        if (sectionV == '') {
-          alert("구역을 선택해주세요.");
-          $('#section').focus();
-          return false;
-        }
-        if (baseV == '') {
-          alert("좌석의 위치를 선택해주세요.");
-          $('#base').focus();
-          return false;
-        }
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
           $('#row').focus();
@@ -116,12 +96,21 @@
           alert("이미지를 첨부해주세요.");
           $('#fileInput').focus();
           return false;
+        } else {
+          $(".modifyBtn").click(function (){
+            if (!confirm("수정하시겠습니까?")) {
+              return ;
+            }
+            actionForm
+                    .attr("action", "/lions/modify")
+                    .attr("method", "post")
+                    .submit();
+          });
         }
       }
 
-
+      // 파일 등록
       $(document).ready(function (e) {
-        // 파일첨부
         var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|tiff)$");
         var maxSize = 10485760;  // 10MB
 
@@ -177,7 +166,6 @@
               showResult(result);
             },
             error: function (jqXHR, textStatus, errorThrown){
-              console.log("error", textStatus);
             }
           }); // $.ajax
         })    // end change event
@@ -198,13 +186,15 @@
           uploadUL.append(str);
         }
 
-        $(".uploadResult ").on("click", "li button", function (e) {
+        $(".uploadResult").on("click", "li button", function (e) {
           var targetFile = $(this).data("file");
           var targetLi = $(this).closest("li");
+          var ino = $(this).data("ino");
+          var sno = $(this).data("sno");
 
           $.ajax({
-            url: '/removeFile',
-            data: {fileName: targetFile},
+            url: '/lions/removeFile',
+            data: {fileName: targetFile, ino: ino, sno: sno},
             dataType: 'text',
             type: 'POST',
             success: function (result) {
@@ -212,6 +202,10 @@
             }
           }); // $.ajax
         });
+        $("input[type='file']").change(function (e) {
+          var formData = new FormData();
+        })
+
 
         $(".btn-dark").on("click", function (e) {
           e.preventDefault();
@@ -220,7 +214,6 @@
 
           $(".uploadResult li").each(function (i, obj) {
             var target = $(obj);
-
             str += "<input type='hidden' name='imageDTOList["+i+"].imgName' value='" + target.data('name') + "'>";
             str += "<input type='hidden' name='imageDTOList["+i+"].path' value='" + target.data('path') + "'>";
             str += "<input type='hidden' name='imageDTOList["+i+"].uuid' value='" + target.data('uuid') + "'>";
@@ -232,7 +225,7 @@
         })
       });
     </script>
-  </body>
+    </body>
   </th:block>
 </th:block>
 </html>

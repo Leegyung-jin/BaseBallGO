@@ -24,19 +24,25 @@
             </select>
             <select class="form-control section-drop small" name="keyword">
                 <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                <option value="VIP석"               th:selected="${pageRequestDTO.keyword == 'VIP석'}">VIP석</option>
+                <option value="중앙테이블석"        th:selected="${pageRequestDTO.keyword == '중앙테이블석'}">중앙테이블석</option>
+                <option value="테이블석"            th:selected="${pageRequestDTO.keyword == '테이블석'}" >테이블석</option>
+                <option value="익사이팅석"          th:selected="${pageRequestDTO.keyword == '익사이팅석'}" >익사이팅석</option>
+                <option value="블루존"              th:selected="${pageRequestDTO.keyword == '블루존'}" >블루존</option>
+                <option value="원정응원석"          th:selected="${pageRequestDTO.keyword == '원정응원석'}" >원정응원석</option>
+                <option value="내야지정석"          th:selected="${pageRequestDTO.keyword == '내야지정석'}" >내야지정석</option>
+                <option value="잔디석"              th:selected="${pageRequestDTO.keyword == '잔디석'}" >잔디석</option>
+                <option value="장애인석"            th:selected="${pageRequestDTO.keyword == '장애인석'}" >장애인석</option>
+                <option value="SKY요기보존"         th:selected="${pageRequestDTO.keyword == 'SKY요기보존'}" >SKY요기보존</option>
+                <option value="SKY하단지정석"       th:selected="${pageRequestDTO.keyword == 'SKY하단지정석'}" >SKY하단지정석</option>
+                <option value="SKY상단지정석"       th:selected="${pageRequestDTO.keyword == 'SKY상단지정석'}" >SKY상단지정석</option>
+                <option value="스윗박스"            th:selected="${pageRequestDTO.keyword == '스윗박스'}" >스윗박스/option>
+                <option value="파티플로어석"        th:selected="${pageRequestDTO.keyword == '파티플로어석'}" >파티플로어석</option>
+                <option value="외야패밀리석"        th:selected="${pageRequestDTO.keyword == '외야패밀리석'}" >외야패밀리석</option>
+                <option value="외야테이블석"        th:selected="${pageRequestDTO.keyword == '외야테이블석'}" >외야테이블석</option>
+                <option value="외야지정석"          th:selected="${pageRequestDTO.keyword == '외야지정석'}" >외야지정석</option>
+                <option value="외야미니테이블석"    th:selected="${pageRequestDTO.keyword == '외야미니테이블석'}" >외야미니테이블석</option>
+                <option value="땅땅치킨 루프탑"     th:selected="${pageRequestDTO.keyword == '땅땅치킨 루프탑'}" >땅땅치킨 루프탑</option>
             </select>
             <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
         </div>
@@ -60,7 +66,9 @@
             <th scope="row">
                 <a>[[${dto.sno}]]</a>
             </th>
-            <td>[[${dto.base}]]</td>
+            <td th:if="${dto.base} == '1'" th:text="1루"></td>
+            <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+            <td th:if="${dto.base} == '3'" th:text="3루"></td>
             <td>
                 <a class="list-text" th:href="@{/lions/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
@@ -98,11 +106,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){
