@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface TwinsStadiumImageRepository extends JpaRepository<JamsilStadiumImage, Long> {
+public interface BearsStadiumImageRepository extends JpaRepository<JamsilStadiumImage, Long> {
     @Transactional
     @Modifying
     @Query("delete from JamsilStadiumImage where jamsilStadium.sno =:sno")

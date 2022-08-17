@@ -11,7 +11,7 @@
 </div>
 <div class="container stadium-content p-3">
     <h2 class="bears-title-sub font-dohyeon mb-5" >잠실 야구장 좌석 안내</h2>
-    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/ticket/ticketinfo" target="_blank" class="mb-5 bears-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
+    <a href="https://www.doosanbears.com/season/ticket" target="_blank" class="mb-5 bears-title-sub"><i class="fa-solid fa-circle-info ms-sm-2"></i>구장안내</a>
 
     <form action="bears" method="get" id="searchForm">
         <div class="input-group mb-4">
@@ -23,20 +23,15 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                <option value=""           th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value="프리미엄"   th:selected="${pageRequestDTO.keyword == '프리미엄'}">중앙석(프리미엄/VIP)</option>
+                <option value="테이블"     th:selected="${pageRequestDTO.keyword == '테이블'}" >테이블석</option>
+                <option value="익사이팅존" th:selected="${pageRequestDTO.keyword == '익사이팅존'}">익사이팅존</option>
+                <option value="블루"       th:selected="${pageRequestDTO.keyword == '블루'}">블루지정석</option>
+                <option value="오렌지"     th:selected="${pageRequestDTO.keyword == '오렌지'}">오렌지지정석</option>
+                <option value="레드"       th:selected="${pageRequestDTO.keyword == '레드'}">레드지정석</option>
+                <option value="네이비"     th:selected="${pageRequestDTO.keyword == '네이비'}">네이비지정석</option>
+                <option value="그린(외야)" th:selected="${pageRequestDTO.keyword == '그린(외야)'}">외야일반석</option>
             </select>
             <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
         </div>
@@ -60,10 +55,20 @@
             <th scope="row">
                 <a>[[${dto.sno}]]</a>
             </th>
-            <td>[[${dto.base}]]</td>
-            <td>
+            <td th:if="${dto.base} == '1'" th:text="1루"></td>
+            <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+            <td th:if="${dto.base} == '3'" th:text="3루"></td>
+            <!--<td>
                 <a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
-            </td>
+            </td>-->
+            <td th:if="${dto.section} == '프리미엄'"   ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">중앙석(프리미엄/VIP)</a></td>
+            <td th:if="${dto.section} == '테이블'"     ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">테이블석</a></td>
+            <td th:if="${dto.section} == '익사이팅존'" ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">익사이팅존</a></td>
+            <td th:if="${dto.section} == '블루'"       ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">블루지정석</a></td>
+            <td th:if="${dto.section} == '오렌지'"     ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">오렌지지정석</a></td>
+            <td th:if="${dto.section} == '레드'"       ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">레드지정석</a></td>
+            <td th:if="${dto.section} == '네이비'"     ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">네이비지정석</a></td>
+            <td th:if="${dto.section} == '그린(외야)'" ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">외야일반석</a></td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
         </tr>
@@ -98,11 +103,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){

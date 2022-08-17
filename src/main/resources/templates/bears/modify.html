@@ -5,20 +5,27 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 tigers-title">
-      <a th:href="@{/tigers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/tigers.png"></a>
+    <div class="stadium-title mb-3 bears-title">
+      <a th:href="@{/bears}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/bears.png"></a>
       <div class="title-team m-auto">
-        <a style="color: white; text-decoration-line: none" th:href="@{/tigers}"><h1>KIA타이거즈</h1></a>
+        <a style="color: white; text-decoration-line: none" th:href="@{/bears}"><h1>KIA타이거즈</h1></a>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="tigers-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
+      <h2 class="bears-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/tigers/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/bears/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
           <input  type="text" class="form-control" name="sno" th:value="${dto.sno}" hidden>
           <select name="section" class="form-control section-drop-read small" disabled>
-            <option th:value="${dto.section}">[[${dto.section}]]</option>
+            <option th:if="${dto.section} == '프리미엄'"   th:value="${dto.section}">중앙석(프리미엄/VIP)</option>
+            <option th:if="${dto.section} == '테이블'"     th:value="${dto.section}">테이블석</option>
+            <option th:if="${dto.section} == '익사이팅존'" th:value="${dto.section}">익사이팅존</option>
+            <option th:if="${dto.section} == '블루'"       th:value="${dto.section}">블루지정석</option>
+            <option th:if="${dto.section} == '오렌지'"     th:value="${dto.section}">오렌지지정석</option>
+            <option th:if="${dto.section} == '레드'"       th:value="${dto.section}">레드지정석</option>
+            <option th:if="${dto.section} == '네이비'"     th:value="${dto.section}">네이비지정석</option>
+            <option th:if="${dto.section} == '그린(외야)'" th:value="${dto.section}">외야일반석</option>
           </select>
           <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
           <select name="base" class="form-control base-drop-read small" style="margin-right: 10px;" disabled>
@@ -42,7 +49,7 @@
             <label class="custom-file-label" data-browse="Browse"></label>
           </div>
         </div>
-        <div class="box">
+        <div class="box" id="imageBox">
 
         </div>
 
@@ -59,7 +66,7 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
-          <a th:href="@{/tigers}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a th:href="@{/bears}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
 
@@ -74,7 +81,7 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
-        var fileV     = document.getElementById("fileInput").value;
+        var fileV     = document.getElementById("imageBox").value;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -101,7 +108,7 @@
               return ;
             }
             actionForm
-                    .attr("action", "/tigers/modify")
+                    .attr("action", "/bears/modify")
                     .attr("method", "post")
                     .submit();
           });
@@ -194,7 +201,7 @@
           var sno = $(this).data("sno");
 
           $.ajax({
-            url: '/tigers/removeFile',
+            url: '/bears/removeFile',
             data: {fileName: targetFile, ino: ino, sno: sno},
             dataType: 'text',
             type: 'POST',

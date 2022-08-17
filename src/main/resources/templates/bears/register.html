@@ -5,34 +5,28 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 tigers-title">
-      <a th:href="@{/tigers}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/tigers.png"></a>
+    <div class="stadium-title mb-3 bears-title">
+      <a th:href="@{/bears}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/bears.png"></a>
       <div class="title-team m-auto">
-        <a style="color: white; text-decoration-line: none" th:href="@{/tigers}"><h1>KIA타이거즈</h1></a>
+        <a style="color: white; text-decoration-line: none" th:href="@{/bears}"><h1>두산베어스</h1></a>
       </div>
     </div>
       <div class="container stadium-content p-3">
-        <h2 class="tigers-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
+        <h2 class="bears-title-sub font-dohyeon mb-4">좌석 정보 등록하기</h2>
         <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-        <form th:action="@{/tigers/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+        <form th:action="@{/bears/register}" th:method="post" name="fm" onsubmit="return validation_input(this)">
           <div class="form-group font-notosans">
             <select name="section" id="section" class="form-control section-drop small" required>
               <option value="">전체</option>
-              <option value=""                         >구역 선택</option>
-              <option value="K9석"                     >K9석</option>
-              <option value="K8석"                     >K8석</option>
-              <option value="K5석"                     >K5석</option>
-              <option value="K3석"                     >K3석</option>
-              <option value="외야석"                   >외야석</option>
-              <option value="스카이박스"               >스카이박스</option>
-              <option value="챔피언석"                 >챔피언석</option>
-              <option value="높을고창석"               >높을고창석</option>
-              <option value="타이거즈 가족석"          >타이거즈 가족석</option>
-              <option value="높을고창 파티석"          >높을고창 파티석</option>
-              <option value="스카이피크닉석"           >스카이피크닉석</option>
-              <option value="에코다이나믹스 가족석"    >에코다이나믹스 가족석</option>
-              <option value="서프라이즈석"             >서프라이즈석</option>
-              <option value="휠체어석"                 >휠체어석</option>
+              <option value=""           >구역 선택</option>
+              <option value="프리미엄"   >중앙석(프리미엄/VIP)</option>
+              <option value="테이블"     >테이블석</option>
+              <option value="익사이팅존" >익사이팅존</option>
+              <option value="블루"       >블루지정석</option>
+              <option value="오렌지"     >오렌지지정석</option>
+              <option value="레드"       >레드지정석</option>
+              <option value="네이비"     >네이비지정석</option>
+              <option value="그린(외야)" >외야일반석</option>
             </select>
             <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
             <select name="base" id="base" class="form-control base-drop small">
@@ -66,7 +60,7 @@
 
           <div class="mt-4" style="text-align: center">
             <button type="submit" class="btn btn-dark register-btn">등록</button>
-            <a th:href="@{/tigers}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+            <a th:href="@{/bears}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
           </div>
         </form>
       </div>
