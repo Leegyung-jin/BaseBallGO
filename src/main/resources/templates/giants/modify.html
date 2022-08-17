@@ -96,16 +96,6 @@
           alert("이미지를 첨부해주세요.");
           $('#fileInput').focus();
           return false;
-        } else {
-          $(".modifyBtn").click(function (){
-            if (!confirm("수정하시겠습니까?")) {
-              return ;
-            }
-            actionForm
-                    .attr("action", "/giants/modify")
-                    .attr("method", "post")
-                    .submit();
-          });
         }
       }
 
@@ -224,6 +214,16 @@
           $(".box").html(str);
           $("form").submit();
         })
+
+        $(".modifyBtn").click(function (){
+          if (!confirm("수정하시겠습니까?")) {
+            return ;
+          }
+          actionForm
+                  .attr("action", "/giants/modify")
+                  .attr("method", "post")
+                  .submit();
+        });
       });
     </script>
     </body>

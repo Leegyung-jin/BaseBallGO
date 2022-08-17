@@ -43,7 +43,7 @@
             <label class="custom-file-label" data-browse="Browse"></label>
           </div>
         </div>
-        <div class="box">
+        <div class="box" id="imageBox">
         </div>
 
         <div class="uploadResult">
@@ -75,6 +75,7 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
+        var fileV  = document.getElementById("imageBox").value;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -89,6 +90,11 @@
         if (contentV == '') {
           alert("내용을 입력해주세요.");
           $('#content').focus();
+          return false;
+        }
+        if (fileV == '') {
+          alert("이미지를 첨부해주세요.");
+          $('#fileInput').focus();
           return false;
         }
       }

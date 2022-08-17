@@ -42,7 +42,7 @@
             <label class="custom-file-label" data-browse="Browse"></label>
           </div>
         </div>
-        <div class="box">
+        <div class="box" id="imageBox">
 
         </div>
 
@@ -74,7 +74,7 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
-        var fileV     = document.getElementById("fileInput").value;
+        var fileV     = document.getElementById("imageBox").value;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -95,16 +95,6 @@
           alert("이미지를 첨부해주세요.");
           $('#fileInput').focus();
           return false;
-        } else {
-          $(".modifyBtn").click(function (){
-            if (!confirm("수정하시겠습니까?")) {
-              return ;
-            }
-            actionForm
-                    .attr("action", "/tigers/modify")
-                    .attr("method", "post")
-                    .submit();
-          });
         }
       }
 
@@ -224,6 +214,16 @@
           $(".box").html(str);
           $("form").submit();
         })
+
+        $(".modifyBtn").click(function (){
+          if (!confirm("수정하시겠습니까?")) {
+            return ;
+          }
+          actionForm
+                  .attr("action", "/tigers/modify")
+                  .attr("method", "post")
+                  .submit();
+        });
       });
     </script>
     </body>

@@ -85,6 +85,7 @@
           var rowV      = document.getElementById("row").value;
           var numV      = document.getElementById("num").value;
           var contentV  = document.getElementById("content").value;
+          var fileV     = document.getElementById("fileInput").value;
 
           if (sectionV == '') {
             alert("구역을 선택해주세요.");
@@ -109,6 +110,11 @@
           if (contentV == '') {
             alert("내용을 입력해주세요.");
             $('#content').focus();
+            return false;
+          }
+          if (fileV == '') {
+            alert("이미지를 첨부해주세요.");
+            $('#fileInput').focus();
             return false;
           }
         }

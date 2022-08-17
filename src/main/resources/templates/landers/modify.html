@@ -74,6 +74,7 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
+        var fileV     = document.getElementById("imageBox").value;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -88,6 +89,11 @@
         if (contentV == '') {
           alert("내용을 입력해주세요.");
           $('#content').focus();
+          return false;
+        }
+        if (fileV == '') {
+          alert("이미지를 첨부해주세요.");
+          $('#fileInput').focus();
           return false;
         }
       }
@@ -211,7 +217,6 @@
           $(".box").html(str);
           $("form").submit();
         })
-
 
         $(".modifyBtn").click(function (){
           if (!confirm("수정하시겠습니까?")) {

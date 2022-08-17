@@ -90,16 +90,6 @@
           alert("내용을 입력해주세요.");
           $('#content').focus();
           return false;
-        } else {
-          $(".modifyBtn").click(function (){
-            if (!confirm("수정하시겠습니까?")) {
-              return ;
-            }
-            actionForm
-                    .attr("action", "/twins/modify")
-                    .attr("method", "post")
-                    .submit();
-          });
         }
       }
 
@@ -218,6 +208,16 @@
           $(".box").html(str);
           $("form").submit();
         })
+
+        $(".modifyBtn").click(function (){
+          if (!confirm("수정하시겠습니까?")) {
+            return ;
+          }
+          actionForm
+                  .attr("action", "/twins/modify")
+                  .attr("method", "post")
+                  .submit();
+        });
       });
     </script>
     </body>
