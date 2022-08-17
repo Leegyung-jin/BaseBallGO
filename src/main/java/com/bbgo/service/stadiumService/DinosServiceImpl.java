@@ -3,11 +3,8 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.DinosStadium;
-import com.bbgo.entity.stadium.DinosStadiumImage;
-import com.bbgo.entity.stadium.QDinosStadium;
-import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.entity.stadium.*;
+import com.bbgo.repository.stadiumRepository.DinosStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.DinosStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,7 +28,7 @@ import java.util.function.Function;
 public class DinosServiceImpl implements DinosService {
 
     private final DinosStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final DinosStadiumImageRepository imageRepository;
 
     // List
     @Override
@@ -74,7 +72,6 @@ public class DinosServiceImpl implements DinosService {
 
         // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
@@ -87,7 +84,7 @@ public class DinosServiceImpl implements DinosService {
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         DinosStadium stadium = (DinosStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<DinosStadiumImage> stadiumImageList = (List<DinosStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -114,7 +111,29 @@ public class DinosServiceImpl implements DinosService {
 
     @Override
     public StadiumDTO entitiesToDTO(DinosStadium stadium, List<DinosStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return DinosService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<DinosStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            DinosStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<DinosStadiumImage> stadiumImageList = (List<DinosStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

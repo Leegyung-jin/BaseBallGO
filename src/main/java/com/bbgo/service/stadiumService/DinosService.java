@@ -27,11 +27,12 @@ public interface DinosService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         DinosStadium stadium = DinosStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();
@@ -99,4 +100,5 @@ public interface DinosService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }
