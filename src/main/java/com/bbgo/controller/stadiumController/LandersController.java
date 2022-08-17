@@ -2,7 +2,6 @@ package com.bbgo.controller.stadiumController;
 
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.Stadium;
 import com.bbgo.service.stadiumService.LandersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

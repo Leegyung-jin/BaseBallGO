@@ -4,13 +4,11 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.dto.team.StadiumImageDTO;
-import com.bbgo.entity.Stadium;
-import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.Team;
+import com.bbgo.entity.stadium.LandersStadium;
+import com.bbgo.entity.stadium.LandersStadiumImage;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,7 +16,7 @@ public interface LandersService {
 
     // List
     // PageRequestDTO-파라미터, PageResultDTO-리턴 타입으로 사용
-    PageResultDTO<StadiumDTO, Stadium> getList(PageRequestDTO requestDTO);
+    PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO);
 
     // Register
     Long register(StadiumDTO dto);
@@ -30,7 +28,7 @@ public interface LandersService {
         Map<String, Object> entityMap = new HashMap<>();
 
         String upperRow = stadiumDTO.getRow().toUpperCase();
-        Stadium stadium = Stadium.builder()
+        LandersStadium stadium = LandersStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
@@ -43,13 +41,13 @@ public interface LandersService {
 
         // StadiumImageDTO 처리
         if (imageDTOList != null && imageDTOList.size() > 0) {
-            List<StadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
-                StadiumImage stadiumImage = StadiumImage.builder()
+            List<LandersStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
+                LandersStadiumImage stadiumImage = LandersStadiumImage.builder()
                         .ino(stadiumImageDTO.getIno())
                         .path(stadiumImageDTO.getPath())
                         .imgName(stadiumImageDTO.getImgName())
                         .uuid(stadiumImageDTO.getUuid())
-                        .stadium(stadium)
+                        .landersStadium(stadium)
                         .build();
                 return stadiumImage;
             }).collect(Collectors.toList());
@@ -59,7 +57,7 @@ public interface LandersService {
     }
 
     // List
-    default StadiumDTO entityToDTO(Stadium entity) {
+    default StadiumDTO entityToDTO(LandersStadium entity) {
 
         StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
@@ -77,7 +75,7 @@ public interface LandersService {
     }
 
     // Read
-    default StadiumDTO entitiesToDTO(Stadium entity, List<StadiumImage> stadiumImages) {
+    default StadiumDTO entitiesToDTO(LandersStadium entity, List<LandersStadiumImage> stadiumImages) {
         StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
                 .base(entity.getBase())

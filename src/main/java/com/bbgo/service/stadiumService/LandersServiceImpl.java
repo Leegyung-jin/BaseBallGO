@@ -3,12 +3,9 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.dto.team.StadiumImageDTO;
-import com.bbgo.entity.QStadium;
-import com.bbgo.entity.Stadium;
-import com.bbgo.entity.StadiumImage;
-import com.bbgo.repository.StadiumImageRepository;
-import com.bbgo.repository.StadiumRepository;
+import com.bbgo.entity.stadium.LandersStadium;
+import com.bbgo.entity.stadium.LandersStadiumImage;
+import com.bbgo.entity.stadium.QLandersStadium;
 import com.bbgo.repository.stadiumRepository.LandersStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.LandersStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -34,14 +31,14 @@ public class LandersServiceImpl implements LandersService{
 
     // List
     @Override
-    public PageResultDTO<StadiumDTO, Stadium> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
 
         // 검색
         BooleanBuilder booleanBuilder = getSearch(requestDTO);
-        Page<Stadium> result = stadiumRepository.findAll(booleanBuilder, pageable);  // Querydsl 사용
+        Page<LandersStadium> result = stadiumRepository.findAll(booleanBuilder, pageable);  // Querydsl 사용
 
-        Function<Stadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
+        Function<LandersStadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
     }
 
@@ -50,7 +47,7 @@ public class LandersServiceImpl implements LandersService{
         String keyword = requestDTO.getKeyword();
 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        QStadium qStadium = QStadium.stadium;
+        QLandersStadium qStadium = QLandersStadium.landersStadium;
 
         // sno > 0조건 생성
         BooleanExpression expression = qStadium.sno.gt(0L);
@@ -87,8 +84,8 @@ public class LandersServiceImpl implements LandersService{
         log.info("SI>stadiumDTO: " + stadiumDTO);
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-        Stadium stadium = (Stadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
+        List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
 
         stadiumRepository.save(stadium);
 
@@ -102,11 +99,11 @@ public class LandersServiceImpl implements LandersService{
     @Override
     public StadiumDTO getStadium(Long sno) {
         List<Object[]> result = stadiumRepository.getStadiumWithAll(sno);
-        Stadium stadium = (Stadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
-        List<StadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+        LandersStadium stadium = (LandersStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<LandersStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
-            StadiumImage stadiumImage = (StadiumImage) arr[1];
+            LandersStadiumImage stadiumImage = (LandersStadiumImage) arr[1];
             stadiumImageList.add(stadiumImage);
         });
 
@@ -114,16 +111,16 @@ public class LandersServiceImpl implements LandersService{
     }
 
     @Override
-    public StadiumDTO entitiesToDTO(Stadium stadium, List<StadiumImage> stadiumImages) {
+    public StadiumDTO entitiesToDTO(LandersStadium stadium, List<LandersStadiumImage> stadiumImages) {
         System.out.println("================== entitiesToDTO= " + stadium);
         return LandersService.super.entitiesToDTO(stadium, stadiumImages);
     }
 
     @Override
     public void modify(StadiumDTO stadiumDTO) {
-        Optional<Stadium> result = stadiumRepository.findById(stadiumDTO.getSno());
+        Optional<LandersStadium> result = stadiumRepository.findById(stadiumDTO.getSno());
         if(result.isPresent()){
-            Stadium entity = result.get();
+            LandersStadium entity = result.get();
 
             String upperRow = stadiumDTO.getRow().toUpperCase();
             entity.changeRow(upperRow);
@@ -135,7 +132,7 @@ public class LandersServiceImpl implements LandersService{
 
             // 이미지
             Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-            List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+            List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
             stadiumImageList.forEach(stadiumImage -> {
                 imageRepository.save(stadiumImage);
             });
