@@ -78,7 +78,6 @@ public class TwinsServiceImpl implements TwinsService{
     }
 
 
-    // Register
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {

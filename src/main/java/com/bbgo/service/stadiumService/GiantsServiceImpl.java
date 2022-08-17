@@ -4,10 +4,9 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.GiantsStadium;
-import com.bbgo.entity.stadium.GiantsStadiumImage;
-import com.bbgo.entity.stadium.QGiantsStadium;
+import com.bbgo.entity.stadium.*;
 import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.repository.stadiumRepository.GiantsStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.GiantsStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,7 +30,7 @@ import java.util.function.Function;
 public class GiantsServiceImpl implements GiantsService {
 
     private final GiantsStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final GiantsStadiumImageRepository imageRepository;
 
     // List
     @Override
@@ -75,12 +75,10 @@ public class GiantsServiceImpl implements GiantsService {
 
         // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
 
-    // Register
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
@@ -88,7 +86,7 @@ public class GiantsServiceImpl implements GiantsService {
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         GiantsStadium stadium = (GiantsStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<GiantsStadiumImage> stadiumImageList = (List<GiantsStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -115,7 +113,30 @@ public class GiantsServiceImpl implements GiantsService {
 
     @Override
     public StadiumDTO entitiesToDTO(GiantsStadium stadium, List<GiantsStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return GiantsService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+
+        Optional<GiantsStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            GiantsStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<GiantsStadiumImage> stadiumImageList = (List<GiantsStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

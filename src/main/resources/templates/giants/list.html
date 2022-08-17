@@ -6,7 +6,7 @@
 <div class="stadium-title mb-3 giants-title">
     <a th:href="@{giants}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/giants.png"></a>
     <div class="title-team m-auto">
-        <h1 class="cursor-default"><a class="title-team-giants" th:href="@{giants}">롯데자이언츠</a></h1>
+        <h1 class="cursor-default"><a class="title-team-giants" th:href="@{/giants}">롯데자이언츠</a></h1>
     </div>
 </div>
 <div class="container stadium-content p-3">
@@ -24,26 +24,24 @@
             </select>
             <select class="form-control section-drop small" name="keyword">
                 <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                <option value="중앙탁자석"       th:selected="${pageRequestDTO.keyword == '중앙탁자석'}">중앙탁자석</option>
+                <option value="와이드탁자석"     th:selected="${pageRequestDTO.keyword == '와이드탁자석'}">와이드탁자석</option>
+                <option value="응원탁자석"       th:selected="${pageRequestDTO.keyword == '응원탁자석'}" >응원탁자석</option>
+                <option value="내야탁자석"       th:selected="${pageRequestDTO.keyword == '내야탁자석'}" >내야탁자석</option>
+                <option value="3루 단체석"       th:selected="${pageRequestDTO.keyword == '3루 단체석'}" >3루 단체석</option>
+                <option value="로케트배터리존"   th:selected="${pageRequestDTO.keyword == '로케트배터리존'}" >로케트배터리존</option>
+                <option value="내야필드석"       th:selected="${pageRequestDTO.keyword == '내야필드석'}" >내야필드석</option>
+                <option value="내야상단석"       th:selected="${pageRequestDTO.keyword == '내야상단석'}" >내야상단석</option>
+                <option value="중앙상단석"       th:selected="${pageRequestDTO.keyword == '중앙상단석'}" >중앙상단석</option>
+                <option value="외야석"           th:selected="${pageRequestDTO.keyword == '외야석'}" >외야석</option>
+                <option value="휠체어석"         th:selected="${pageRequestDTO.keyword == '휠체어석'}" >휠체어석</option>
             </select>
             <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
         </div>
     </form>
 
     <a class="float-start font-black cursor-default small">전체 [[${result.totalElements}]] 개</a>
-    <a class="writer float-end font-black cursor-pointer" th:href="@{giants/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
+    <a class="writer float-end font-black cursor-pointer" th:href="@{/giants/register}"><button class="btn btn-light btn-sm"><i class="fa-solid fa-pen-to-square font-black"></i>글쓰기</button></a>
 
     <table class="table mt-5 mb-5">
         <thead>
@@ -60,7 +58,9 @@
             <th scope="row">
                 <a>[[${dto.sno}]]</a>
             </th>
-            <td>[[${dto.base}]]</td>
+            <td th:if="${dto.base} == '1'" th:text="1루"></td>
+            <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+            <td th:if="${dto.base} == '3'" th:text="3루"></td>
             <td>
                 <a class="list-text" th:href="@{/giants/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
@@ -98,11 +98,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){

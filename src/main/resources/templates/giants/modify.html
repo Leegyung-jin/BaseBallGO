@@ -5,16 +5,16 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 twins-title">
-      <a th:href="@{/twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/twins.png"></a>
+    <div class="stadium-title mb-3 giants-title">
+      <a th:href="@{/giants}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/giants.png"></a>
       <div class="title-team m-auto">
-        <a style="color: white; text-decoration-line: none" th:href="@{/twins}"><h1>LG트윈스</h1></a>
+        <h1 class="cursor-default"><a class="title-team-giants" th:href="@{giants}">롯데자이언츠</a></h1>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="twins-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
+      <h2 class="giants-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/twins/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/giants/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
           <input  type="text" class="form-control" name="sno" th:value="${dto.sno}" hidden>
           <select name="section" class="form-control section-drop-read small" disabled>
@@ -59,7 +59,7 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
-          <a th:href="@{/twins}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a th:href="@{/giants}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
 
@@ -75,6 +75,7 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
+        var fileV     = document.getElementById("imageBox").value;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -90,13 +91,18 @@
           alert("내용을 입력해주세요.");
           $('#content').focus();
           return false;
+        }
+        if (fileV == '') {
+          alert("이미지를 첨부해주세요.");
+          $('#fileInput').focus();
+          return false;
         } else {
           $(".modifyBtn").click(function (){
             if (!confirm("수정하시겠습니까?")) {
               return ;
             }
             actionForm
-                    .attr("action", "/twins/modify")
+                    .attr("action", "/giants/modify")
                     .attr("method", "post")
                     .submit();
           });
@@ -187,7 +193,7 @@
           var sno = $(this).data("sno");
 
           $.ajax({
-            url: '/twins/removeFile',
+            url: '/giants/removeFile',
             data: {fileName: targetFile, ino: ino, sno: sno},
             dataType: 'text',
             type: 'POST',
