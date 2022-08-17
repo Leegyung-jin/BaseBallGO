@@ -4,8 +4,8 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.dto.team.StadiumImageDTO;
-import com.bbgo.entity.stadium.TwinsStadium;
-import com.bbgo.entity.stadium.TwinsStadiumImage;
+import com.bbgo.entity.stadium.JamsilStadium;
+import com.bbgo.entity.stadium.JamsilStadiumImage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ public interface TwinsService {
 
     // List
     // PageRequestDTO-파라미터, PageResultDTO-리턴 타입으로 사용
-    PageResultDTO<StadiumDTO, TwinsStadium> getList(PageRequestDTO requestDTO);
+    PageResultDTO<StadiumDTO, JamsilStadium> getList(PageRequestDTO requestDTO);
 
     // Register
     Long register(StadiumDTO dto);
@@ -28,7 +28,7 @@ public interface TwinsService {
         Map<String, Object> entityMap = new HashMap<>();
 
         String upperRow = stadiumDTO.getRow().toUpperCase();
-        TwinsStadium stadium = TwinsStadium.builder()
+        JamsilStadium stadium = JamsilStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
@@ -41,12 +41,12 @@ public interface TwinsService {
 
         // StadiumImageDTO 처리
         if (imageDTOList != null && imageDTOList.size() > 0) {
-            List<TwinsStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
-                TwinsStadiumImage stadiumImage = TwinsStadiumImage.builder()
+            List<JamsilStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
+                JamsilStadiumImage stadiumImage = JamsilStadiumImage.builder()
                         .path(stadiumImageDTO.getPath())
                         .imgName(stadiumImageDTO.getImgName())
                         .uuid(stadiumImageDTO.getUuid())
-                        .twinsStadium(stadium)
+                        .jamsilStadium(stadium)
                         .build();
                 return stadiumImage;
             }).collect(Collectors.toList());
@@ -56,7 +56,7 @@ public interface TwinsService {
     }
 
     // List
-    default StadiumDTO entityToDTO(TwinsStadium entity) {
+    default StadiumDTO entityToDTO(JamsilStadium entity) {
 
         StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
@@ -74,7 +74,7 @@ public interface TwinsService {
     }
 
     // Read
-    default StadiumDTO entitiesToDTO(TwinsStadium entity, List<TwinsStadiumImage> stadiumImages) {
+    default StadiumDTO entitiesToDTO(JamsilStadium entity, List<JamsilStadiumImage> stadiumImages) {
         StadiumDTO stadiumDTO = StadiumDTO.builder()
                 .sno(entity.getSno())
                 .base(entity.getBase())

@@ -3,9 +3,9 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.stadium.QTwinsStadium;
-import com.bbgo.entity.stadium.TwinsStadium;
-import com.bbgo.entity.stadium.TwinsStadiumImage;
+import com.bbgo.entity.stadium.JamsilStadium;
+import com.bbgo.entity.stadium.JamsilStadiumImage;
+import com.bbgo.entity.stadium.QJamsilStadium;
 import com.bbgo.repository.stadiumRepository.TwinsStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.TwinsStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -34,14 +34,14 @@ public class TwinsServiceImpl implements TwinsService{
 
     // List
     @Override
-    public PageResultDTO<StadiumDTO, TwinsStadium> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<StadiumDTO, JamsilStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
 
         // 검색
         BooleanBuilder booleanBuilder = getSearch(requestDTO);
-        Page<TwinsStadium> result = repository.findAll(booleanBuilder, pageable);  // Querydsl 사용
+        Page<JamsilStadium> result = repository.findAll(booleanBuilder, pageable);  // Querydsl 사용
 
-        Function<TwinsStadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
+        Function<JamsilStadium, StadiumDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
     }
 
@@ -50,7 +50,7 @@ public class TwinsServiceImpl implements TwinsService{
         String keyword = requestDTO.getKeyword();
 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        QTwinsStadium qTwinsStadium = QTwinsStadium.twinsStadium;
+        QJamsilStadium qTwinsStadium = QJamsilStadium.jamsilStadium;
 
         // sno > 0조건 생성
         BooleanExpression expression = qTwinsStadium.sno.gt(0L);
@@ -83,8 +83,8 @@ public class TwinsServiceImpl implements TwinsService{
     @Override
     public Long register(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-        TwinsStadium stadium = (TwinsStadium) entityMap.get("stadium");
-        List<TwinsStadiumImage> stadiumImageList = (List<TwinsStadiumImage>) entityMap.get("imgList");
+        JamsilStadium stadium = (JamsilStadium) entityMap.get("stadium");
+        List<JamsilStadiumImage> stadiumImageList = (List<JamsilStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -98,11 +98,11 @@ public class TwinsServiceImpl implements TwinsService{
     @Override
     public StadiumDTO getStadium(Long sno) {
         List<Object[]> result = repository.getStadiumWithAll(sno);
-        TwinsStadium stadium = (TwinsStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
-        List<TwinsStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+        JamsilStadium stadium = (JamsilStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<JamsilStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
-            TwinsStadiumImage stadiumImage = (TwinsStadiumImage) arr[1];
+            JamsilStadiumImage stadiumImage = (JamsilStadiumImage) arr[1];
             stadiumImageList.add(stadiumImage);
         });
 
@@ -110,15 +110,15 @@ public class TwinsServiceImpl implements TwinsService{
     }
 
     @Override
-    public StadiumDTO entitiesToDTO(TwinsStadium stadium, List<TwinsStadiumImage> stadiumImages) {
+    public StadiumDTO entitiesToDTO(JamsilStadium stadium, List<JamsilStadiumImage> stadiumImages) {
         return TwinsService.super.entitiesToDTO(stadium, stadiumImages);
     }
 
     @Override
     public void modify(StadiumDTO stadiumDTO) {
-        Optional<TwinsStadium> result = repository.findById(stadiumDTO.getSno());
+        Optional<JamsilStadium> result = repository.findById(stadiumDTO.getSno());
         if(result.isPresent()){
-            TwinsStadium entity = result.get();
+            JamsilStadium entity = result.get();
 
             String upperRow = stadiumDTO.getRow().toUpperCase();
             entity.changeRow(upperRow);
@@ -130,7 +130,7 @@ public class TwinsServiceImpl implements TwinsService{
 
             // 이미지
             Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-            List<TwinsStadiumImage> stadiumImageList = (List<TwinsStadiumImage>) entityMap.get("imgList");
+            List<JamsilStadiumImage> stadiumImageList = (List<JamsilStadiumImage>) entityMap.get("imgList");
             stadiumImageList.forEach(stadiumImage -> {
                 imageRepository.save(stadiumImage);
             });
