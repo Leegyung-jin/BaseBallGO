@@ -360,7 +360,6 @@ div > .div-div {
     align-items: center;
     vertical-align: top;
     overflow: auto;
-    /*background-color: #ffffff;*/
 }
 .uploadResult ul li {
     list-style: none;
@@ -369,6 +368,7 @@ div > .div-div {
 }
 .uploadResult ul li img {
     width: 100px;
+    height: 100px;
 }
 .uploadResult ul li button {
     width: 30px;

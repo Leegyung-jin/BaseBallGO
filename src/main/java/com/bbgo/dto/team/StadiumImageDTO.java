@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 @Builder
 public class StadiumImageDTO {
 
+    private Long ino;
     private String uuid;
     private String imgName;
     private String path;

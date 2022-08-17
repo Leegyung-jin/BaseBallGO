@@ -3,11 +3,14 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
+import com.bbgo.dto.team.StadiumImageDTO;
 import com.bbgo.entity.QStadium;
 import com.bbgo.entity.Stadium;
 import com.bbgo.entity.StadiumImage;
 import com.bbgo.repository.StadiumImageRepository;
 import com.bbgo.repository.StadiumRepository;
+import com.bbgo.repository.stadiumRepository.LandersStadiumImageRepository;
+import com.bbgo.repository.stadiumRepository.LandersStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -29,8 +29,8 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class LandersServiceImpl implements LandersService{
 
-    private final StadiumRepository stadiumRepository;
-    private final StadiumImageRepository imageRepository;
+    private final LandersStadiumRepository stadiumRepository;
+    private final LandersStadiumImageRepository imageRepository;
 
     // List
     @Override
@@ -117,5 +117,27 @@ public class LandersServiceImpl implements LandersService{
     public StadiumDTO entitiesToDTO(Stadium stadium, List<StadiumImage> stadiumImages) {
         System.out.println("================== entitiesToDTO= " + stadium);
         return LandersService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<Stadium> result = stadiumRepository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            Stadium entity = result.get();
+
+            entity.changeRow(stadiumDTO.getRow());
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            stadiumRepository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

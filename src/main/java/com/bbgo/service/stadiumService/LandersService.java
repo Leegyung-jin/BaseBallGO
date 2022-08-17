@@ -43,11 +43,11 @@ public interface LandersService {
         if (imageDTOList != null && imageDTOList.size() > 0) {
             List<StadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
                 StadiumImage stadiumImage = StadiumImage.builder()
+                        .ino(stadiumImageDTO.getIno())
                         .path(stadiumImageDTO.getPath())
                         .imgName(stadiumImageDTO.getImgName())
                         .uuid(stadiumImageDTO.getUuid())
                         .stadium(stadium)
-
                         .build();
                 return stadiumImage;
             }).collect(Collectors.toList());
@@ -91,6 +91,7 @@ public interface LandersService {
 
         List<StadiumImageDTO> stadiumImageDTOList = stadiumImages.stream().map(stadiumImage -> {
             return StadiumImageDTO.builder().imgName(stadiumImage.getImgName())
+                    .ino(stadiumImage.getIno())
                     .path(stadiumImage.getPath())
                     .uuid(stadiumImage.getUuid())
                     .build();
@@ -101,4 +102,5 @@ public interface LandersService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }
