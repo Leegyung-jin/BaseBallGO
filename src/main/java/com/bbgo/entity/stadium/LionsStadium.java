@@ -25,4 +25,14 @@ public class LionsStadium extends SBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    public void changeRow(String row){
+        this.row = row;
+    }
+    public void changeNum(Integer num){
+        this.num = num;
+    }
+    public void changeContent(String content){
+        this.content = content;
+    }
 }

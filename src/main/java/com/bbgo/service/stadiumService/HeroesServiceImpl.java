@@ -3,11 +3,10 @@ package com.bbgo.service.stadiumService;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.StadiumImage;
 import com.bbgo.entity.stadium.HeroesStadium;
 import com.bbgo.entity.stadium.HeroesStadiumImage;
 import com.bbgo.entity.stadium.QHeroesStadium;
-import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.repository.stadiumRepository.HeroesStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.HeroesStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,7 +30,7 @@ import java.util.function.Function;
 public class HeroesServiceImpl implements HeroesService{
 
     private final HeroesStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final HeroesStadiumImageRepository imageRepository;
 
     // List
     @Override
@@ -87,13 +87,16 @@ public class HeroesServiceImpl implements HeroesService{
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         HeroesStadium stadium = (HeroesStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<HeroesStadiumImage> stadiumImageList = (List<HeroesStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
-        stadiumImageList.forEach(stadiumImage -> {
-            imageRepository.save(stadiumImage);
-        });
+
+        if (stadiumImageList != null && stadiumImageList.size() > 0) {
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
 
         return stadium.getSno();
     }
@@ -114,7 +117,29 @@ public class HeroesServiceImpl implements HeroesService{
 
     @Override
     public StadiumDTO entitiesToDTO(HeroesStadium stadium, List<HeroesStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return HeroesService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<HeroesStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            HeroesStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<HeroesStadiumImage> stadiumImageList = (List<HeroesStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

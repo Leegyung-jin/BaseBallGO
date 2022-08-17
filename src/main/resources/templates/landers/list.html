@@ -105,11 +105,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){

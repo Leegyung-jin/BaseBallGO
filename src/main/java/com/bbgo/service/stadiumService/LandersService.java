@@ -10,6 +10,7 @@ import com.bbgo.entity.Team;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,11 +29,12 @@ public interface LandersService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         Stadium stadium = Stadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();

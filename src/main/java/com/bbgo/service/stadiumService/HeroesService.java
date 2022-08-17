@@ -4,13 +4,12 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.dto.team.StadiumImageDTO;
-import com.bbgo.entity.Stadium;
-import com.bbgo.entity.StadiumImage;
 import com.bbgo.entity.stadium.HeroesStadium;
 import com.bbgo.entity.stadium.HeroesStadiumImage;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -29,11 +28,12 @@ public interface HeroesService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         HeroesStadium stadium = HeroesStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();
@@ -44,6 +44,7 @@ public interface HeroesService {
         if (imageDTOList != null && imageDTOList.size() > 0) {
             List<HeroesStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
                 HeroesStadiumImage stadiumImage = HeroesStadiumImage.builder()
+                        .ino(stadiumImageDTO.getIno())
                         .path(stadiumImageDTO.getPath())
                         .imgName(stadiumImageDTO.getImgName())
                         .uuid(stadiumImageDTO.getUuid())
@@ -91,6 +92,7 @@ public interface HeroesService {
 
         List<StadiumImageDTO> stadiumImageDTOList = stadiumImages.stream().map(stadiumImage -> {
             return StadiumImageDTO.builder().imgName(stadiumImage.getImgName())
+                    .ino(stadiumImage.getIno())
                     .path(stadiumImage.getPath())
                     .uuid(stadiumImage.getUuid())
                     .build();
@@ -101,4 +103,5 @@ public interface HeroesService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }

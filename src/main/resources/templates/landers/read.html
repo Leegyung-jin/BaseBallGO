@@ -35,7 +35,8 @@
               <img th:if="${stadiumImage.path != null}"
                    th:src="|/display?fileName=${stadiumImage.getThumbnailURL()}|">
             </li>
-          </ul>        </div>
+          </ul>
+        </div>
 
         <div class="mt-4" style="text-align: center">
           <a th:href="@{/landers/modify(sno = ${dto.sno}, page= ${requestDTO.page})}">

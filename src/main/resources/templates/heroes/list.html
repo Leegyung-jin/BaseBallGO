@@ -60,7 +60,9 @@
                 <th scope="row">
                     <a>[[${dto.sno}]]</a>
                 </th>
-                <td>[[${dto.base}]]</td>
+                <td th:if="${dto.base} == '1'" th:text="1루"></td>
+                <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+                <td th:if="${dto.base} == '3'" th:text="3루"></td>
                 <td>
                     <a class="list-text" th:href="@{/heroes/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
                 </td>
@@ -98,11 +100,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){
