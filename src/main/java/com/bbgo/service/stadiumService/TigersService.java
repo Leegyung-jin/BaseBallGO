@@ -27,11 +27,12 @@ public interface TigersService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
+        String upperRow = stadiumDTO.getRow().toUpperCase();
         TigersStadium stadium = TigersStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .build();
@@ -39,18 +40,16 @@ public interface TigersService {
         List<StadiumImageDTO> imageDTOList = stadiumDTO.getImageDTOList();
 
         // StadiumImageDTO 처리
-        if (imageDTOList != null && imageDTOList.size() > 0) {
-            List<TigersStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
-                TigersStadiumImage stadiumImage = TigersStadiumImage.builder()
-                        .path(stadiumImageDTO.getPath())
-                        .imgName(stadiumImageDTO.getImgName())
-                        .uuid(stadiumImageDTO.getUuid())
-                        .tigersStadium(stadium)
-                        .build();
-                return stadiumImage;
-            }).collect(Collectors.toList());
-            entityMap.put("imgList", stadiumImageList);
-        }
+        List<TigersStadiumImage> stadiumImageList = imageDTOList.stream().map(stadiumImageDTO -> {
+            TigersStadiumImage stadiumImage = TigersStadiumImage.builder()
+                    .path(stadiumImageDTO.getPath())
+                    .imgName(stadiumImageDTO.getImgName())
+                    .uuid(stadiumImageDTO.getUuid())
+                    .tigersStadium(stadium)
+                    .build();
+            return stadiumImage;
+        }).collect(Collectors.toList());
+        entityMap.put("imgList", stadiumImageList);
         return entityMap;
     }
 
@@ -98,5 +97,10 @@ public interface TigersService {
 
         return stadiumDTO;
     }
+
+    void modify(StadiumDTO dto);
+
+
+
 
 }

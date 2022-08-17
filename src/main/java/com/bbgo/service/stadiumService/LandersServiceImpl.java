@@ -29,7 +29,6 @@ public class LandersServiceImpl implements LandersService{
     private final LandersStadiumRepository stadiumRepository;
     private final LandersStadiumImageRepository imageRepository;
 
-    // List
     @Override
     public PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sno").descending());
@@ -53,14 +52,12 @@ public class LandersServiceImpl implements LandersService{
         BooleanExpression expression = qStadium.sno.gt(0L);
         booleanBuilder.and(expression);
 
-
         if (type == null || type.trim().length() == 0) {
             return booleanBuilder;
         }
 
         BooleanBuilder conditionBuilder = new BooleanBuilder();
         if (type.contains("1")) {
-//            conditionBuilder.or(qStadium.base.contains("1")).and(qStadium.section.contains(keyword));
             conditionBuilder.or(qStadium.base.contains("1")).and(qStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
@@ -81,8 +78,6 @@ public class LandersServiceImpl implements LandersService{
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
-
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
         List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");

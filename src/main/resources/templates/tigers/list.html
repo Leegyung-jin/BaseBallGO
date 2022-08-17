@@ -23,20 +23,21 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                <option value=""                         th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value="K9석"                     th:selected="${pageRequestDTO.keyword == 'K9석'}">K9석</option>
+                <option value="K8석"                     th:selected="${pageRequestDTO.keyword == 'K8석'}">K8석</option>
+                <option value="K5석"                     th:selected="${pageRequestDTO.keyword == 'K5석'}">K5석</option>
+                <option value="K3석"                     th:selected="${pageRequestDTO.keyword == 'K3석'}">K3석</option>
+                <option value="외야석"                   th:selected="${pageRequestDTO.keyword == '외야석'}">외야석</option>
+                <option value="스카이박스"               th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
+                <option value="챔피언석"                 th:selected="${pageRequestDTO.keyword == '챔피언석'}">챔피언석</option>
+                <option value="높을고창석"               th:selected="${pageRequestDTO.keyword == '높을고창석'}">높을고창석</option>
+                <option value="타이거즈 가족석"          th:selected="${pageRequestDTO.keyword == '타이거즈 가족석'}">타이거즈 가족석</option>
+                <option value="높을고창 파티석"          th:selected="${pageRequestDTO.keyword == '높을고창 파티석'}">높을고창 파티석</option>
+                <option value="스카이피크닉석"           th:selected="${pageRequestDTO.keyword == '스카이피크닉석'}">스카이피크닉석</option>
+                <option value="에코다이나믹스 가족석"    th:selected="${pageRequestDTO.keyword == '에코다이나믹스 가족석'}">에코다이나믹스 가족석</option>
+                <option value="서프라이즈석"             th:selected="${pageRequestDTO.keyword == '서프라이즈석'}">서프라이즈석</option>
+                <option value="휠체어석"                 th:selected="${pageRequestDTO.keyword == '휠체어석'}">휠체어석</option>
             </select>
             <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
         </div>
@@ -60,7 +61,9 @@
             <th scope="row">
                 <a>[[${dto.sno}]]</a>
             </th>
-            <td>[[${dto.base}]]</td>
+            <td th:if="${dto.base} == '1'" th:text="1루"></td>
+            <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+            <td th:if="${dto.base} == '3'" th:text="3루"></td>
             <td>
                 <a class="list-text" th:href="@{/tigers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
@@ -98,11 +101,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){
