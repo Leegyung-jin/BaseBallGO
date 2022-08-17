@@ -99,4 +99,5 @@ public interface WizService {
         return stadiumDTO;
     }
 
+    void modify(StadiumDTO dto);
 }

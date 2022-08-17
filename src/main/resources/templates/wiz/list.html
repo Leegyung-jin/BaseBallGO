@@ -4,7 +4,7 @@
 </th:block>
 <body id="page-top" class="font-notosans">
 <div class="stadium-title mb-3 wiz-title">
-    <a th:href="@{wiz}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/wiz.png" style="top: 10px"></a>
+    <a th:href="@{/wiz}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/wiz.png" style="top: 10px"></a>
     <div class="title-team m-auto">
         <h1 class="cursor-default"><a class="title-team-white" th:href="@{wiz}">kt wiz</a></h1>
     </div>
@@ -60,7 +60,9 @@
             <th scope="row">
                 <a>[[${dto.sno}]]</a>
             </th>
-            <td>[[${dto.base}]]</td>
+            <td th:if="${dto.base} == '1'" th:text="1루"></td>
+            <td th:if="${dto.base} == '2'" th:text="중앙"></td>
+            <td th:if="${dto.base} == '3'" th:text="3루"></td>
             <td>
                 <a class="list-text" th:href="@{/wiz/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
             </td>
@@ -98,11 +100,6 @@
 </body>
 <script th:inline="javascript">
     var msg = [[${msg}]];
-    console.log(msg);
-
-    if(msg){
-        $(".modal").modal();
-    }
 
     var searchForm = $("#searchForm");
     $('.btn-search').click(function (e){

@@ -6,19 +6,13 @@ import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.Member;
 import com.bbgo.entity.Stadium;
 import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.Team;
 import com.bbgo.service.stadiumService.LandersService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.UUID;
 import java.util.stream.IntStream;
 

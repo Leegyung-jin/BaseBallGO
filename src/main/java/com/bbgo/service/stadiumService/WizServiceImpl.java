@@ -4,10 +4,8 @@ import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.StadiumImage;
-import com.bbgo.entity.stadium.QWizStadium;
-import com.bbgo.entity.stadium.WizStadium;
-import com.bbgo.entity.stadium.WizStadiumImage;
-import com.bbgo.repository.StadiumImageRepository;
+import com.bbgo.entity.stadium.*;
+import com.bbgo.repository.stadiumRepository.WizStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.WizStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,7 +29,7 @@ import java.util.function.Function;
 public class WizServiceImpl implements WizService {
 
     private final WizStadiumRepository repository;
-    private final StadiumImageRepository imageRepository;
+    private final WizStadiumImageRepository imageRepository;
 
     // List
     @Override
@@ -51,7 +50,6 @@ public class WizServiceImpl implements WizService {
 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QWizStadium qWizStadium = QWizStadium.wizStadium;
-
 
         // sno > 0조건 생성
         BooleanExpression expression = qWizStadium.sno.gt(0L);
@@ -75,7 +73,6 @@ public class WizServiceImpl implements WizService {
 
         // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
@@ -84,11 +81,9 @@ public class WizServiceImpl implements WizService {
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
-
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         WizStadium stadium = (WizStadium) entityMap.get("stadium");
-        List<StadiumImage> stadiumImageList = (List<StadiumImage>) entityMap.get("imgList");
+        List<WizStadiumImage> stadiumImageList = (List<WizStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
 
@@ -115,7 +110,29 @@ public class WizServiceImpl implements WizService {
 
     @Override
     public StadiumDTO entitiesToDTO(WizStadium stadium, List<WizStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return WizService.super.entitiesToDTO(stadium, stadiumImages);
+    }
+
+    @Override
+    public void modify(StadiumDTO stadiumDTO) {
+        Optional<WizStadium> result = repository.findById(stadiumDTO.getSno());
+        if(result.isPresent()){
+            WizStadium entity = result.get();
+
+            String upperRow = stadiumDTO.getRow().toUpperCase();
+            entity.changeRow(upperRow);
+            entity.changeNum(stadiumDTO.getNum());
+            entity.changeContent(stadiumDTO.getContent());
+
+            repository.save(entity);
+            imageRepository.deleteBySno(stadiumDTO.getSno());
+
+            // 이미지
+            Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+            List<WizStadiumImage> stadiumImageList = (List<WizStadiumImage>) entityMap.get("imgList");
+            stadiumImageList.forEach(stadiumImage -> {
+                imageRepository.save(stadiumImage);
+            });
+        }
     }
 }

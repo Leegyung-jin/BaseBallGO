@@ -74,7 +74,6 @@ public class TwinsServiceImpl implements TwinsService{
 
         // 모든 조건 통합
         booleanBuilder.and(conditionBuilder);
-
         return booleanBuilder;
     }
 
@@ -112,7 +111,6 @@ public class TwinsServiceImpl implements TwinsService{
 
     @Override
     public StadiumDTO entitiesToDTO(TwinsStadium stadium, List<TwinsStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return TwinsService.super.entitiesToDTO(stadium, stadiumImages);
     }
 

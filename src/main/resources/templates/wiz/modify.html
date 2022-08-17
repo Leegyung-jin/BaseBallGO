@@ -5,16 +5,16 @@
 <th:block>
   <th:block>
     <body id="page-top">
-    <div class="stadium-title mb-3 twins-title">
-      <a th:href="@{/twins}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/twins.png"></a>
+    <div class="stadium-title mb-3 wiz-title">
+      <a th:href="@{/wiz}"><img class="img-fluid title-emblem m-auto" src="../assets/img/emblem/wiz.png" style="top: 10px"></a>
       <div class="title-team m-auto">
-        <a style="color: white; text-decoration-line: none" th:href="@{/twins}"><h1>LG트윈스</h1></a>
+        <a style="color: white; text-decoration-line: none" th:href="@{/wiz}"><h1>kt wiz</h1></a>
       </div>
     </div>
     <div class="container stadium-content p-3">
-      <h2 class="twins-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
+      <h2 class="wiz-title-sub font-dohyeon mb-4">좌석 정보 수정하기</h2>
       <p class="small" style="color: darkred">※ 정확한 좌석을 모르는 경우에는 0열 0번으로 입력해주세요.</p>
-      <form th:action="@{/twins/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
+      <form th:action="@{/wiz/modify}" th:method="post" name="fm" onsubmit="return validation_input(this)">
         <div class="form-group font-notosans">
           <input  type="text" class="form-control" name="sno" th:value="${dto.sno}" hidden>
           <select name="section" class="form-control section-drop-read small" disabled>
@@ -59,7 +59,7 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
-          <a th:href="@{/twins}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a th:href="@{/wiz}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
 
@@ -177,7 +177,7 @@
           var sno = $(this).data("sno");
 
           $.ajax({
-            url: '/twins/removeFile',
+            url: '/wiz/removeFile',
             data: {fileName: targetFile, ino: ino, sno: sno},
             dataType: 'text',
             type: 'POST',
@@ -215,7 +215,7 @@
             return ;
           }
           actionForm
-                  .attr("action", "/twins/modify")
+                  .attr("action", "/wiz/modify")
                   .attr("method", "post")
                   .submit();
         });
