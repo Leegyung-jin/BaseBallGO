@@ -64,7 +64,7 @@ public class DinosServiceImpl implements DinosService {
             conditionBuilder.or(qDinosStadium.base.contains("1")).and(qDinosStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qDinosStadium.base.contains("중앙")).and(qDinosStadium.section.contains(keyword));
+            conditionBuilder.or(qDinosStadium.base.contains("2")).and(qDinosStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qDinosStadium.base.contains("3")).and(qDinosStadium.section.contains(keyword));

@@ -63,7 +63,7 @@ public class TigersServiceImpl implements TigersService {
             conditionBuilder.or(qTigersStadium.base.contains("1")).and(qTigersStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qTigersStadium.base.contains("중앙")).and(qTigersStadium.section.contains(keyword));
+            conditionBuilder.or(qTigersStadium.base.contains("2")).and(qTigersStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qTigersStadium.base.contains("3")).and(qTigersStadium.section.contains(keyword));

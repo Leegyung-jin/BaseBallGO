@@ -65,7 +65,7 @@ public class GiantsServiceImpl implements GiantsService {
             conditionBuilder.or(qGiantsStadium.base.contains("1")).and(qGiantsStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qGiantsStadium.base.contains("중앙")).and(qGiantsStadium.section.contains(keyword));
+            conditionBuilder.or(qGiantsStadium.base.contains("2")).and(qGiantsStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qGiantsStadium.base.contains("3")).and(qGiantsStadium.section.contains(keyword));

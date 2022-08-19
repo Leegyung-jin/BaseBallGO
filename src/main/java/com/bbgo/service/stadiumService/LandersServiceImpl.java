@@ -128,9 +128,11 @@ public class LandersServiceImpl implements LandersService{
             // 이미지
             Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
             List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
-            stadiumImageList.forEach(stadiumImage -> {
-                imageRepository.save(stadiumImage);
-            });
+            if (stadiumImageList.size() > 0) {
+                stadiumImageList.forEach(stadiumImage -> {
+                    imageRepository.save(stadiumImage);
+                });
+            }
         }
     }
 }

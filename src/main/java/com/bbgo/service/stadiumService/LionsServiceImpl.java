@@ -62,7 +62,7 @@ public class LionsServiceImpl implements LionsService {
             conditionBuilder.or(qLionsStadium.base.contains("1")).and(qLionsStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qLionsStadium.base.contains("중앙")).and(qLionsStadium.section.contains(keyword));
+            conditionBuilder.or(qLionsStadium.base.contains("2")).and(qLionsStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qLionsStadium.base.contains("3")).and(qLionsStadium.section.contains(keyword));

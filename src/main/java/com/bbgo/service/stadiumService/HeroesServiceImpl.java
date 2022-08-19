@@ -66,7 +66,7 @@ public class HeroesServiceImpl implements HeroesService{
             conditionBuilder.or(qHeroesStadium.base.contains("1")).and(qHeroesStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qHeroesStadium.base.contains("중앙")).and(qHeroesStadium.section.contains(keyword));
+            conditionBuilder.or(qHeroesStadium.base.contains("2")).and(qHeroesStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qHeroesStadium.base.contains("3")).and(qHeroesStadium.section.contains(keyword));

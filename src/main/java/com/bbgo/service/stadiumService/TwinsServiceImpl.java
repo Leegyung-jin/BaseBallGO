@@ -66,7 +66,7 @@ public class TwinsServiceImpl implements TwinsService{
             conditionBuilder.or(qTwinsStadium.base.contains("1")).and(qTwinsStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qTwinsStadium.base.contains("중앙")).and(qTwinsStadium.section.contains(keyword));
+            conditionBuilder.or(qTwinsStadium.base.contains("2")).and(qTwinsStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qTwinsStadium.base.contains("3")).and(qTwinsStadium.section.contains(keyword));

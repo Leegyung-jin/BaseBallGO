@@ -66,7 +66,7 @@ public class BearsServiceImpl implements BearsService{
             conditionBuilder.or(qBearsStadium.base.contains("1")).and(qBearsStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qBearsStadium.base.contains("중앙")).and(qBearsStadium.section.contains(keyword));
+            conditionBuilder.or(qBearsStadium.base.contains("2")).and(qBearsStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qBearsStadium.base.contains("3")).and(qBearsStadium.section.contains(keyword));

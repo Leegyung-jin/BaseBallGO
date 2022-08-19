@@ -65,7 +65,7 @@ public class WizServiceImpl implements WizService {
             conditionBuilder.or(qWizStadium.base.contains("1")).and(qWizStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qWizStadium.base.contains("중앙")).and(qWizStadium.section.contains(keyword));
+            conditionBuilder.or(qWizStadium.base.contains("2")).and(qWizStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qWizStadium.base.contains("3")).and(qWizStadium.section.contains(keyword));

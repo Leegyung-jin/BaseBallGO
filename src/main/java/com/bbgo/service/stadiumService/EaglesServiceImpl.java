@@ -61,7 +61,7 @@ public class EaglesServiceImpl implements EaglesService {
             conditionBuilder.or(qEaglesStadium.base.contains("1")).and(qEaglesStadium.section.contains(keyword));
         }
         if (type.contains("2")) {
-            conditionBuilder.or(qEaglesStadium.base.contains("중앙")).and(qEaglesStadium.section.contains(keyword));
+            conditionBuilder.or(qEaglesStadium.base.contains("2")).and(qEaglesStadium.section.contains(keyword));
         }
         if (type.contains("3")) {
             conditionBuilder.or(qEaglesStadium.base.contains("3")).and(qEaglesStadium.section.contains(keyword));
