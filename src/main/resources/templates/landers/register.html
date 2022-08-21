@@ -19,13 +19,13 @@
             <select name="section" id="section" class="form-control section-drop small" required>
               <option value="">전체</option>
               <option value="일반석">일반석</option>
-              <option value="몰리스">몰리스 그린존</option>
+              <option value="몰리스 그린존">몰리스 그린존</option>
               <option value="응원지정석">응원지정석</option>
               <option value="의자지정석">의자지정석</option>
-              <option value="라이브존">랜더스 라이브존</option>
-              <option value="프렌들리존">이마트 프렌들리존</option>
-              <option value="피코크">피코크 테이블석</option>
-              <option value="노브랜드">노브랜드 테이블석</option>
+              <option value="랜더스 라이브존">랜더스 라이브존</option>
+              <option value="이마트 프렌들리존">이마트 프렌들리존</option>
+              <option value="피코크 테이블석">피코크 테이블석</option>
+              <option value="노브랜드 테이블석">노브랜드 테이블석</option>
               <option value="SKY탁자석">SKY탁자석</option>
               <option value="홈런커플존">홈런커플존</option>
               <option value="바베큐존">바베큐존</option>
@@ -35,7 +35,7 @@
               <option value="초가정자">초가정자</option>
               <option value="미니스카이박스">미니스카이박스</option>
               <option value="스카이박스">스카이박스</option>
-              <option value="휠체어">휠체어 장애인석</option>
+              <option value="휠체어 장애인석">휠체어 장애인석</option>
             </select>
             <a style="float: left; padding: 0.375rem 0rem; margin-right: 20px">구역</a>
             <select name="base" id="base" class="form-control base-drop small">
@@ -60,9 +60,9 @@
               <label class="custom-file-label" data-browse="Browse"></label>
             </div>
           </div>
-          <div class="box">
+          <div class="box" id="imageBox">
           </div>
-          <div class="uploadResult">
+          <div class="uploadResult" id="uploadResult">
             <ul>
             </ul>
           </div>
@@ -112,17 +112,14 @@
             $('#content').focus();
             return false;
           }
-          if (fileV == '') {
+          if (fileV == '' || fileV == null) {
             alert("이미지를 첨부해주세요.");
             $('#fileInput').focus();
             return false;
           }
         }
 
-
-
         $(document).ready(function (e) {
-
           var regex = new RegExp("!(.*?)\.(exe|sh|zip|alz|tiff)$");
           var maxSize = 10485760;  // 10MB
 
@@ -175,11 +172,9 @@
               type: 'POST',
               dataType: 'json',
               success: function (result) {
-                console.log("result", result);
                 showResult(result);
               },
               error: function (jqXHR, textStatus, errorThrown){
-                console.log("error", textStatus);
               }
             }); // $.ajax
           })    // end change event
@@ -198,7 +193,6 @@
               str +=  "</li>";
             });
             uploadUL.append(str);
-            console.log("str", str)
           }
 
           $(".uploadResult ").on("click", "li button", function (e) {
@@ -218,8 +212,11 @@
           });
 
           $(".btn-dark").on("click", function (e) {
-            e.preventDefault();
+            if (!confirm("등록하시겠습니까?")) {
+              return false;
+            }
 
+            e.preventDefault();
             var str = "";
 
             $(".uploadResult li").each(function (i, obj) {
@@ -230,7 +227,6 @@
               str += "<input type='hidden' name='imageDTOList["+i+"].uuid' value='" + target.data('uuid') + "'>";
             });
 
-            // 태그들이 추가된 것을 확인한 후에 comment를 제거한다.
             $(".box").html(str);
             $("form").submit();
           })

@@ -42,7 +42,7 @@
             <label class="custom-file-label" data-browse="Browse"></label>
           </div>
         </div>
-        <div class="box">
+        <div class="box" id="imageBox">
 
         </div>
 
@@ -59,7 +59,8 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
-          <a th:href="@{/landers}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <!--          <a th:href="@{/heroes}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>-->
+          <a href="javascript:history.back();"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
 
@@ -74,7 +75,11 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
-        var fileV     = document.getElementById("imageBox").value;
+
+        // 이미지 첨부 여부 체크
+        const target = $("#imageBox")
+        const inputArr = target.find("input")
+        const inputCnt = inputArr.length;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -91,11 +96,21 @@
           $('#content').focus();
           return false;
         }
-        if (fileV == '') {
+        if (inputCnt < 3) {
           alert("이미지를 첨부해주세요.");
           $('#fileInput').focus();
           return false;
         }
+
+        // $(".modifyBtn").click(function (){
+        //   if (!confirm("수정하시겠습니까?")) {
+        //     return ;
+        //   }
+        //   actionForm
+        //           .attr("action", "/landers/modify")
+        //           .attr("method", "post")
+        //           .submit();
+        // });
       }
 
       // 파일 등록
@@ -152,11 +167,9 @@
             type: 'POST',
             dataType: 'json',
             success: function (result) {
-              console.log("result", result);
               showResult(result);
             },
             error: function (jqXHR, textStatus, errorThrown){
-              console.log("error", textStatus);
             }
           }); // $.ajax
         })    // end change event
@@ -183,9 +196,10 @@
           var ino = $(this).data("ino");
           var sno = $(this).data("sno");
 
-          alert(targetFile + " /// " + targetLi + " /// " + ino + " /// " + sno)
-
-          $.ajax({
+          if (confirm("첨부 이미지를 제거하시겠습니까?")) {
+            targetLi.remove();
+          }
+         /* $.ajax({
             url: '/landers/removeFile',
             data: {fileName: targetFile, ino: ino, sno: sno},
             dataType: 'text',
@@ -194,7 +208,7 @@
               alert(result)
               targetLi.remove();
             }
-          }); // $.ajax
+          }); // $.ajax*/
         });
         $("input[type='file']").change(function (e) {
           var formData = new FormData();
@@ -208,25 +222,32 @@
 
           $(".uploadResult li").each(function (i, obj) {
             var target = $(obj);
-            str += "<input type='hidden' name='imageDTOList["+i+"].imgName' value='" + target.data('name') + "'>";
-            str += "<input type='hidden' name='imageDTOList["+i+"].path' value='" + target.data('path') + "'>";
-            str += "<input type='hidden' name='imageDTOList["+i+"].uuid' value='" + target.data('uuid') + "'>";
+            str += "<input type='hidden' name='imageDTOList[" + i + "].imgName' value='" + target.data('name') + "'>";
+            str += "<input type='hidden' name='imageDTOList[" + i + "].path' value='" + target.data('path') + "'>";
+            str += "<input type='hidden' name='imageDTOList[" + i + "].uuid' value='" + target.data('uuid') + "'>";
           });
 
-          // 태그들이 추가된 것을 확인한 후에 comment를 제거한다.
+          if (!confirm("수정하시겠습니까?")) {
+            return false;
+          }
+          // $("form").attr("action", "/landers/modify")
+          //         .attr("method", "post")
+          //         .submit();
+
           $(".box").html(str);
           $("form").submit();
-        })
-
-        $(".modifyBtn").click(function (){
-          if (!confirm("수정하시겠습니까?")) {
-            return ;
-          }
-          actionForm
-                  .attr("action", "/landers/modify")
-                  .attr("method", "post")
-                  .submit();
         });
+
+        // $(".modifyBtn").click(function (){
+        //   validation_input();
+        //   if (!confirm("수정하시겠습니까?")) {
+        //     return ;
+        //   }
+        //   actionForm
+        //           .attr("action", "/landers/modify")
+        //           .attr("method", "post")
+        //           .submit();
+        // });
       });
     </script>
     </body>

@@ -59,13 +59,12 @@
 
         <div class="mt-4" style="text-align: center">
           <button type="button" class="btn btn-dark register-btn modifyBtn">수정</button>
-          <a th:href="@{/heroes}"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
+          <a href="javascript:history.back();"><button type="button" class="btn btn-outline-dark register-btn">취소</button></a>
         </div>
       </form>
 
     </div>
     <script th:inline="javascript">
-
       function validation_row(e) {
         e.value = e.value.replace(/[^A-Za-z]/ig, '')
       }
@@ -75,7 +74,11 @@
         var rowV      = document.getElementById("row").value;
         var numV      = document.getElementById("num").value;
         var contentV  = document.getElementById("content").value;
-        var fileV  = document.getElementById("imageBox").value;
+
+        // 이미지 첨부 여부 체크
+        const target = $("#imageBox")
+        const inputArr = target.find("input")
+        const inputCnt = inputArr.length;
 
         if (rowV == '') {
           alert("좌석(열)을 입력해주세요.");
@@ -92,7 +95,7 @@
           $('#content').focus();
           return false;
         }
-        if (fileV == '') {
+        if (inputCnt < 3) {
           alert("이미지를 첨부해주세요.");
           $('#fileInput').focus();
           return false;
@@ -184,23 +187,14 @@
           var ino = $(this).data("ino");
           var sno = $(this).data("sno");
 
-          alert(targetFile + " /// " + targetLi + " /// " + ino + " /// " + sno)
-
-          $.ajax({
-            url: '/heroes/removeFile',
-            data: {fileName: targetFile, ino: ino, sno: sno},
-            dataType: 'text',
-            type: 'POST',
-            success: function (result) {
-              alert(result)
-              targetLi.remove();
-            }
-          }); // $.ajax
+          if (confirm("첨부 이미지를 제거하시겠습니까?")) {
+            targetLi.remove();
+          }
         });
+
         $("input[type='file']").change(function (e) {
           var formData = new FormData();
         })
-
 
         $(".btn-dark").on("click", function (e) {
           e.preventDefault();
@@ -214,21 +208,13 @@
             str += "<input type='hidden' name='imageDTOList["+i+"].uuid' value='" + target.data('uuid') + "'>";
           });
 
-          // 태그들이 추가된 것을 확인한 후에 comment를 제거한다.
+          if (!confirm("수정하시겠습니까?")) {
+            return false;
+          }
+
           $(".box").html(str);
           $("form").submit();
         })
-
-
-        $(".modifyBtn").click(function (){
-          if (!confirm("수정하시겠습니까?")) {
-            return ;
-          }
-          actionForm
-                  .attr("action", "/heroes/modify")
-                  .attr("method", "post")
-                  .submit();
-        });
       });
     </script>
     </body>
