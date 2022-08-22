@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-    min-width: 1125px;
+    /*min-width: 1125px;*/
 }
 
 .cursor-default, .cursor-default:hover {

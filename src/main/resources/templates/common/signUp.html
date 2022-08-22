@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/header::header">
+</th:block>
+<body id="page-top" class="font-notosans width-400">
+  <div class="stadium-title mb-3">
+    <a th:href="@{main}">
+      <img class="img-fluid title-emblem m-auto" src="../assets/img/baseball.ico">
+    </a>
+    <div class="title-team m-auto">
+      <h1><a class="title-team-white" th:href="@{main}"></a></h1>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div class="font-notosans" style="margin: auto">
+      <h2 class="mt-5" style="text-align: center">회원가입</h2>
+<!--      <div class="alert alert-success"  id="alert-success">비밀번호가 일치합니다.</div>-->
+<!--      <div class="alert alert-danger"   id="alert-danger" >비밀번호가 일치하지 않습니다.</div>-->
+      <form th:action="@{/signup}" th:method="post" class="mt-5">
+        <div class="form-group mb-3" style="width: 300px">
+          <label>이메일 주소</label>
+          <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">작성한 EMAIL은 ID로 사용됩니다.</small>
+        </div>
+        <div class="form-group mb-3">
+          <label>닉네임</label>
+          <input type="text" name="nickname" class="form-control" placeholder="닉네임을 입력해주세요.">
+        </div>
+        <div class="form-group mb-3">
+          <label>비밀번호</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
+        </div>
+        <div class="form-group mb-5">
+          <label>비밀번호 확인</label>
+          <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인">
+          <small id="alert-danger"  style="color: red; font-weight: bold;">※ 비밀번호가 일치하지 않습니다.</small>
+          <small id="alert-success" style="color: #0f0f71; font-weight: bold;">※ 비밀번호가 일치합니다.</small>
+        </div>
+        <button type="submit" class="btn btn-warning signup">가입하기</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+  $(function(){
+    $("#alert-success").hide();
+    $("#alert-danger").hide();
+    $("input").keyup(function(){
+      var pwd1=$("#password").val();
+      var pwd2=$("#password2").val();
+      if(pwd1 != "" || pwd2 != ""){
+        if(pwd1 == pwd2){
+          $("#alert-success").show();
+          $("#alert-danger").hide();
+          $("#submit").removeAttr("disabled");
+        }else{
+          $("#alert-success").hide();
+          $("#alert-danger").show();
+          $("#submit").attr("disabled", "disabled");
+        }
+      }
+    });
+  });
+
+  $(".signup").on("click", function (e) {
+    if (!confirm("가입하시겠습니까?")) {
+      return false;
+    }
+    $("form").submit();
+  });
+</script>
+</html>
