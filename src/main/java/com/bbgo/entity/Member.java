@@ -3,6 +3,7 @@ package com.bbgo.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -20,4 +21,7 @@ public class Member extends BaseEntity {
     private String email;
     private String nickname;
     private String password;
+
+    private LocalDateTime regDate;  // 등록일
+    private LocalDateTime modDate;  // 수정일
 }

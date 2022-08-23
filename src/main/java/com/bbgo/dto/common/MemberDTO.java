@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,4 +16,7 @@ public class MemberDTO {
     private String email;
     private String nickname;
     private String password;
+
+    private LocalDateTime regDate;  // 등록일
+    private LocalDateTime modDate;  // 수정일
 }

@@ -32,6 +32,39 @@ body {
     text-decoration: underline;
 }
 
+.n-p-div {
+    border: 1px dotted lightgrey;
+    padding: 60px;
+}
+
+.n-p-input {
+    display: inline;
+    width: 30%;
+    height: 30px;
+    max-width: 180px;
+    font-size: 0.875em;
+}
+
+.login-input {
+    display: flex;
+    width: 500%;
+    height: 40px;
+    max-width: 180px;
+    font-size: 0.875em;
+}
+
+.center {
+    margin: auto;
+}
+.center-btn {
+    height: 30px;
+    width: 70px;
+    padding: 0px 15px;
+    font-size: small;
+    margin: auto;
+    display: inline-block;
+}
+
 /* FONT */
 .font-white {
     color: white;
