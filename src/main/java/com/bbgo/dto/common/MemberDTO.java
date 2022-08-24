@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class MemberDTO {
     private Long mno;
     private String email;
-    private String nickname;
+    private String name;
     private String password;
 
     private LocalDateTime regDate;  // 등록일

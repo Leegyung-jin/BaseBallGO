@@ -1,4 +1,4 @@
-package com.bbgo.service.signUpService;
+package com.bbgo.service.MemberService;
 
 import com.bbgo.dto.common.MemberDTO;
 import com.bbgo.entity.Member;
@@ -17,11 +17,13 @@ public interface MemberService {
         Member member = Member.builder()
                 .mno(memberDTO.getMno())
                 .email(memberDTO.getEmail())
-                .nickname(memberDTO.getNickname())
+                .name(memberDTO.getName())
                 .password(memberDTO.getPassword())
                 .build();
         entityMap.put("member", member);
 
         return entityMap;
     }
+
+    int checkEmail(String email);
 }

@@ -25,13 +25,15 @@ public class QMember extends EntityPathBase<Member> {
 
     public final NumberPath<Long> mno = createNumber("mno", Long.class);
 
-    public final DateTimePath<java.time.LocalDateTime> modDate = createDateTime("modDate", java.time.LocalDateTime.class);
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modDate = _super.modDate;
 
-    public final StringPath nickname = createString("nickname");
+    public final StringPath name = createString("name");
 
     public final StringPath password = createString("password");
 
-    public final DateTimePath<java.time.LocalDateTime> regDate = createDateTime("regDate", java.time.LocalDateTime.class);
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));

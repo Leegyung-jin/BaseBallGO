@@ -26,7 +26,6 @@ import java.net.URLDecoder;
 @RequestMapping("/bears")
 public class BearsController {
 
-//    private final BearsService bearsService;
     private final BearsService bearsService;
 
     @GetMapping(value = {"", "/"})

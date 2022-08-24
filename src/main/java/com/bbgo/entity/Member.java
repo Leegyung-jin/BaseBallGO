@@ -19,9 +19,7 @@ public class Member extends BaseEntity {
     private Long mno;
 
     private String email;
-    private String nickname;
+    private String name;
     private String password;
 
-    private LocalDateTime regDate;  // 등록일
-    private LocalDateTime modDate;  // 수정일
 }

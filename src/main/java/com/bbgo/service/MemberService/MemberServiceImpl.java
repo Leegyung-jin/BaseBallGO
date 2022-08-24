@@ -1,4 +1,4 @@
-package com.bbgo.service.signUpService;
+package com.bbgo.service.MemberService;
 
 import com.bbgo.dto.common.MemberDTO;
 import com.bbgo.entity.Member;
@@ -25,5 +25,12 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         return member.getMno();
+    }
+
+    @Override
+    public int checkEmail(String email) {
+        int result = memberRepository.checkEmail(email);
+        System.out.println("============================================ IMPL EMAIL= " + result);
+        return result;
     }
 }
