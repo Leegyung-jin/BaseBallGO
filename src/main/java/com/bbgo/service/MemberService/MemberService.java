@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface MemberService {
-
     Long signUp(MemberDTO dto);
 
     // entity객체를 DTO객체로 변환

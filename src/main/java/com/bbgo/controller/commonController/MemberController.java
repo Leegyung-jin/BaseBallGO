@@ -22,7 +22,6 @@ public class MemberController {
     @PostMapping("/checkEmail")
     @ResponseBody
     public int checkEmail(@RequestParam("email") String email) {
-        System.out.println("================================== email= " + email);
         int result = memberService.checkEmail(email);
         return result;
     }

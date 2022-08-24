@@ -4,11 +4,8 @@
 </th:block>
 <body id="page-top" class="font-notosans width-400">
   <div class="stadium-title mb-3">
-    <a th:href="@{main}">
-      <img class="img-fluid title-emblem m-auto" src="../assets/img/baseball.ico">
-    </a>
-    <div class="title-team m-auto">
-      <h1><a class="title-team-white" th:href="@{main}">BASEBALL GO</a></h1>
+    <div class="title-team" style="left: 5%">
+      <h5><a class="title-team-black" th:href="@{main}">BASEBALL GO</a></h5>
     </div>
   </div>
   <div style="display: flex">
@@ -18,11 +15,7 @@
         <div class="form-group mb-3" style="width: 300px">
           <label>이메일 주소</label>
           <div>
-            <input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요."
-             style="width: 75%; display: inline-block;" oninput = "checkEmail()">
-<!--             style="width: 75%; display: inline-block;">-->
-            <button type="button" class="btn btn-outline-info"
-             style="width: 23%; display: inline-block; margin: 0px; font-size: small; padding: 2px 5px">중복확인</button>
+            <input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요." oninput = "checkEmail()">
           </div>
           <small id="emailHelp" class="form-text text-muted" style="display: block">작성한 EMAIL은 ID로 사용됩니다.</small>
           <small class="checkId_1" style="color: #0f0f71; display: none">사용 가능한 이메일입니다.</small>
