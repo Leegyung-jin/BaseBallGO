@@ -18,13 +18,13 @@ public class MainController {
         return "/index";
     }
 
-    
+    // 구단별 경기장 선택
     @GetMapping("/stadium")
     public String stadium(Model model) {
         return "common/stadium";
     }
 
-    // 구단 정보 알아보기
+    // 구단 소개 알아보기
     @GetMapping("/team")
     public String team(Model model) {
         return "common/team";
