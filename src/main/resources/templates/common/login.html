@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/header::header">
+</th:block>
+<body id="page-top" class="font-notosans width-400">
+  <div class="stadium-title mb-3">
+    <div class="title-team" style="left: 5%">
+      <h5><a class="title-team-black" th:href="@{main}">BASEBALL GO</a></h5>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div class="font-notosans" style="margin: auto">
+      <h2 class="mt-5 font-dohyeon" style="text-align: center">로그인</h2>
+      <form th:action="@{/login}" th:method="post" class="mt-5" onsubmit="return validForm()">
+        <div th:if="${param.error}">
+          <div class="alert alert-danger">
+            사용자ID 또는 비밀번호를 확인해주세요.
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label>이메일</label>
+          <input type="text" name="username" id="username" class="form-control" placeholder="이메일을 입력해주세요.">
+        </div>
+        <div class="form-group mb-4">
+          <label>비밀번호</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
+        </div>
+        <div style="text-align: center">
+          <a th:href="@{/signup}"><button type="button" class="btn btn-outline-dark signup login-btn">회원가입</button></a>
+          <button type="submit" class="btn btn-dark signup login-btn">로그인</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+  function validForm() {
+    var usernameV  = document.getElementById('username').value;
+    var pwdV    = document.getElementById('password').value;
+
+    if (usernameV == '' || usernameV == null) {
+      alert('이메일을 입력해주세요.');
+      $('#username').focus();
+      return false;
+    }
+    if (pwdV == '' || pwdV == null) {
+      alert('비밀번호를 입력해주세요.');
+      $('#password').focus();
+      return false;
+    }
+  }
+
+  $(document).ready(function (e) {
+    $(".signup").on("click", function (e) {
+      $("form").submit();
+    });
+  });
+
+</script>
+</html>

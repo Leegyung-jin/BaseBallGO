@@ -10,7 +10,7 @@
   </div>
   <div style="display: flex">
     <div class="font-notosans" style="margin: auto">
-      <h2 class="mt-5" style="text-align: center">회원가입</h2>
+      <h2 class="mt-5 font-dohyeon" style="text-align: center">회원가입</h2>
       <form th:action="@{/signup}" th:method="post" class="mt-5" onsubmit="return validForm()">
         <div class="form-group mb-3" style="width: 300px">
           <label>이메일 주소</label>
@@ -35,16 +35,15 @@
           <label>비밀번호 확인</label>
           <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인">
         </div>
-        <button type="submit" class="btn btn-warning signup">가입하기</button>
+        <div style="text-align: center">
+          <button type="submit" class="btn btn-warning signup" style="display: inline-block">가입하기</button>
+        </div>
       </form>
     </div>
   </div>
 </body>
 <script type="text/javascript">
   function checkEmail() {
-  // $(function(){
-  //   $(".checkId_1").hide();
-  //   $(".checkId_2").hide();
     var email = $('#email').val();
     $.ajax({
       url: '/checkEmail',

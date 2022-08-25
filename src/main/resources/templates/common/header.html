@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:fragment="header">
   <head>
     <meta charset="utf-8" />
@@ -38,8 +38,15 @@
         <li class="sidebar-nav-item"><a th:href="@{/stadium}">구단선택</a></li>
         <li class="sidebar-nav-item"><a href="#">맛집찾기</a></li>
         <li class="sidebar-nav-item"><a href="#">문의하기</a></li>
-        <li class="sidebar-nav-item"><a th:href="@{/signup}">회원가입</a></li>
-        <li class="sidebar-nav-item"><a href="#">로그인</a></li>
+        <li sec:authorize="isAnonymous()" class="sidebar-nav-item">
+          <a th:href="@{/signup}">회원가입</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+          <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+        </li>
+        <!--  현재 로그인된 사용자의 name을 가져온다 -->
+        <li class="sidebar-nav-item"><a sec:authentication="name"></a></li>
       </ul>
     </nav>
 

@@ -41,7 +41,9 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public void login(){
-        log.info("login...........");
+    public String login(Model model){
+        return "common/login";
     }
+
+
 }

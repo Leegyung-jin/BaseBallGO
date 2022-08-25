@@ -2,11 +2,12 @@ package com.bbgo.service.MemberService;
 
 import com.bbgo.dto.common.MemberDTO;
 import com.bbgo.entity.Member;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public interface MemberService {
+public interface MemberService{
     Long signUp(MemberDTO dto);
 
     // entity객체를 DTO객체로 변환
@@ -15,7 +16,7 @@ public interface MemberService {
 
         Member member = Member.builder()
                 .mno(memberDTO.getMno())
-                .email(memberDTO.getEmail())
+                .username(memberDTO.getUsername())
                 .name(memberDTO.getName())
                 .password(memberDTO.getPassword())
                 .build();
