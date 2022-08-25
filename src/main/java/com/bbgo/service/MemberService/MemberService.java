@@ -15,7 +15,7 @@ public interface MemberService{
 
         Member member = Member.builder()
                 .mno(memberDTO.getMno())
-                .email(memberDTO.getEmail())
+                .username(memberDTO.getUsername())
                 .name(memberDTO.getName())
                 .password(memberDTO.getPassword())
                 .build();

@@ -21,8 +21,8 @@ public class MemberController {
 
     @PostMapping("/checkEmail")
     @ResponseBody
-    public int checkEmail(@RequestParam("email") String email) {
-        int result = memberService.checkEmail(email);
+    public int checkEmail(@RequestParam("username") String username) {
+        int result = memberService.checkEmail(username);
         return result;
     }
 

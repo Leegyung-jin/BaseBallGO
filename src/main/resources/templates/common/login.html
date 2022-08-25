@@ -11,7 +11,7 @@
   <div style="display: flex">
     <div class="font-notosans" style="margin: auto">
       <h2 class="mt-5 font-dohyeon" style="text-align: center">로그인</h2>
-      <form th:action="@{/login}" th:method="post" class="mt-5" onsubmit="return validForm()">
+      <form action="/login" method="post" class="mt-5" onsubmit="return validForm()">
         <div th:if="${param.error}">
           <div class="alert alert-danger">
             사용자ID 또는 비밀번호를 확인해주세요.

@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int checkEmail(String email) {
-        int result = memberRepository.checkEmail(email);
+    public int checkEmail(String username) {
+        int result = memberRepository.checkEmail(username);
         return result;
     }
 }

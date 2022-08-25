@@ -15,7 +15,7 @@
         <div class="form-group mb-3" style="width: 300px">
           <label>이메일 주소</label>
           <div>
-            <input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요." oninput = "checkEmail()">
+            <input type="email" name="username" id="username" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요." oninput = "checkEmail()">
           </div>
           <small id="emailHelp" class="form-text text-muted" style="display: block">작성한 EMAIL은 ID로 사용됩니다.</small>
           <small class="checkId_1" style="color: #0f0f71; display: none">사용 가능한 이메일입니다.</small>
@@ -44,11 +44,11 @@
 </body>
 <script type="text/javascript">
   function checkEmail() {
-    var email = $('#email').val();
+    var email = $('#username').val();
     $.ajax({
       url: '/checkEmail',
       type: 'post',
-      data: {email: email},
+      data: {username: email},
       success: function (result) {
         if(result == 0) {
           $('.checkId_1').show();
@@ -56,7 +56,7 @@
         } else {
           $('.checkId_1').hide();
           $('.checkId_2').show();
-          $('#email').val('');
+          $('#username').val('');
         }
       },
       error: function () {
@@ -87,7 +87,7 @@
   });
 
   function validForm() {
-    var emailV  = document.getElementById('email').value;
+    var emailV  = document.getElementById('username').value;
     var nameV   = document.getElementById('name').value;
     var pwdV    = document.getElementById('password').value;
     var pwd2V   = document.getElementById('password2').value;
@@ -95,7 +95,7 @@
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     if (regEmail.test(emailV) === false) {
       alert('올바른 이메일 형식이 아닙니다.');
-      $('#email').focus();
+      $('#username').focus();
       return false;
     }
     if (nameV == '' || nameV == null) {
@@ -113,6 +113,11 @@
       $('#password2').focus();
       return false;
     }
+    if (pwdV != pwd2V) {
+      alert('비밀번호가 일치하지 않습니다.');
+      $('#password').focus();
+      return false;
+    }
   }
 
   $(document).ready(function (e) {
@@ -120,8 +125,6 @@
       if (!confirm("가입하시겠습니까?")) {
         return false;
       }
-      $("form").submit();
-      alert("회원가입이 완료되었습니다. 메인 페이지로 이동합니다.")
     });
   });
 
