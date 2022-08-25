@@ -35,6 +35,9 @@ public interface LandersService {
                 .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
+                .username(stadiumDTO.getUsername())
+                .name(stadiumDTO.getName())
+                .mno(stadiumDTO.getMno())
                 .build();
         entityMap.put("stadium", stadium);
         List<StadiumImageDTO> imageDTOList = stadiumDTO.getImageDTOList();
@@ -65,10 +68,12 @@ public interface LandersService {
                 .section(entity.getSection())
                 .row(entity.getRow())
                 .num(entity.getNum())
-                .email("member1@aa.com")
-                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
+                // Member
+                .username(entity.getUsername())
+                .name(entity.getName())
+                .mno(entity.getMno())
                 .build();
 
         return stadiumDTO;
@@ -83,10 +88,12 @@ public interface LandersService {
                 .row(entity.getRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
-                .email("member1@aa.com")
-                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
+                // Member
+                .username(entity.getUsername())
+                .name(entity.getName())
+                .mno(entity.getMno())
                 .build();
 
         List<StadiumImageDTO> stadiumImageDTOList = stadiumImages.stream().map(stadiumImage -> {

@@ -62,8 +62,8 @@ public interface TigersService {
                 .section(entity.getSection())
                 .row(entity.getRow())
                 .num(entity.getNum())
-                .email("member1@aa.com")
-                .nickname("ADMIN")
+//                .email("member1@aa.com")
+//                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
                 .build();
@@ -80,8 +80,8 @@ public interface TigersService {
                 .row(entity.getRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
-                .email("member1@aa.com")
-                .nickname("ADMIN")
+//                .email("member1@aa.com")
+//                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
                 .build();
