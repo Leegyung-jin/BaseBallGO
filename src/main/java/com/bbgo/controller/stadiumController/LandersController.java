@@ -1,5 +1,6 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.service.stadiumService.LandersService;
@@ -8,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,10 +43,10 @@ public class LandersController {
     }
 
     @PostMapping("/register")
-    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes) {
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
 
         log.info("C>stadiumDTO: " + stadiumDTO);
-        Long sno = landersService.register(stadiumDTO);
+        Long sno = landersService.register(stadiumDTO, principalDetail);
         log.info("SNO: " + sno);
         redirectAttributes.addFlashAttribute("msg", sno);
 

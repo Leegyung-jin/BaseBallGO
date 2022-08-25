@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -19,7 +20,7 @@ public interface LandersService {
     PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO);
 
     // Register
-    Long register(StadiumDTO dto);
+    Long register(StadiumDTO dto, PrincipalDetail principalDetail);
 
     StadiumDTO getStadium(Long sno);
 

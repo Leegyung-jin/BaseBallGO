@@ -58,6 +58,7 @@
                 <th>구역</th>
                 <th>좌석</th>
                 <th>등록일</th>
+                <th>작성자</th>
             </tr>
             </thead>
             <tbody>
@@ -73,6 +74,7 @@
                 </td>
                 <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                <td>[[${dto.name}]]</td>
             </tr>
             <tr th:unless="${result.totalElements}" class="text-center">
                 <td colspan="5">검색 결과가 없습니다.</a></td>

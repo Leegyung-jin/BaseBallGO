@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -82,19 +83,13 @@ public class LandersServiceImpl implements LandersService{
     // Register
     @Transactional
     @Override
-    public Long register(StadiumDTO stadiumDTO) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = memberRepository.findByEmail(authentication.getName());
-        String name  = memberRepository.findByName(authentication.getName());
-        Long mno     = memberRepository.findByMno(authentication.getName());
+    public Long register(StadiumDTO stadiumDTO, PrincipalDetail principalDetail) {
 
-        stadiumDTO.setUsername(email);
-        stadiumDTO.setName(name);
-        stadiumDTO.setMno(mno);
+        stadiumDTO.setUsername(principalDetail.getUsername());
+        stadiumDTO.setName(principalDetail.getName());
+        stadiumDTO.setMno(principalDetail.getMno());
 
-        System.out.println("=================== before: " + stadiumDTO);
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
-        System.out.println("=================== after: " + stadiumDTO);
         LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
         List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
 

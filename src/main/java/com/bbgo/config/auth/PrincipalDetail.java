@@ -6,13 +6,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 public class PrincipalDetail implements UserDetails {
     private Member member;
 
     public PrincipalDetail(Member member) {
         this.member = member;
+    }
+
+    public Long getMno() {
+        return member.getMno();
+    }
+
+    public String getName() {
+        return member.getName();
     }
 
     @Override
