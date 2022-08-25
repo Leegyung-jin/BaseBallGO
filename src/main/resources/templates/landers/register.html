@@ -199,13 +199,13 @@
             var targetFile = $(this).data("file");
             var targetLi = $(this).closest("li");
 
+            alert("targetFile- " + targetFile + ", targetLi- " + JSON.stringify(targetLi));
             $.ajax({
               url: '/removeFile',
               data: {fileName: targetFile},
               dataType: 'text',
               type: 'POST',
               success: function (result) {
-                alert(result)
                 targetLi.remove();
               }
             }); // $.ajax

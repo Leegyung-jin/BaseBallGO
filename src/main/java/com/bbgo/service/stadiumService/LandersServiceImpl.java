@@ -7,7 +7,6 @@ import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.stadium.LandersStadium;
 import com.bbgo.entity.stadium.LandersStadiumImage;
 import com.bbgo.entity.stadium.QLandersStadium;
-import com.bbgo.repository.MemberRepository;
 import com.bbgo.repository.stadiumRepository.LandersStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.LandersStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -17,8 +16,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,8 +29,6 @@ public class LandersServiceImpl implements LandersService{
 
     private final LandersStadiumRepository stadiumRepository;
     private final LandersStadiumImageRepository imageRepository;
-
-    private final MemberRepository memberRepository;
 
     @Override
     public PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO) {
@@ -79,7 +74,6 @@ public class LandersServiceImpl implements LandersService{
         return booleanBuilder;
     }
 
-
     // Register
     @Transactional
     @Override
@@ -106,7 +100,21 @@ public class LandersServiceImpl implements LandersService{
     public StadiumDTO getStadium(Long sno) {
         List<Object[]> result = stadiumRepository.getStadiumWithAll(sno);
         LandersStadium stadium = (LandersStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
-        List<LandersStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+        List<LandersStadiumImage> stadiumImageList = new ArrayList<>();           // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            LandersStadiumImage stadiumImage = (LandersStadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+    @Override
+    public StadiumDTO getModify(long sno, Long mno) {
+        List<Object[]> result = stadiumRepository.getStadiumWithAll(sno);
+        LandersStadium stadium = (LandersStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<LandersStadiumImage> stadiumImageList = new ArrayList<>();           // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
             LandersStadiumImage stadiumImage = (LandersStadiumImage) arr[1];
@@ -118,7 +126,6 @@ public class LandersServiceImpl implements LandersService{
 
     @Override
     public StadiumDTO entitiesToDTO(LandersStadium stadium, List<LandersStadiumImage> stadiumImages) {
-        System.out.println("================== entitiesToDTO= " + stadium);
         return LandersService.super.entitiesToDTO(stadium, stadiumImages);
     }
 
@@ -145,5 +152,11 @@ public class LandersServiceImpl implements LandersService{
                 });
             }
         }
+    }
+
+    @Override
+    public void delete(Long sno) {
+        imageRepository.deleteBySno(sno);
+        stadiumRepository.deleteById(sno);
     }
 }

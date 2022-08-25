@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
@@ -44,34 +41,41 @@ public class LandersController {
 
     @PostMapping("/register")
     public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
-
-        log.info("C>stadiumDTO: " + stadiumDTO);
+        log.info("stadiumDTO: " + stadiumDTO);
         Long sno = landersService.register(stadiumDTO, principalDetail);
-        log.info("SNO: " + sno);
         redirectAttributes.addFlashAttribute("msg", sno);
 
         return "redirect:/landers";
     }
 
-    @GetMapping({"/read", "/modify"})
-    public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
+    @GetMapping({"/read"})
+    public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("sno: " + sno);
         StadiumDTO stadiumDTO = landersService.getStadium(sno);
         model.addAttribute("dto", stadiumDTO);
+    }
+
+    @GetMapping({ "/modify"})
+    public String modify(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail, RedirectAttributes redirectAttributes, long mno) {
+        Long principalMno = principalDetail.getMno();
+        if (mno == principalMno) {
+            StadiumDTO stadiumDTO = landersService.getModify(sno, mno);
+            model.addAttribute("dto", stadiumDTO);
+            return "/landers/modify";
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
+            return "/common/errorPage";
+        }
     }
 
     @PostMapping("/modify")
     public String modify(StadiumDTO dto,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          RedirectAttributes redirectAttributes){
-        log.info("post modify............................................");
         log.info("dto: " + dto);
-
         landersService.modify(dto);
-
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("sno", dto.getSno());
-
         return "redirect:/landers/read";
     }
 
@@ -97,5 +101,13 @@ public class LandersController {
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/delete")
+    public String delete(Long sno, RedirectAttributes redirectAttributes) {
+        log.info("sno: " + sno);
+        landersService.delete(sno);
+        redirectAttributes.addFlashAttribute("msg", sno);
+        return "redirect:/landers";
     }
 }

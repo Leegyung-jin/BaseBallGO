@@ -23,6 +23,7 @@ public interface LandersService {
     Long register(StadiumDTO dto, PrincipalDetail principalDetail);
 
     StadiumDTO getStadium(Long sno);
+    StadiumDTO getModify(long sno, Long mno);
 
     // entity객체를 DTO객체로 변환
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
@@ -111,4 +112,6 @@ public interface LandersService {
     }
 
     void modify(StadiumDTO dto);
+
+    void delete(Long sno);
 }

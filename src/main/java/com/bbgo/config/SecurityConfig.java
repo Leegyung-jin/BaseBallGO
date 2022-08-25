@@ -10,12 +10,14 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)  // 특정 주소 접근 시 권한/인증 체크
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private PrincipalDetailService principalDetailService;
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder getPasswordEncoder() {
@@ -24,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/assets/**", "/font/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/assets/**", "/font/**", "/stadiumImg/**");
     }
 
     @Autowired
@@ -54,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")     //로그인 페이지를 우리가 만든 페이지로 등록한다.
                     .loginProcessingUrl("/login")   //스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인해줌(서비스의 loadUserByName로 알아서)
                     .defaultSuccessUrl("/")        //정상일떄
+//                    .successHandler(authenticationSuccessHandler)
 
             // 로그아웃
             .and().logout()
