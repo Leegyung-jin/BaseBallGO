@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/assets/**", "/font/**");
     }
 
     @Autowired
@@ -36,9 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()           // csrf토큰 비활성화(csrf토큰이 있어야 접근 가능)
                 .authorizeRequests()    // 인가 요청이 오면
-                    .antMatchers("/js/**","/css/**","/assets/**", "/font/**"    // 해당 경로는
-                            , "/", "/signup", "/login", "/stadium", "/team"
-
+                    .antMatchers(   // 해당 경로는
+                           "/", "/main", "/signup", "/login", "/stadium", "/team", "/checkEmail"  
                             , "/landers", "/landers/", "/landers/read"
                     )
                     .permitAll()        // 접근을 허용

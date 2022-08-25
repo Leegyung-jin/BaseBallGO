@@ -19,7 +19,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/checkEmail")
+    @PostMapping(value = "/checkEmail")
     @ResponseBody
     public int checkEmail(@RequestParam("username") String username) {
         int result = memberService.checkEmail(username);
@@ -44,6 +44,4 @@ public class MemberController {
     public String login(Model model){
         return "common/login";
     }
-
-
 }

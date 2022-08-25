@@ -15,7 +15,8 @@
         <div class="form-group mb-3" style="width: 300px">
           <label>이메일 주소</label>
           <div>
-            <input type="email" name="username" id="username" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요." oninput = "checkEmail()">
+            <input type="email" name="username" id="username" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요."
+                   oninput = "checkEmail(this)">
           </div>
           <small id="emailHelp" class="form-text text-muted" style="display: block">작성한 EMAIL은 ID로 사용됩니다.</small>
           <small class="checkId_1" style="color: #0f0f71; display: none">사용 가능한 이메일입니다.</small>
@@ -43,6 +44,26 @@
   </div>
 </body>
 <script type="text/javascript">
+  $(function(){
+    $("#alert-success").hide();
+    $("#alert-danger").hide();
+    $("input").keyup(function(){
+      var pwd1=$("#password").val();
+      var pwd2=$("#password2").val();
+      if(pwd1 != "" || pwd2 != ""){
+        if(pwd1 == pwd2){
+          $("#alert-success").show();
+          $("#alert-danger").hide();
+          $("#submit").removeAttr("disabled");
+        }else{
+          $("#alert-success").hide();
+          $("#alert-danger").show();
+          $("#submit").attr("disabled", "disabled");
+        }
+      }
+    });
+  });
+
   function checkEmail() {
     var email = $('#username').val();
     $.ajax({
@@ -64,27 +85,6 @@
       }
     })
   }
-
-
-  $(function(){
-    $("#alert-success").hide();
-    $("#alert-danger").hide();
-    $("input").keyup(function(){
-      var pwd1=$("#password").val();
-      var pwd2=$("#password2").val();
-      if(pwd1 != "" || pwd2 != ""){
-        if(pwd1 == pwd2){
-          $("#alert-success").show();
-          $("#alert-danger").hide();
-          $("#submit").removeAttr("disabled");
-        }else{
-          $("#alert-success").hide();
-          $("#alert-danger").show();
-          $("#submit").attr("disabled", "disabled");
-        }
-      }
-    });
-  });
 
   function validForm() {
     var emailV  = document.getElementById('username').value;

@@ -15,4 +15,13 @@ public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslP
     int checkEmail(@Param("username") String username);
 
     Optional<Member> findByUsername(@Param("username") String username);
+
+    @Query("SELECT m.username FROM Member m WHERE m.username =:username")
+    String findByEmail(@Param("username") String username);
+
+    @Query("SELECT m.name FROM Member m WHERE m.username =:username")
+    String findByName(@Param("username") String username);
+
+    @Query("SELECT m.mno FROM Member m WHERE m.username =:username")
+    Long findByMno(@Param("username") String name);
 }

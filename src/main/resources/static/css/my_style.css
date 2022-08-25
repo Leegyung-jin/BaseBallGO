@@ -126,6 +126,15 @@ body {
 }
 
 /* 공통 모듈 */
+.sidebar-title {
+    color: #050a24f2 !important;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.sidebar-profile {
+    background-color: rgba(255, 255, 255, 0.27);
+    color: #050a24f2 !important;
+}
 .search-group {
     width: 100%;
 }
