@@ -10,6 +10,6 @@ import java.util.Optional;
 
 
 public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
-    @Query("SELECT COUNT(m.username) FROM Member m WHERE m.username =:email")
+    @Query("SELECT COUNT(m.email) FROM Member m WHERE m.email =:email")
     int checkEmail(@Param("email") String email);
 }

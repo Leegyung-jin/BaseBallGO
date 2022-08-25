@@ -2,7 +2,6 @@ package com.bbgo.service.MemberService;
 
 import com.bbgo.dto.common.MemberDTO;
 import com.bbgo.entity.Member;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public interface MemberService{
 
         Member member = Member.builder()
                 .mno(memberDTO.getMno())
-                .username(memberDTO.getUsername())
+                .email(memberDTO.getEmail())
                 .name(memberDTO.getName())
                 .password(memberDTO.getPassword())
                 .build();
