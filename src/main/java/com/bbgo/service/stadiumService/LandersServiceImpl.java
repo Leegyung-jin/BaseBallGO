@@ -6,6 +6,7 @@ import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.entity.stadium.LandersStadium;
 import com.bbgo.entity.stadium.LandersStadiumImage;
 import com.bbgo.entity.stadium.QLandersStadium;
+import com.bbgo.repository.MemberRepository;
 import com.bbgo.repository.stadiumRepository.LandersStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.LandersStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -15,6 +16,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,8 @@ public class LandersServiceImpl implements LandersService{
 
     private final LandersStadiumRepository stadiumRepository;
     private final LandersStadiumImageRepository imageRepository;
+
+    private final MemberRepository memberRepository;
 
     @Override
     public PageResultDTO<StadiumDTO, LandersStadium> getList(PageRequestDTO requestDTO) {
@@ -78,7 +83,18 @@ public class LandersServiceImpl implements LandersService{
     @Transactional
     @Override
     public Long register(StadiumDTO stadiumDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = memberRepository.findByEmail(authentication.getName());
+        String name  = memberRepository.findByName(authentication.getName());
+        Long mno     = memberRepository.findByMno(authentication.getName());
+
+        stadiumDTO.setUsername(email);
+        stadiumDTO.setName(name);
+        stadiumDTO.setMno(mno);
+
+        System.out.println("=================== before: " + stadiumDTO);
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+        System.out.println("=================== after: " + stadiumDTO);
         LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
         List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
 

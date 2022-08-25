@@ -22,8 +22,9 @@ public class StadiumDTO {
     private Integer num;        // Stadium 좌석(번호)
     private String content;     // 내용
 
-    private String nickname;    // Member 닉네임
-    private String email;       // Member email
+    private String username;    // Member email
+    private String name;        // Member 닉네임
+    private Long mno;           // Member Mno
 
     @Builder.Default
     private List<StadiumImageDTO> imageDTOList = new ArrayList<>();

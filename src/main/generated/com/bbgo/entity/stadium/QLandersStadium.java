@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,8 +17,6 @@ public class QLandersStadium extends EntityPathBase<LandersStadium> {
 
     private static final long serialVersionUID = 1586765253L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QLandersStadium landersStadium = new QLandersStadium("landersStadium");
 
     public final QSBaseEntity _super = new QSBaseEntity(this);
@@ -28,10 +25,12 @@ public class QLandersStadium extends EntityPathBase<LandersStadium> {
 
     public final StringPath content = createString("content");
 
-    public final com.bbgo.entity.QMember member;
+    public final NumberPath<Long> mno = createNumber("mno", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modDate = _super.modDate;
+
+    public final StringPath name = createString("name");
 
     public final NumberPath<Integer> num = createNumber("num", Integer.class);
 
@@ -44,25 +43,18 @@ public class QLandersStadium extends EntityPathBase<LandersStadium> {
 
     public final NumberPath<Long> sno = createNumber("sno", Long.class);
 
+    public final StringPath username = createString("username");
+
     public QLandersStadium(String variable) {
-        this(LandersStadium.class, forVariable(variable), INITS);
+        super(LandersStadium.class, forVariable(variable));
     }
 
     public QLandersStadium(Path<? extends LandersStadium> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QLandersStadium(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QLandersStadium(PathMetadata metadata, PathInits inits) {
-        this(LandersStadium.class, metadata, inits);
-    }
-
-    public QLandersStadium(Class<? extends LandersStadium> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new com.bbgo.entity.QMember(forProperty("member")) : null;
+        super(LandersStadium.class, metadata);
     }
 
 }

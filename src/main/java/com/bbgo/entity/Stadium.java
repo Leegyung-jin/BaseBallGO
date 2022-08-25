@@ -17,14 +17,13 @@ public class Stadium extends BaseEntity{
     private Long sno;
 
     private String base;
-//    private Integer base;
     private String section;
     private String row;
     private Integer num;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Member member;
 
     public void changeRow(String row){
         this.row = row;
