@@ -51,6 +51,7 @@ public class LandersController {
     @GetMapping({"/read"})
     public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("sno: " + sno);
+        Long principalMno = principalDetail.getMno();
         StadiumDTO stadiumDTO = landersService.getStadium(sno, principalDetail);
         model.addAttribute("dto", stadiumDTO);
     }
@@ -59,15 +60,16 @@ public class LandersController {
     public String modify(long sno,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
-                         RedirectAttributes redirectAttributes, long mno) {
+                         RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-        if (mno == principalMno) {
-            StadiumDTO stadiumDTO = landersService.getModify(sno, mno);
-            model.addAttribute("dto", stadiumDTO);
-            return "/landers/modify";
-        } else {
-            redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
-            return "/common/errorPage";
+
+        StadiumDTO stadiumDTO = landersService.getModify(sno);
+            if (stadiumDTO.getMno() == principalMno) {
+                model.addAttribute("dto", stadiumDTO);
+                return "/landers/modify";
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
+                return "/common/errorPage";
         }
     }
 
