@@ -43,7 +43,8 @@ public class HeroesController {
     }
 
     @PostMapping("/register")
-    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("stadiumDTO: " + stadiumDTO);
         Long sno = heroesService.register(stadiumDTO, principalDetail);
         redirectAttributes.addFlashAttribute("msg", sno);
