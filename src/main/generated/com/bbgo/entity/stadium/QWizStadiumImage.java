@@ -50,7 +50,7 @@ public class QWizStadiumImage extends EntityPathBase<WizStadiumImage> {
 
     public QWizStadiumImage(Class<? extends WizStadiumImage> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.wizStadium = inits.isInitialized("wizStadium") ? new QWizStadium(forProperty("wizStadium"), inits.get("wizStadium")) : null;
+        this.wizStadium = inits.isInitialized("wizStadium") ? new QWizStadium(forProperty("wizStadium")) : null;
     }
 
 }

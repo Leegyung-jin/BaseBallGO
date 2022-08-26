@@ -1,5 +1,6 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.service.stadiumService.WizService;
@@ -8,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,21 +42,35 @@ public class WizController {
     }
 
     @PostMapping("/register")
-    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes) {
-
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("stadiumDTO: " + stadiumDTO);
-        Long sno = wizService.register(stadiumDTO);
+        Long sno = wizService.register(stadiumDTO, principalDetail);
         redirectAttributes.addFlashAttribute("msg", sno);
 
         return "redirect:/wiz";
     }
 
-    @GetMapping({"/read", "/modify"})
+    @GetMapping({"/read"})
     public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
         StadiumDTO stadiumDTO = wizService.getStadium(sno);
         model.addAttribute("dto", stadiumDTO);
     }
 
+    @GetMapping({ "/modify"})
+    public String modify(long sno,
+                         @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                         Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
+                         RedirectAttributes redirectAttributes, long mno) {
+        Long principalMno = principalDetail.getMno();
+        if (mno == principalMno) {
+            StadiumDTO stadiumDTO = wizService.getModify(sno, mno);
+            model.addAttribute("dto", stadiumDTO);
+            return "/wiz/modify";
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
+            return "/common/errorPage";
+        }
+    }
 
     @PostMapping("/modify")
     public String modify(StadiumDTO dto,
@@ -62,7 +78,6 @@ public class WizController {
                          RedirectAttributes redirectAttributes){
         log.info("dto: " + dto);
         wizService.modify(dto);
-
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("sno", dto.getSno());
 
@@ -91,5 +106,13 @@ public class WizController {
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/delete")
+    public String delete(Long sno, RedirectAttributes redirectAttributes) {
+        log.info("sno: " + sno);
+        wizService.delete(sno);
+        redirectAttributes.addFlashAttribute("msg", sno);
+        return "redirect:/wiz";
     }
 }

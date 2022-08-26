@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -80,7 +81,11 @@ public class WizServiceImpl implements WizService {
     // Register
     @Transactional
     @Override
-    public Long register(StadiumDTO stadiumDTO) {
+    public Long register(StadiumDTO stadiumDTO, PrincipalDetail principalDetail) {
+        stadiumDTO.setUsername(principalDetail.getUsername());
+        stadiumDTO.setName(principalDetail.getName());
+        stadiumDTO.setMno(principalDetail.getMno());
+
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         WizStadium stadium = (WizStadium) entityMap.get("stadium");
         List<WizStadiumImage> stadiumImageList = (List<WizStadiumImage>) entityMap.get("imgList");
@@ -109,6 +114,21 @@ public class WizServiceImpl implements WizService {
     }
 
     @Override
+    public StadiumDTO getModify(long sno, Long mno) {
+        List<Object[]> result = repository.getStadiumWithAll(sno);
+        WizStadium stadium = (WizStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<WizStadiumImage> stadiumImageList = new ArrayList<>();          // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            WizStadiumImage stadiumImage = (WizStadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+
+    @Override
     public StadiumDTO entitiesToDTO(WizStadium stadium, List<WizStadiumImage> stadiumImages) {
         return WizService.super.entitiesToDTO(stadium, stadiumImages);
     }
@@ -134,5 +154,11 @@ public class WizServiceImpl implements WizService {
                 imageRepository.save(stadiumImage);
             });
         }
+    }
+
+    @Override
+    public void delete(Long sno) {
+        imageRepository.deleteBySno(sno);
+        repository.deleteById(sno);
     }
 }
