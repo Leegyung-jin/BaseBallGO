@@ -22,7 +22,7 @@ public interface LandersService {
     // Register
     Long register(StadiumDTO dto, PrincipalDetail principalDetail);
 
-    StadiumDTO getStadium(Long sno);
+    StadiumDTO getStadium(Long sno, PrincipalDetail principalDetail);
     StadiumDTO getModify(long sno, Long mno);
 
     // entity객체를 DTO객체로 변환

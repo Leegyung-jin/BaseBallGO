@@ -51,7 +51,7 @@ public class LandersController {
     @GetMapping({"/read"})
     public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("sno: " + sno);
-        StadiumDTO stadiumDTO = landersService.getStadium(sno);
+        StadiumDTO stadiumDTO = landersService.getStadium(sno, principalDetail);
         model.addAttribute("dto", stadiumDTO);
     }
 
