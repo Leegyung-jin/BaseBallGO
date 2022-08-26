@@ -1,5 +1,6 @@
 package com.bbgo.controller.stadiumController;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.team.StadiumDTO;
 import com.bbgo.service.stadiumService.TigersService;
@@ -8,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,8 @@ public class TigersController {
 
     private final TigersService tigersService;
 
-    @GetMapping(value = {"", "/"})    public String list(PageRequestDTO pageRequestDTO, Model model) {
+    @GetMapping(value = {"", "/"})
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
         log.info("list......................" + pageRequestDTO);
         model.addAttribute("result", tigersService.getList(pageRequestDTO));
         return "tigers/list";
@@ -40,21 +43,35 @@ public class TigersController {
     }
 
     @PostMapping("/register")
-    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes) {
-
-        log.info("C>stadiumDTO: " + stadiumDTO);
-        Long sno = tigersService.register(stadiumDTO);
-        log.info("SNO: " + sno);
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+        log.info("stadiumDTO: " + stadiumDTO);
+        Long sno = tigersService.register(stadiumDTO, principalDetail);
         redirectAttributes.addFlashAttribute("msg", sno);
 
         return "redirect:/tigers";
     }
 
-    @GetMapping({"/read", "/modify"})
+    @GetMapping({"/read"})
     public void read(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
         log.info("sno: " + sno);
         StadiumDTO stadiumDTO = tigersService.getStadium(sno);
         model.addAttribute("dto", stadiumDTO);
+    }
+
+    @GetMapping({ "/modify"})
+    public String modify(long sno,
+                         @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                         Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
+                         RedirectAttributes redirectAttributes, long mno) {
+        Long principalMno = principalDetail.getMno();
+        if (mno == principalMno) {
+            StadiumDTO stadiumDTO = tigersService.getModify(sno, mno);
+            model.addAttribute("dto", stadiumDTO);
+            return "/tigers/modify";
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
+            return "/common/errorPage";
+        }
     }
 
     @PostMapping("/modify")
@@ -62,9 +79,7 @@ public class TigersController {
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          RedirectAttributes redirectAttributes){
         log.info("dto: " + dto);
-
         tigersService.modify(dto);
-
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("sno", dto.getSno());
 
@@ -93,5 +108,13 @@ public class TigersController {
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/delete")
+    public String delete(Long sno, RedirectAttributes redirectAttributes) {
+        log.info("sno: " + sno);
+        tigersService.delete(sno);
+        redirectAttributes.addFlashAttribute("msg", sno);
+        return "redirect:/tigers";
     }
 }

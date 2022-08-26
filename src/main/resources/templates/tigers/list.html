@@ -23,7 +23,7 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value=""                         th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value=""                         th:selected="${pageRequestDTO.keyword == null}">전체 구역</option>
                 <option value="K9석"                     th:selected="${pageRequestDTO.keyword == 'K9석'}">K9석</option>
                 <option value="K8석"                     th:selected="${pageRequestDTO.keyword == 'K8석'}">K8석</option>
                 <option value="K5석"                     th:selected="${pageRequestDTO.keyword == 'K5석'}">K5석</option>
@@ -54,6 +54,7 @@
             <th>구역</th>
             <th>좌석</th>
             <th>등록일</th>
+            <th>작성자</th>
         </tr>
         </thead>
         <tbody>
@@ -69,6 +70,7 @@
             </td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            <td>[[${dto.name}]]</td>
         </tr>
         <tr th:unless="${result.totalElements}" class="text-center">
             <td colspan="5">검색 결과가 없습니다.</a></td>

@@ -50,6 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             , "/heroes", "/heroes/"
                             , "/twins", "/twins/"
                             , "/wiz", "/wiz/"
+                            , "/tigers", "/tigers/"
+                            , "/bears", "/bears/"
+                            , "/giants", "/giants/"
+                            , "/dinos", "/dinos/"
+                            , "/lions", "/lions/"
+                            , "/eagles", "/eagles/"
                     )
                     .permitAll()        // 접근을 허용
                     .anyRequest()       // 이외의 요청은
