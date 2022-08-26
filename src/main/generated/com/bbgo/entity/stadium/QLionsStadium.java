@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,8 +17,6 @@ public class QLionsStadium extends EntityPathBase<LionsStadium> {
 
     private static final long serialVersionUID = 1538627273L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QLionsStadium lionsStadium = new QLionsStadium("lionsStadium");
 
     public final QSBaseEntity _super = new QSBaseEntity(this);
@@ -28,10 +25,12 @@ public class QLionsStadium extends EntityPathBase<LionsStadium> {
 
     public final StringPath content = createString("content");
 
-    public final com.bbgo.entity.QMember member;
+    public final NumberPath<Long> mno = createNumber("mno", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modDate = _super.modDate;
+
+    public final StringPath name = createString("name");
 
     public final NumberPath<Integer> num = createNumber("num", Integer.class);
 
@@ -44,25 +43,18 @@ public class QLionsStadium extends EntityPathBase<LionsStadium> {
 
     public final NumberPath<Long> sno = createNumber("sno", Long.class);
 
+    public final StringPath username = createString("username");
+
     public QLionsStadium(String variable) {
-        this(LionsStadium.class, forVariable(variable), INITS);
+        super(LionsStadium.class, forVariable(variable));
     }
 
     public QLionsStadium(Path<? extends LionsStadium> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QLionsStadium(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QLionsStadium(PathMetadata metadata, PathInits inits) {
-        this(LionsStadium.class, metadata, inits);
-    }
-
-    public QLionsStadium(Class<? extends LionsStadium> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new com.bbgo.entity.QMember(forProperty("member")) : null;
+        super(LionsStadium.class, metadata);
     }
 
 }
