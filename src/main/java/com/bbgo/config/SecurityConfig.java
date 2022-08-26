@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                            "/", "/main", "/signup", "/login", "/stadium", "/team", "/checkEmail"  
                             , "/landers", "/landers/"
                             , "/heroes", "/heroes/"
+                            , "/twins", "/twins  /"
                     )
                     .permitAll()        // 접근을 허용
                     .anyRequest()       // 이외의 요청은

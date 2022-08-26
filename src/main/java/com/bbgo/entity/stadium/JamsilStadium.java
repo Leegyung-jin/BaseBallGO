@@ -23,8 +23,9 @@ public class JamsilStadium extends SBaseEntity {
     private Integer num;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private String username;
+    private String name;
+    private Long mno;
 
     public void changeRow(String row){
         this.row = row;

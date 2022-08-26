@@ -55,7 +55,6 @@ public class HeroesServiceImpl implements HeroesService{
         BooleanExpression expression = qHeroesStadium.sno.gt(0L);
         booleanBuilder.and(expression);
 
-
         if (type == null || type.trim().length() == 0) {
             return booleanBuilder;
         }
