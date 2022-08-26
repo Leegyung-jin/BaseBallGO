@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -15,8 +16,10 @@ import java.util.stream.Collectors;
 public interface EaglesService {
 
     PageResultDTO<StadiumDTO, EaglesStadium> getList(PageRequestDTO requestDTO);
-    Long register(StadiumDTO dto);
+    Long register(StadiumDTO dto, PrincipalDetail principalDetail);
+
     StadiumDTO getStadium(Long sno);
+    StadiumDTO getModify(long sno, Long mno);
 
     // entity객체를 DTO객체로 변환
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
@@ -30,6 +33,9 @@ public interface EaglesService {
                 .row(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
+                .username(stadiumDTO.getUsername())
+                .name(stadiumDTO.getName())
+                .mno(stadiumDTO.getMno())
                 .build();
         entityMap.put("stadium", stadium);
         List<StadiumImageDTO> imageDTOList = stadiumDTO.getImageDTOList();
@@ -56,10 +62,11 @@ public interface EaglesService {
                 .section(entity.getSection())
                 .row(entity.getRow())
                 .num(entity.getNum())
-//                .email("member1@aa.com")
-//                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
+                .username(entity.getUsername())
+                .name(entity.getName())
+                .mno(entity.getMno())
                 .build();
         return stadiumDTO;
     }
@@ -73,10 +80,11 @@ public interface EaglesService {
                 .row(entity.getRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
-//                .email("member1@aa.com")
-//                .nickname("ADMIN")
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
+                .username(entity.getUsername())
+                .name(entity.getName())
+                .mno(entity.getMno())
                 .build();
 
         List<StadiumImageDTO> stadiumImageDTOList = stadiumImages.stream().map(stadiumImage -> {
@@ -92,4 +100,6 @@ public interface EaglesService {
     }
 
     void modify(StadiumDTO dto);
+
+    void delete(Long sno);
 }

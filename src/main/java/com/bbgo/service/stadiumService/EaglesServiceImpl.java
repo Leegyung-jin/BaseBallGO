@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -73,7 +74,11 @@ public class EaglesServiceImpl implements EaglesService {
 
     @Transactional
     @Override
-    public Long register(StadiumDTO stadiumDTO) {
+    public Long register(StadiumDTO stadiumDTO, PrincipalDetail principalDetail) {
+        stadiumDTO.setUsername(principalDetail.getUsername());
+        stadiumDTO.setName(principalDetail.getName());
+        stadiumDTO.setMno(principalDetail.getMno());
+
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         EaglesStadium stadium = (EaglesStadium) entityMap.get("stadium");
         List<EaglesStadiumImage> stadiumImageList = (List<EaglesStadiumImage>) entityMap.get("imgList");
@@ -92,6 +97,20 @@ public class EaglesServiceImpl implements EaglesService {
         List<Object[]> result = repository.getStadiumWithAll(sno);
         EaglesStadium stadium = (EaglesStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
         List<EaglesStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            EaglesStadiumImage stadiumImage = (EaglesStadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+    @Override
+    public StadiumDTO getModify(long sno, Long mno) {
+        List<Object[]> result = repository.getStadiumWithAll(sno);
+        EaglesStadium stadium = (EaglesStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<EaglesStadiumImage> stadiumImageList = new ArrayList<>();          // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
             EaglesStadiumImage stadiumImage = (EaglesStadiumImage) arr[1];
@@ -127,5 +146,11 @@ public class EaglesServiceImpl implements EaglesService {
                 imageRepository.save(stadiumImage);
             });
         }
+    }
+
+    @Override
+    public void delete(Long sno) {
+        imageRepository.deleteBySno(sno);
+        repository.deleteById(sno);
     }
 }
