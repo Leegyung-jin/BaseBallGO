@@ -23,20 +23,20 @@
                     <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
                 </select>
                 <select class="form-control section-drop small" name="keyword">
-                    <option value="" th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
-                    <option value="스카이박스" th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
-                    <option value="R.d-club" th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
-                    <option value="1층" th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
-                    <option value="2층" th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
-                    <option value="내야커플석" th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
-                    <option value="외야커플석" th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
-                    <option value="다크" th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
-                    <option value="버건디석" th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
-                    <option value="3층" th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
-                    <option value="4층" th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
-                    <option value="휠체어" th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
-                    <option value="외야일반석" th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
-                    <option value="외야패밀리석" th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
+                    <option value=""            th:selected="${pageRequestDTO.keyword == null}">전체 구역</option>
+                    <option value="스카이박스"  th:selected="${pageRequestDTO.keyword == '스카이박스'}">스카이박스</option>
+                    <option value="R.d-club"    th:selected="${pageRequestDTO.keyword == 'R.d-club'}" >R.d-club</option>
+                    <option value="1층"         th:selected="${pageRequestDTO.keyword == '1층'}">1층 테이블석</option>
+                    <option value="2층"         th:selected="${pageRequestDTO.keyword == '2층'}">2층 테이블석</option>
+                    <option value="내야커플석"  th:selected="${pageRequestDTO.keyword == '내야커플석'}">내야커플석</option>
+                    <option value="외야커플석"  th:selected="${pageRequestDTO.keyword == '외야커플석'}">외야커플석</option>
+                    <option value="다크"        th:selected="${pageRequestDTO.keyword == '다크'}">다크버건디석</option>
+                    <option value="버건디석"    th:selected="${pageRequestDTO.keyword == '버건디석'}">버건디석</option>
+                    <option value="3층"         th:selected="${pageRequestDTO.keyword == '3층'}">3층 지정석</option>
+                    <option value="4층"         th:selected="${pageRequestDTO.keyword == '4층'}">4층 지정석</option>
+                    <option value="휠체어"      th:selected="${pageRequestDTO.keyword == '휠체어'}">휠체어석</option>
+                    <option value="외야일반석"  th:selected="${pageRequestDTO.keyword == '외야일반석'}">외야일반석</option>
+                    <option value="외야패밀리석"th:selected="${pageRequestDTO.keyword == '외야패밀리석'}">외야패밀리석</option>
                 </select>
                 <button class="btn btn-outline-secondary btn-search" type="button">검색</button>
             </div>

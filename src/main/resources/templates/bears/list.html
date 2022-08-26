@@ -23,7 +23,7 @@
                 <option value="3"   th:selected="${pageRequestDTO.type == '3'}">3루</option>
             </select>
             <select class="form-control section-drop small" name="keyword">
-                <option value=""           th:selected="${pageRequestDTO.keyword == null}">구역 선택</option>
+                <option value=""           th:selected="${pageRequestDTO.keyword == null}">전체 구역</option>
                 <option value="프리미엄"   th:selected="${pageRequestDTO.keyword == '프리미엄'}">중앙석(프리미엄/VIP)</option>
                 <option value="테이블"     th:selected="${pageRequestDTO.keyword == '테이블'}" >테이블석</option>
                 <option value="익사이팅존" th:selected="${pageRequestDTO.keyword == '익사이팅존'}">익사이팅존</option>
@@ -48,6 +48,7 @@
             <th>구역</th>
             <th>좌석</th>
             <th>등록일</th>
+            <th>작성자</th>
         </tr>
         </thead>
         <tbody>
@@ -71,6 +72,7 @@
             <td th:if="${dto.section} == '그린(외야)'" ><a class="list-text" th:href="@{/bears/read(sno = ${dto.sno}, page= ${result.page})}">외야일반석</a></td>
             <td>[[${dto.row}]]열 [[${dto.num}]]번</td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            <td>[[${dto.name}]]</td>
         </tr>
         <tr th:unless="${result.totalElements}" class="text-center">
             <td colspan="5">검색 결과가 없습니다.</a></td>
