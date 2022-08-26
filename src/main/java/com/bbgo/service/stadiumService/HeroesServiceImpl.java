@@ -1,11 +1,10 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
-import com.bbgo.entity.stadium.HeroesStadium;
-import com.bbgo.entity.stadium.HeroesStadiumImage;
-import com.bbgo.entity.stadium.QHeroesStadium;
+import com.bbgo.entity.stadium.*;
 import com.bbgo.repository.stadiumRepository.HeroesStadiumImageRepository;
 import com.bbgo.repository.stadiumRepository.HeroesStadiumRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -82,15 +81,16 @@ public class HeroesServiceImpl implements HeroesService{
     // Register
     @Transactional
     @Override
-    public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
+    public Long register(StadiumDTO stadiumDTO, PrincipalDetail principalDetail) {
+        stadiumDTO.setUsername(principalDetail.getUsername());
+        stadiumDTO.setName(principalDetail.getName());
+        stadiumDTO.setMno(principalDetail.getMno());
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         HeroesStadium stadium = (HeroesStadium) entityMap.get("stadium");
         List<HeroesStadiumImage> stadiumImageList = (List<HeroesStadiumImage>) entityMap.get("imgList");
 
         repository.save(stadium);
-
 
         if (stadiumImageList != null && stadiumImageList.size() > 0) {
             stadiumImageList.forEach(stadiumImage -> {
@@ -106,6 +106,20 @@ public class HeroesServiceImpl implements HeroesService{
         List<Object[]> result = repository.getStadiumWithAll(sno);
         HeroesStadium stadium = (HeroesStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
         List<HeroesStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            HeroesStadiumImage stadiumImage = (HeroesStadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+    @Override
+    public StadiumDTO getModify(long sno, Long mno) {
+        List<Object[]> result = repository.getStadiumWithAll(sno);
+        HeroesStadium stadium = (HeroesStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<HeroesStadiumImage> stadiumImageList = new ArrayList<>();          // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
             HeroesStadiumImage stadiumImage = (HeroesStadiumImage) arr[1];
@@ -141,5 +155,11 @@ public class HeroesServiceImpl implements HeroesService{
                 imageRepository.save(stadiumImage);
             });
         }
+    }
+
+    @Override
+    public void delete(Long sno) {
+        imageRepository.deleteBySno(sno);
+        repository.deleteById(sno);
     }
 }

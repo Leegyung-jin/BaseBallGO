@@ -87,13 +87,15 @@
       });
 
       $("#btn-delete").on("click", function (e) {
+        if (!confirm("삭제하시겠습니까?")) {
+          return false;
+        }
         var targetFile = $(".readImg").data("file");
         var targetLi = $(".readImg").closest("li");
 
         // targerFile: 실제 파일 이름
         // targetLi  : 파일 List
       })
-
     </script>
   </th:block>
 </th:block>

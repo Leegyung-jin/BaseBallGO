@@ -46,7 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()    // 인가 요청이 오면
                     .antMatchers(   // 해당 경로는
                            "/", "/main", "/signup", "/login", "/stadium", "/team", "/checkEmail"  
-                            , "/landers", "/landers/", "/landers/read"
+                            , "/landers", "/landers/"
+                            , "/heroes", "/heroes/"
                     )
                     .permitAll()        // 접근을 허용
                     .anyRequest()       // 이외의 요청은

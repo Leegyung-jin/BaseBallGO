@@ -56,7 +56,10 @@ public class LandersController {
     }
 
     @GetMapping({ "/modify"})
-    public String modify(long sno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model, @AuthenticationPrincipal PrincipalDetail principalDetail, RedirectAttributes redirectAttributes, long mno) {
+    public String modify(long sno,
+                         @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                         Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
+                         RedirectAttributes redirectAttributes, long mno) {
         Long principalMno = principalDetail.getMno();
         if (mno == principalMno) {
             StadiumDTO stadiumDTO = landersService.getModify(sno, mno);

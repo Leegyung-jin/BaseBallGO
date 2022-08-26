@@ -84,8 +84,6 @@
         var contentV  = document.getElementById("content").value;
         var fileV     = document.getElementById("fileInput").value;
 
-        alert(baseV)
-
         if (sectionV == '') {
           alert("구역을 선택해주세요.");
           $('#section').focus();
@@ -160,7 +158,6 @@
           }
 
           for (var value of formData.values()) {
-            console.log(value)
           }
 
           // 실제 업로드 부분
@@ -173,7 +170,6 @@
             type: 'POST',
             dataType: 'json',
             success: function (result) {
-              console.log("result", result);
               showResult(result);
             },
             error: function (jqXHR, textStatus, errorThrown){
@@ -196,7 +192,6 @@
             str +=  "</li>";
           });
           uploadUL.append(str);
-          console.log("str", str)
         }
 
         $(".uploadResult ").on("click", "li button", function (e) {
@@ -209,7 +204,6 @@
             dataType: 'text',
             type: 'POST',
             success: function (result) {
-              alert(result)
               targetLi.remove();
             }
           }); // $.ajax
