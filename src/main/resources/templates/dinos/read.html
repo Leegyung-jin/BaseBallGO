@@ -39,10 +39,19 @@
         </div>
 
         <div class="mt-4" style="text-align: center">
-          <a th:href="@{/dinos/modify(sno = ${dto.sno}, page= ${requestDTO.page})}">
-            <button type="button" class="btn btn-dark register-btn">수정</button>
-          </a>
-          <a th:href="@{/dinos}"><button type="button" class="btn btn-outline-dark register-btn">목록</button></a>
+          <div sec:authorize="isAuthenticated()">
+            <div th:if="${dto.username == #authentication.principal.username}">
+              <a th:href="@{/dinos/modify(sno = ${dto.sno}, page= ${requestDTO.page}, mno = ${dto.mno})}"><button type="button" class="btn btn-dark register-btn">수정</button></a>
+              <form th:action="@{/dinos/delete(sno = ${dto.sno})}" th:method="post" style="display: contents;">
+                <input type="hidden" name="_method" th:value="delete">
+                <button class="btn btn-outline-danger register-btn" id="btn-delete">삭제</button>
+              </form>
+              <a th:href="@{/dinos}"><button type="button" class="btn btn-outline-dark register-btn">목록</button></a>
+            </div>
+          </div>
+          <div th:unless="${dto.username == #authentication.principal.username}">
+            <a th:href="@{/dinos}"><button type="button" class="btn btn-outline-dark register-btn">목록</button></a>
+          </div>
         </div>
 
         <!-- IMG modal -->
@@ -75,6 +84,12 @@
           $('.imageModal .modal-body').html("<img style='width:100%' src='/display?fileName=" + file + "&size=1'>")
           $(".imageModal").modal("show");
         })
+      });
+
+      $("#btn-delete").on("click", function (e) {
+        if (!confirm("삭제하시겠습니까?")) {
+          return false;
+        }
       });
     </script>
   </th:block>

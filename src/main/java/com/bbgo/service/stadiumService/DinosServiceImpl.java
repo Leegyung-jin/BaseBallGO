@@ -1,5 +1,6 @@
 package com.bbgo.service.stadiumService;
 
+import com.bbgo.config.auth.PrincipalDetail;
 import com.bbgo.dto.common.PageRequestDTO;
 import com.bbgo.dto.common.PageResultDTO;
 import com.bbgo.dto.team.StadiumDTO;
@@ -79,8 +80,10 @@ public class DinosServiceImpl implements DinosService {
     // Register
     @Transactional
     @Override
-    public Long register(StadiumDTO stadiumDTO) {
-        log.info("SI>stadiumDTO: " + stadiumDTO);
+    public Long register(StadiumDTO stadiumDTO, PrincipalDetail principalDetail) {
+        stadiumDTO.setUsername(principalDetail.getUsername());
+        stadiumDTO.setName(principalDetail.getName());
+        stadiumDTO.setMno(principalDetail.getMno());
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
         DinosStadium stadium = (DinosStadium) entityMap.get("stadium");
@@ -100,6 +103,20 @@ public class DinosServiceImpl implements DinosService {
         List<Object[]> result = repository.getStadiumWithAll(sno);
         DinosStadium stadium = (DinosStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
         List<DinosStadiumImage> stadiumImageList = new ArrayList<>();    // 영화의 이미지 개수만큼 MovieImage가 필요하다.
+
+        result.forEach(arr -> {
+            DinosStadiumImage stadiumImage = (DinosStadiumImage) arr[1];
+            stadiumImageList.add(stadiumImage);
+        });
+
+        return entitiesToDTO(stadium, stadiumImageList);
+    }
+
+    @Override
+    public StadiumDTO getModify(long sno, Long mno) {
+        List<Object[]> result = repository.getStadiumWithAll(sno);
+        DinosStadium stadium = (DinosStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
+        List<DinosStadiumImage> stadiumImageList = new ArrayList<>();          // 영화의 이미지 개수만큼 MovieImage가 필요하다.
 
         result.forEach(arr -> {
             DinosStadiumImage stadiumImage = (DinosStadiumImage) arr[1];
@@ -135,5 +152,11 @@ public class DinosServiceImpl implements DinosService {
                 imageRepository.save(stadiumImage);
             });
         }
+    }
+
+    @Override
+    public void delete(Long sno) {
+        imageRepository.deleteBySno(sno);
+        repository.deleteById(sno);
     }
 }
