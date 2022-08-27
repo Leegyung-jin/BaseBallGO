@@ -24,7 +24,7 @@ public interface HeroesService {
     Long register(StadiumDTO dto, PrincipalDetail principalDetail);
 
     StadiumDTO getStadium(Long sno);
-    StadiumDTO getModify(long sno, Long mno);
+    StadiumDTO getModify(long sno);
 
     // entity객체를 DTO객체로 변환
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {

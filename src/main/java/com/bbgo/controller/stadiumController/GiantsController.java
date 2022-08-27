@@ -61,10 +61,10 @@ public class GiantsController {
     public String modify(long sno,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
-                         RedirectAttributes redirectAttributes, long mno) {
+                         RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-        if (mno == principalMno) {
-            StadiumDTO stadiumDTO = giantsService.getModify(sno, mno);
+        StadiumDTO stadiumDTO = giantsService.getModify(sno);
+        if (stadiumDTO.getMno() == principalMno) {
             model.addAttribute("dto", stadiumDTO);
             return "/giants/modify";
         } else {

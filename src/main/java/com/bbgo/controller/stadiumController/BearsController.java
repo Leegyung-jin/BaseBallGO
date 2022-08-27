@@ -42,7 +42,8 @@ public class BearsController {
     }
 
     @PostMapping("/register")
-    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+    public String register(StadiumDTO stadiumDTO, RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("stadiumDTO: " + stadiumDTO);
         Long sno = bearsService.register(stadiumDTO, principalDetail);
         redirectAttributes.addFlashAttribute("msg", sno);
@@ -60,10 +61,10 @@ public class BearsController {
     public String modify(long sno,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
-                         RedirectAttributes redirectAttributes, long mno) {
+                         RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-        if (mno == principalMno) {
-            StadiumDTO stadiumDTO = bearsService.getModify(sno, mno);
+        StadiumDTO stadiumDTO = bearsService.getModify(sno);
+        if (stadiumDTO.getMno() == principalMno) {
             model.addAttribute("dto", stadiumDTO);
             return "/bears/modify";
         } else {

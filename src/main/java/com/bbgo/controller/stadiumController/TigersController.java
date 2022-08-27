@@ -62,10 +62,10 @@ public class TigersController {
     public String modify(long sno,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
-                         RedirectAttributes redirectAttributes, long mno) {
+                         RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-        if (mno == principalMno) {
-            StadiumDTO stadiumDTO = tigersService.getModify(sno, mno);
+        StadiumDTO stadiumDTO = tigersService.getModify(sno);
+        if (stadiumDTO.getMno() == principalMno) {
             model.addAttribute("dto", stadiumDTO);
             return "/tigers/modify";
         } else {

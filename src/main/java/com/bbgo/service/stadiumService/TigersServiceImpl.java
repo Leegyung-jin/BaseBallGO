@@ -113,7 +113,7 @@ public class TigersServiceImpl implements TigersService {
     }
 
     @Override
-    public StadiumDTO getModify(long sno, Long mno) {
+    public StadiumDTO getModify(long sno) {
         List<Object[]> result = repository.getStadiumWithAll(sno);
         TigersStadium stadium = (TigersStadium) result.get(0)[0];               // Movie 엔티티는 가장 앞에 존재한다. - 모든 Row가 동일한 값
         List<TigersStadiumImage> stadiumImageList = new ArrayList<>();          // 영화의 이미지 개수만큼 MovieImage가 필요하다.

@@ -62,14 +62,13 @@ public class LandersController {
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
                          RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-
         StadiumDTO stadiumDTO = landersService.getModify(sno);
-            if (stadiumDTO.getMno() == principalMno) {
-                model.addAttribute("dto", stadiumDTO);
-                return "/landers/modify";
-            } else {
-                redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
-                return "/common/errorPage";
+        if (stadiumDTO.getMno() == principalMno) {
+            model.addAttribute("dto", stadiumDTO);
+            return "/landers/modify";
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "접근할 수 없습니다.");
+            return "/common/errorPage";
         }
     }
 

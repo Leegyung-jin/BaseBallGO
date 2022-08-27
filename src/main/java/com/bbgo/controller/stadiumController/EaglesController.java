@@ -60,10 +60,10 @@ public class EaglesController {
     public String modify(long sno,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          Model model, @AuthenticationPrincipal PrincipalDetail principalDetail,
-                         RedirectAttributes redirectAttributes, long mno) {
+                         RedirectAttributes redirectAttributes) {
         Long principalMno = principalDetail.getMno();
-        if (mno == principalMno) {
-            StadiumDTO stadiumDTO = eaglesService.getModify(sno, mno);
+        StadiumDTO stadiumDTO = eaglesService.getModify(sno);
+        if (stadiumDTO.getMno() == principalMno) {
             model.addAttribute("dto", stadiumDTO);
             return "/eagles/modify";
         } else {

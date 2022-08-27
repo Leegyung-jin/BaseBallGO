@@ -41,7 +41,7 @@
         <div class="mt-4" style="text-align: center">
           <div sec:authorize="isAuthenticated()">
             <div th:if="${dto.username == #authentication.principal.username}">
-              <a th:href="@{/lions/modify(sno = ${dto.sno}, page= ${requestDTO.page}, mno = ${dto.mno})}"><button type="button" class="btn btn-dark register-btn">수정</button></a>
+              <a th:href="@{/lions/modify(sno = ${dto.sno}, page= ${requestDTO.page})}"><button type="button" class="btn btn-dark register-btn">수정</button></a>
               <form th:action="@{/lions/delete(sno = ${dto.sno})}" th:method="post" style="display: contents;">
                 <input type="hidden" name="_method" th:value="delete">
                 <button class="btn btn-outline-danger register-btn" id="btn-delete">삭제</button>
