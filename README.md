@@ -19,4 +19,4 @@
 <br><br>
 
 ### 📚 Notion 바로가기
-<a href="https://cautious-venom-66e.notion.site/63eeffa782904d1fa14ad6d3f254e463?v=ad714e80f9274116b5abbe348eb1ed00/"><img src="https://img.shields.io/badge/BaseBallGO-000000?style=flat-square&logo=Notion&logoColor=white&link=https://cautious-venom-66e.notion.site/63eeffa782904d1fa14ad6d3f254e463?v=ad714e80f9274116b5abbe348eb1ed00/"/></a>
+<a href="https://cautious-venom-66e.notion.site/f50ba24d0cfc4547affb20a3c75e2d65?v=266a0f8822ac401d9e7a4dbb0621e8c9"><img src="https://img.shields.io/badge/BaseBallGO-000000?style=flat-square&logo=Notion&logoColor=white&link=https://cautious-venom-66e.notion.site/63eeffa782904d1fa14ad6d3f254e463?v=ad714e80f9274116b5abbe348eb1ed00/"/></a>
