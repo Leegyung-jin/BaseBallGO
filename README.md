@@ -11,8 +11,8 @@
 
 ### 💻 기능
 - [Spring Security를 이용한 회원가입](https://bameh.tistory.com/190)
-- Spring Security를 이용한 로그인
-- 게시글 조회
+- [Spring Security를 이용한 로그인](https://bameh.tistory.com/191)
+- [게시글 조회](https://bameh.tistory.com/192)
 - 게시글 검색
 - 게시글 등록(이미지 등록 및 미리보기)
 - 게시글 수정
