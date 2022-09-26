@@ -10,7 +10,8 @@
 <br><br>
 
 ### 💻 기능
-- Spring Security를 이용한 회원가입, 로그인
+- [Spring Security를 이용한 회원가입](https://bameh.tistory.com/190)
+- Spring Security를 이용한 로그인
 - 게시글 조회
 - 게시글 검색
 - 게시글 등록(이미지 등록 및 미리보기)
