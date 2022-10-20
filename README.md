@@ -13,8 +13,8 @@
 - [Spring Security를 이용한 회원가입](https://bameh.tistory.com/190)
 - [Spring Security를 이용한 로그인](https://bameh.tistory.com/191)
 - [게시글 조회](https://bameh.tistory.com/192)
-- 게시글 검색
-- 게시글 등록(이미지 등록 및 미리보기)
+- [게시글 검색](https://bameh.tistory.com/243)
+- [게시글 등록(이미지 등록 및 미리보기)](https://bameh.tistory.com/244)
 - 게시글 수정
 - 게시글 삭제
 <br><br>
