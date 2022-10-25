@@ -15,8 +15,8 @@
 - [게시글 조회](https://bameh.tistory.com/192)
 - [게시글 검색](https://bameh.tistory.com/243)
 - [게시글 등록(이미지 등록 및 미리보기)](https://bameh.tistory.com/244)
-- 게시글 수정
-- 게시글 삭제
+- [게시글 수정](https://bameh.tistory.com/248)
+- [게시글 삭제](https://bameh.tistory.com/249)
 <br><br>
 
 ### 📚 Notion 바로가기
