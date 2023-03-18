@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lombok.extern.log4j.Log4j2;
+
 public interface LandersService {
 
     // List
@@ -29,12 +31,13 @@ public interface LandersService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
-        String upperRow = stadiumDTO.getRows().toUpperCase();
+        String upperRow = stadiumDTO.getSRow().toUpperCase();
+
         LandersStadium stadium = LandersStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .rows(upperRow)
+                .sRow(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .username(stadiumDTO.getUsername())
@@ -68,7 +71,7 @@ public interface LandersService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .rows(entity.getRows())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
@@ -87,7 +90,7 @@ public interface LandersService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .rows(entity.getRows())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
                 .regDate(entity.getRegDate())

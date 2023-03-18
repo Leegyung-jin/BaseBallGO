@@ -136,7 +136,7 @@ public class LandersServiceImpl implements LandersService{
         if(result.isPresent()){
             LandersStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRows().toUpperCase();
+            String upperRow = stadiumDTO.getSRow().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());

@@ -138,7 +138,7 @@ public class GiantsServiceImpl implements GiantsService {
         if(result.isPresent()){
             GiantsStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRow().toUpperCase();
+            String upperRow = stadiumDTO.getSRow().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());

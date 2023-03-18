@@ -29,12 +29,12 @@ public interface TigersService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
-        String upperRow = stadiumDTO.getRow().toUpperCase();
+        String upperRow = stadiumDTO.getSRow().toUpperCase();
         TigersStadium stadium = TigersStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(upperRow)
+                .sRow(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .username(stadiumDTO.getUsername())
@@ -65,7 +65,7 @@ public interface TigersService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .row(entity.getRow())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
@@ -83,7 +83,7 @@ public interface TigersService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .row(entity.getRow())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
                 .regDate(entity.getRegDate())

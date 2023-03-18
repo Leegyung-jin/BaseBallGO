@@ -19,7 +19,7 @@ public class GiantsStadium extends SBaseEntity {
 
     private String base;
     private String section;
-    private String row;
+    private String sRow;
     private Integer num;
     private String content;
 
@@ -28,7 +28,7 @@ public class GiantsStadium extends SBaseEntity {
     private Long mno;
 
     public void changeRow(String row){
-        this.row = row;
+        this.sRow = row;
     }
     public void changeNum(Integer num){
         this.num = num;

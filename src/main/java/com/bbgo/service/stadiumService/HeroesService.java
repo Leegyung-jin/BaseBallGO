@@ -30,12 +30,12 @@ public interface HeroesService {
     default Map<String, Object> dtoToEntity(StadiumDTO stadiumDTO) {
         Map<String, Object> entityMap = new HashMap<>();
 
-        String upperRow = stadiumDTO.getRow().toUpperCase();
+        String upperRow = stadiumDTO.getSRow().toUpperCase();
         HeroesStadium stadium = HeroesStadium.builder()
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(upperRow)
+                .sRow(upperRow)
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .username(stadiumDTO.getUsername())
@@ -69,7 +69,7 @@ public interface HeroesService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .row(entity.getRow())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .regDate(entity.getRegDate())
                 .modDate(entity.getModDate())
@@ -87,7 +87,7 @@ public interface HeroesService {
                 .sno(entity.getSno())
                 .base(entity.getBase())
                 .section(entity.getSection())
-                .row(entity.getRow())
+                .sRow(entity.getSRow())
                 .num(entity.getNum())
                 .content(entity.getContent())
                 .regDate(entity.getRegDate())

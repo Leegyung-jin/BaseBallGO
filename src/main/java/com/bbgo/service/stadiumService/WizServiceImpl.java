@@ -139,7 +139,7 @@ public class WizServiceImpl implements WizService {
         if(result.isPresent()){
             WizStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRow().toUpperCase();
+            String upperRow = stadiumDTO.getSRow().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());

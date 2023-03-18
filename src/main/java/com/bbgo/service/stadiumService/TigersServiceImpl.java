@@ -137,7 +137,7 @@ public class TigersServiceImpl implements TigersService {
         if(result.isPresent()){
             TigersStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRow().toUpperCase();
+            String upperRow = stadiumDTO.getSRow().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());

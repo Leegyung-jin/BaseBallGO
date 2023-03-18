@@ -18,7 +18,7 @@ public class StadiumDTO {
     private Long sno;           // Stadium number
     private String base;       // 1루/3루
     private String section;     // Stadium 구역
-    private String rows;         // Stadium 좌석(열)
+    private String sRow;         // Stadium 좌석(열)
     private Integer num;        // Stadium 좌석(번호)
     private String content;     // 내용
 

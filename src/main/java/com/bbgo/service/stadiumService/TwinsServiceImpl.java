@@ -135,7 +135,7 @@ public class TwinsServiceImpl implements TwinsService{
         if(result.isPresent()){
             JamsilStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRow().toUpperCase();
+            String upperRow = stadiumDTO.getSRow().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());

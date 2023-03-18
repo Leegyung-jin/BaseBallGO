@@ -19,7 +19,7 @@ public class TwinsStadium extends SBaseEntity {
 
     private String base;
     private String section;
-    private String row;
+    private String sRow;
     private Integer num;
     private String content;
 
@@ -27,7 +27,7 @@ public class TwinsStadium extends SBaseEntity {
     private Member member;
 
     public void changeRow(String row){
-        this.row = row;
+        this.sRow = row;
     }
     public void changeNum(Integer num){
         this.num = num;
