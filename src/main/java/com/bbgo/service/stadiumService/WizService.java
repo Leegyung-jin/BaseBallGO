@@ -33,7 +33,7 @@ public interface WizService {
                 .sno(stadiumDTO.getSno())
                 .base(stadiumDTO.getBase())
                 .section(stadiumDTO.getSection())
-                .row(stadiumDTO.getRow())
+                .row(stadiumDTO.getRows())
                 .num(stadiumDTO.getNum())
                 .content(stadiumDTO.getContent())
                 .username(stadiumDTO.getUsername())

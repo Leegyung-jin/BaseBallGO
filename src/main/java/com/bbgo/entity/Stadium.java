@@ -18,7 +18,7 @@ public class Stadium extends BaseEntity{
 
     private String base;
     private String section;
-    private String row;
+    private String rows;
     private Integer num;
     private String content;
 
@@ -26,7 +26,7 @@ public class Stadium extends BaseEntity{
 //    private Member member;
 
     public void changeRow(String row){
-        this.row = row;
+        this.rows = row;
     }
     public void changeNum(Integer num){
         this.num = num;

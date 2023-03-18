@@ -87,6 +87,7 @@ public class LandersServiceImpl implements LandersService{
         LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
         List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
 
+        log.info("============ stadium: " + stadium);
         stadiumRepository.save(stadium);
 
         stadiumImageList.forEach(stadiumImage -> {
@@ -135,7 +136,7 @@ public class LandersServiceImpl implements LandersService{
         if(result.isPresent()){
             LandersStadium entity = result.get();
 
-            String upperRow = stadiumDTO.getRow().toUpperCase();
+            String upperRow = stadiumDTO.getRows().toUpperCase();
             entity.changeRow(upperRow);
             entity.changeNum(stadiumDTO.getNum());
             entity.changeContent(stadiumDTO.getContent());
