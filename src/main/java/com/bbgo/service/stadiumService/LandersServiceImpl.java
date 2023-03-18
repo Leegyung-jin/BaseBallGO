@@ -84,6 +84,7 @@ public class LandersServiceImpl implements LandersService{
         stadiumDTO.setMno(principalDetail.getMno());
 
         Map<String, Object> entityMap = dtoToEntity(stadiumDTO);
+        log.info("=====entity: " + entityMap);
         LandersStadium stadium = (LandersStadium) entityMap.get("stadium");
         List<LandersStadiumImage> stadiumImageList = (List<LandersStadiumImage>) entityMap.get("imgList");
 

@@ -75,7 +75,7 @@
                 <td>
                     <a class="list-text" th:href="@{/landers/read(sno = ${dto.sno}, page= ${result.page})}">[[${dto.section}]]</a>
                 </td>
-                <td>[[ ${dto.row}]]열 [[${dto.num}]]번</td>
+                <td>[[ ${dto.sRow}]]열 [[${dto.num}]]번</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${dto.name}]]</td>
             </tr>
